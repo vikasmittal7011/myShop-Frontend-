@@ -4,10 +4,11 @@ import logo from "../assets/logo.png";
 import Links from "../components/common/Link";
 import Input from "../components/form/Input";
 
-const Login = () => {
+const Signup = () => {
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
+    confirmPassword: ""
   });
 
   const manageCredentials = (id, value) => {
@@ -17,9 +18,9 @@ const Login = () => {
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-        <img className="mx-auto h-16 w-auto" src={logo} alt="Your Company" />
-        <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-          Sign in to your account
+        <img className="mx-auto h-12 w-auto" src={logo} alt="Your Company" />
+        <h2 className="mt-8 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+          Create a new account
         </h2>
       </div>
 
@@ -37,11 +38,17 @@ const Login = () => {
             title="Password"
             id="password"
             type="password"
-            showLink={true}
-            linkText="Forget Password?"
-            linkNavigate="/"
             placeHolder="Enter your password..."
             value={credentials.password}
+            onChange={manageCredentials}
+            minLength={8}
+          />
+          <Input
+            title="Confirm Password"
+            id="confirmPassword"
+            type="password"
+            placeHolder="Enter password again..."
+            value={credentials.confirmPassword}
             onChange={manageCredentials}
             minLength={8}
           />
@@ -56,11 +63,11 @@ const Login = () => {
         </form>
 
         <p className="mt-10 text-center text-sm text-gray-500">
-          Not a member?{" "}
+          Alrady have a member?{" "}
           <Links
-            to="/signup"
+            to="/signin"
             className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
-            name="Become a member"
+            name="Continue Shopping"
           />
         </p>
       </div>
@@ -68,4 +75,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;

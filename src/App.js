@@ -1,15 +1,19 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+
 import NavBar from "./pages/NavBar";
-import Login from "./pages/Login";
+import { Login, Signup } from "./pages/index";
 
 const App = () => {
   return (
     <BrowserRouter>
       <NavBar />
-      <Routes>
-        <Route path="/signin" exact element={<Login />} />
-      </Routes>
+      <Suspense fallback={"Loading..."}>
+        <Routes>
+          <Route path="/signin" exact element={<Login />} />
+          <Route path="/signup" exact element={<Signup />} />
+        </Routes>
+      </Suspense>
     </BrowserRouter>
   );
 };
