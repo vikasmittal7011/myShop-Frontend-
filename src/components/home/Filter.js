@@ -8,6 +8,7 @@ import OpenCloseBTN from "./OpenCloseBTN";
 import SortOptions from "./SortOptions";
 import FilterForm from "./FilterForm";
 import Buttons from "./Buttons";
+import Products from "../products/Products";
 
 export const Filter = () => {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
@@ -44,7 +45,7 @@ export const Filter = () => {
           <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
             <FilterForm />
 
-            <div className="lg:col-span-3">{/* Your content */}</div>
+            <div className="lg:col-span-3"><Products /></div>
           </div>
         </section>
       </main>
