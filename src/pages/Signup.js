@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import logo from "../assets/logo.png";
 import Links from "../components/common/Link";
 import Input from "../components/form/Input";
+import Button from "../components/common/Button";
 
 const Signup = () => {
   const [credentials, setCredentials] = useState({
@@ -53,12 +54,12 @@ const Signup = () => {
             minLength={8}
           />
           <div>
-            <button
+            <Button
               type="submit"
               className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
               Sign in
-            </button>
+            </Button>
           </div>
         </form>
 

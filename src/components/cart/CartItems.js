@@ -39,10 +39,11 @@ const CartItems = ({ products }) => {
 
               <div className="flex">
                 <Button
-                  name="Remove"
                   className="font-medium text-indigo-600 hover:text-indigo-500"
                   type="button"
-                />
+                >
+                  Remove
+                </Button>
               </div>
             </div>
           </div>
