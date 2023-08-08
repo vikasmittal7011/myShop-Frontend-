@@ -3,12 +3,13 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import NavBar from "./pages/NavBar";
 import { Home, Login, Signup, Cart } from "./pages/index";
+import Loader from "./components/common/Loader";
 
 const App = () => {
   return (
     <BrowserRouter>
       <NavBar />
-      <Suspense fallback={"Loading..."}>
+      <Suspense fallback={<Loader />}>
         <Routes>
           <Route path="/" exact element={<Home />} />
           <Route path="/cart" exact element={<Cart />} />
