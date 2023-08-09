@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { Menu } from "@headlessui/react";
 import { useDispatch } from "react-redux";
@@ -14,21 +14,31 @@ import Products from "../products/Products";
 
 export const Filter = () => {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
-  const [filters, setFilters] = useState({});
+  const [filters, setFilters] = useState({ category: [], brand: [] });
+  const [sort, setSort] = useState({});
 
   const dispatch = useDispatch();
 
-  const handleFilters = (id, value) => {
-    const newfilters = { ...filters, [id]: value };
-    setFilters(newfilters);
-    dispatch(fetchProductByFiltersAsync(newfilters));
+  const handleFilters = (id, e) => {
+    const newFilter = { ...filters };
+    if (e.target.checked) {
+      newFilter[id].push(e.target.value);
+    } else {
+      const index = newFilter[id].findIndex((item) => item === e.target.value);
+      newFilter[id].splice(index, 1);
+    }
+    setFilters(newFilter);
   };
 
   const handleSort = (value) => {
-    const newfilters = { ...filters, _sort: value.sort, _order: value.order };
-    setFilters(newfilters);
-    dispatch(fetchProductByFiltersAsync(newfilters));
+    const sort = { _sort: value.sort, _order: value.order };
+    setSort(sort);
   };
+
+  useEffect(() => {
+    dispatch(fetchProductByFiltersAsync({ filters, sort }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sort, filters]);
 
   return (
     <div>

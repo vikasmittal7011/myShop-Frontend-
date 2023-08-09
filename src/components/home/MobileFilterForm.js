@@ -30,7 +30,7 @@ const MobileFilterForm = ({ handleFilters }) => {
                         defaultValue={option.value}
                         type="checkbox"
                         onChange={(e) => {
-                          handleFilters(section.id, e.target.value);
+                          handleFilters(section.id, e);
                         }}
                         defaultChecked={option.checked}
                         className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"

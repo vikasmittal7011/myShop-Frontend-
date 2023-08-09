@@ -22,7 +22,7 @@ export const filters = [
     id: "category",
     name: "Category",
     options: [
-      { value: "smartphones", label: "S martphones", checked: false },
+      { value: "smartphones", label: "Smartphones", checked: false },
       { value: "laptops", label: "Laptops", checked: false },
       { value: "fragrances", label: "Fragrances", checked: false },
       { value: "skincare", label: "Skincare", checked: false },
