@@ -24,6 +24,12 @@ export const Filter = () => {
     dispatch(fetchProductByFiltersAsync(newfilters));
   };
 
+  const handleSort = (value) => {
+    const newfilters = { ...filters, _sort: value.sort, _order: value.order };
+    setFilters(newfilters);
+    dispatch(fetchProductByFiltersAsync(newfilters));
+  };
+
   return (
     <div>
       <MobileFilter
@@ -43,7 +49,7 @@ export const Filter = () => {
           <div className="flex items-center">
             <Menu as="div" className="relative inline-block text-left">
               <OpenCloseBTN />
-              <SortOptions />
+              <SortOptions handleSort={handleSort} />
             </Menu>
 
             <Buttons setMobileFiltersOpen={setMobileFiltersOpen} />
