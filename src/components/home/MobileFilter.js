@@ -5,7 +5,11 @@ import MobileFilterForm from "./MobileFilterForm";
 import TransitionEffet from "../common/TransitionEffet";
 import Button from "../common/Button";
 
-const MobileFilter = ({ mobileFiltersOpen, setMobileFiltersOpen }) => {
+const MobileFilter = ({
+  mobileFiltersOpen,
+  setMobileFiltersOpen,
+  handleFilters,
+}) => {
   return (
     <Transition.Root show={mobileFiltersOpen} as={Fragment}>
       <Dialog
@@ -31,7 +35,7 @@ const MobileFilter = ({ mobileFiltersOpen, setMobileFiltersOpen }) => {
                 </Button>
               </div>
 
-              <MobileFilterForm />
+              <MobileFilterForm handleFilters={handleFilters} />
             </Dialog.Panel>
           </TransitionEffet>
         </div>

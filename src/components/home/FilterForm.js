@@ -3,7 +3,7 @@ import { filters } from "../../utils/constant";
 import { Disclosure } from "@headlessui/react";
 import FilterTitle from "./FilterTitle";
 
-const FilterForm = () => {
+const FilterForm = ({ handleFilters }) => {
   return (
     <form className="hidden lg:block">
       {filters.map((section) => (
@@ -29,6 +29,9 @@ const FilterForm = () => {
                         name={`${section.id}[]`}
                         defaultValue={option.value}
                         type="checkbox"
+                        onChange={(e)=>{
+                          handleFilters(section.id, e.target.value)
+                        }}
                         defaultChecked={option.checked}
                         className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                       />

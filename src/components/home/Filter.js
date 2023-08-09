@@ -1,7 +1,9 @@
 import React from "react";
 import { useState } from "react";
 import { Menu } from "@headlessui/react";
+import { useDispatch } from "react-redux";
 
+import { fetchProductByFiltersAsync } from "../../features/product/productSlice";
 import { Classe } from "../../utils/constant";
 import MobileFilter from "./MobileFilter";
 import OpenCloseBTN from "./OpenCloseBTN";
@@ -12,11 +14,22 @@ import Products from "../products/Products";
 
 export const Filter = () => {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  const [filters, setFilters] = useState({});
+
+  const dispatch = useDispatch();
+
+  const handleFilters = (id, value) => {
+    const newfilters = { ...filters, [id]: value };
+    setFilters(newfilters);
+    dispatch(fetchProductByFiltersAsync(newfilters));
+  };
+
   return (
     <div>
       <MobileFilter
         mobileFiltersOpen={mobileFiltersOpen}
         setMobileFiltersOpen={setMobileFiltersOpen}
+        handleFilters={handleFilters}
       />
 
       <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -43,9 +56,11 @@ export const Filter = () => {
           </h2>
 
           <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
-            <FilterForm />
+            <FilterForm handleFilters={handleFilters} />
 
-            <div className="lg:col-span-3"><Products /></div>
+            <div className="lg:col-span-3">
+              <Products />
+            </div>
           </div>
         </section>
       </main>

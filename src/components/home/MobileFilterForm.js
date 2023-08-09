@@ -3,7 +3,7 @@ import React from "react";
 import { filters } from "../../utils/constant";
 import FilterTitle from "./FilterTitle";
 
-const MobileFilterForm = () => {
+const MobileFilterForm = ({ handleFilters }) => {
   return (
     <form className="mt-4 border-t border-gray-200">
       {filters.map((section) => (
@@ -29,6 +29,9 @@ const MobileFilterForm = () => {
                         name={`${section.id}[]`}
                         defaultValue={option.value}
                         type="checkbox"
+                        onChange={(e) => {
+                          handleFilters(section.id, e.target.value);
+                        }}
                         defaultChecked={option.checked}
                         className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                       />
