@@ -1,58 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { StarIcon } from "@heroicons/react/20/solid";
 
-const products = [
-  {
-    id: 1,
-    name: "Basic Tee",
-    href: "#",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
-    imageAlt: "Front of men's Basic Tee in black.",
-    price: "$35",
-    color: "Black",
-  },
-  {
-    id: 2,
-    name: "Basic Tee",
-    href: "#",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
-    imageAlt: "Front of men's Basic Tee in black.",
-    price: "$35",
-    color: "Black",
-  },
-  {
-    id: 3,
-    name: "Basic Tee",
-    href: "#",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
-    imageAlt: "Front of men's Basic Tee in black.",
-    price: "$35",
-    color: "Black",
-  },
-  {
-    id:4,
-    name: "Basic Tee",
-    href: "#",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
-    imageAlt: "Front of men's Basic Tee in black.",
-    price: "$35",
-    color: "Black",
-  },
-  {
-    id: 4,
-    name: "Basic Tee",
-    href: "#",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
-    imageAlt: "Front of men's Basic Tee in black.",
-    price: "$35",
-    color: "Black",
-  },
-];
+import { products } from "../../utils/constant";
 
 const Products = () => {
   return (
@@ -62,8 +12,8 @@ const Products = () => {
           <div key={product.id} className="group relative">
             <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
               <img
-                src={product.imageSrc}
-                alt={product.imageAlt}
+                src={product.thumbnail}
+                alt={product.title}
                 className="h-full w-full object-cover object-center lg:h-full lg:w-full"
               />
             </div>
@@ -71,15 +21,31 @@ const Products = () => {
               <div>
                 <h3 className="text-sm text-gray-700">
                   <Link to="product-details">
-                    <span aria-hidden="true" className="absolute inset-0" />
-                    {product.name}
+                    <span
+                      aria-hidden="true"
+                      className="absolute inset-0 w-50"
+                    />
+                    {product.title.length >= 25
+                      ? product.title.slice(0, 25) + "...`"
+                      : product.title}
                   </Link>
                 </h3>
-                <p className="mt-1 text-sm text-gray-500">{product.color}</p>
+                <StarIcon className="w-5 h-5 mr-1 inline" />
+                <p className="text-sm text-gray-500 inline align-bottom">
+                  {product.rating}
+                </p>
               </div>
-              <p className="text-sm font-medium text-gray-900">
-                {product.price}
-              </p>
+              <div>
+                <p className="text-sm font-medium text-gray-900">
+                  ${" "}
+                  {Math.round(
+                    product.price * (1 - product.discountPercentage / 100)
+                  )}
+                </p>
+                <p className="text-sm font-medium text-red-400 line-through">
+                  $ {product.price}
+                </p>
+              </div>
             </div>
           </div>
         ))}
