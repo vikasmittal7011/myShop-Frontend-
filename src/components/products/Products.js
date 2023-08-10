@@ -1,23 +1,18 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { StarIcon } from "@heroicons/react/20/solid";
-import { useDispatch, useSelector } from "react-redux";
 
 import Loader from "../common/Loader";
-import {
-  selectProducts,
-  fetchAllProductsAsync,
-} from "../../features/product/productSlice";
+import Pagination from "./Pagination";
 
-const Products = () => {
-  const dispatch = useDispatch();
-  const { products, status } = useSelector(selectProducts);
-
-  useEffect(() => {
-    dispatch(fetchAllProductsAsync());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
+const Products = ({
+  handlePage,
+  page,
+  setPage,
+  products,
+  status,
+  totalItems,
+}) => {
   if (status !== "idle") {
     return <Loader />;
   }
@@ -67,6 +62,12 @@ const Products = () => {
           </div>
         ))}
       </div>
+      <Pagination
+        handlePage={handlePage}
+        page={page}
+        setPage={setPage}
+        totalProduct={totalItems}
+      />
     </div>
   );
 };

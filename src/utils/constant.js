@@ -1,3 +1,5 @@
+export const ITEM_PAGE_PER = 10;
+
 export const navLinks = [
   { name: "Home", href: "/" },
   { name: "Team", href: "/team" },

@@ -6,7 +6,7 @@ export function fetchAllProduct() {
   });
 }
 
-export function fetchProductByFilters(filters, sort) {
+export function fetchProductByFilters(filters, sort, page) {
   let queryString = "";
 
   for (let key in filters) {
@@ -16,8 +16,13 @@ export function fetchProductByFilters(filters, sort) {
       queryString += `${key}=${lastCategoryValue}&`;
     }
   }
+
   for (let key in sort) {
     queryString += `${key}=${sort[key]}&`;
+  }
+
+  for (let key in page) {
+    queryString += `${key}=${page[key]}&`;
   }
 
   return new Promise(async (resolve) => {
@@ -25,6 +30,7 @@ export function fetchProductByFilters(filters, sort) {
       "http://localhost:5000/products?" + queryString
     );
     const data = await response.json();
-    resolve({ data });
+    const totalItems = await response.headers.get("X-Total-Count");
+    resolve({ data: { products: data, totalItems: +totalItems } });
   });
 }
