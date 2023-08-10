@@ -4,6 +4,8 @@ import { Menu } from "@headlessui/react";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
+  fetchAllBrandAsync,
+  fetchAllCategoryAsync,
   fetchProductByFiltersAsync,
   selectProducts,
 } from "../../features/product/productSlice";
@@ -20,6 +22,7 @@ export const Filter = () => {
 
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [filters, setFilters] = useState({ category: [], brand: [] });
+
   const [sort, setSort] = useState({});
   const [page, setPage] = useState(1);
 
@@ -48,8 +51,16 @@ export const Filter = () => {
   useEffect(() => {
     const pagination = { _page: page, _limit: ITEM_PAGE_PER };
     dispatch(fetchProductByFiltersAsync({ filters, sort, pagination }));
+    dispatch(fetchAllBrandAsync());
+    dispatch(fetchAllCategoryAsync());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sort, filters, page]);
+
+  useEffect(() => {
+    dispatch(fetchAllBrandAsync());
+    dispatch(fetchAllCategoryAsync());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     setPage(1);

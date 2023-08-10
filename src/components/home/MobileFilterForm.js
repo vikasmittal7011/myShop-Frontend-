@@ -1,9 +1,25 @@
 import { Disclosure } from "@headlessui/react";
 import React from "react";
-import { filters } from "../../utils/constant";
+import { useSelector } from "react-redux";
+
+import { selectProducts } from "../../features/product/productSlice";
 import FilterTitle from "./FilterTitle";
 
 const MobileFilterForm = ({ handleFilters }) => {
+  const { brand, category } = useSelector(selectProducts);
+
+  const filters = [
+    {
+      id: "category",
+      name: "Category",
+      options: category,
+    },
+    {
+      id: "brand",
+      name: "Brand",
+      options: brand,
+    },
+  ];
   return (
     <form className="mt-4 border-t border-gray-200">
       {filters.map((section) => (

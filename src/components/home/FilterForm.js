@@ -1,12 +1,28 @@
 import React from "react";
-import { filters } from "../../utils/constant";
 import { Disclosure } from "@headlessui/react";
 import FilterTitle from "./FilterTitle";
+import { useSelector } from "react-redux";
+import { selectProducts } from "../../features/product/productSlice";
 
 const FilterForm = ({ handleFilters }) => {
+  const { brand, category } = useSelector(selectProducts);
+
+  const filters = [
+    {
+      id: "category",
+      name: "Category",
+      options: category,
+    },
+    {
+      id: "brand",
+      name: "Brand",
+      options: brand,
+    },
+  ];
+
   return (
     <form className="hidden lg:block">
-      {filters.map((section) => (
+      {filters?.map((section) => (
         <Disclosure
           as="div"
           key={section.id}
