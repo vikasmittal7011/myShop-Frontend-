@@ -32,7 +32,7 @@ const Products = ({
             <div className="mt-4 flex justify-between">
               <div>
                 <h3 className="text-sm text-gray-700">
-                  <Link to="product-details">
+                  <Link to={`product-details/${product.id}`}>
                     <span
                       aria-hidden="true"
                       className="absolute inset-0 w-50"
