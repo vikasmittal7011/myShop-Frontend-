@@ -14,6 +14,7 @@ const Input = ({
   value,
   onChange,
   minLength,
+  errorMessage,
 }) => {
   const handleChange = (e) => {
     onChange(id, e.target.value);
@@ -58,6 +59,7 @@ const Input = ({
           minLength={minLength}
         />
       </div>
+      <p className="text-red-600">{errorMessage || null}</p>
     </div>
   );
 };

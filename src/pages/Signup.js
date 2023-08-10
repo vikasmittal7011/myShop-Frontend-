@@ -9,11 +9,72 @@ const Signup = () => {
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
-    confirmPassword: ""
+    confirmPassword: "",
+  });
+
+  const [errors, setErrors] = useState({
+    email: "",
+    password: "",
+    confirmPassword: "",
+    validform: false,
   });
 
   const manageCredentials = (id, value) => {
     setCredentials({ ...credentials, [id]: value });
+    setErrors({
+      email: "",
+      password: "",
+      confirmPassword: "",
+      validform: false,
+    });
+  };
+
+  const validate = (email, password, confirmPassword) => {
+    const passwordPattern =
+      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+    const emailPattern =
+      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,}(?:\.[a-zA-Z]{2,})?$/;
+
+    if (!emailPattern.test(email)) {
+      setErrors({
+        ...errors,
+        email: "Enter a valid email address!",
+        validform: false,
+      });
+    } else if (!passwordPattern.test(password)) {
+      setErrors({
+        ...errors,
+        password: `- at least 8 characters\n
+      - must contain at least 1 uppercase letter, 1 lowercase letter, and 1 number\n
+      - Can contain special characters`,
+        validform: false,
+      });
+    } else if (password !== confirmPassword) {
+      setErrors({
+        ...errors,
+        confirmPassword: `Password should be match`,
+        validform: false,
+      });
+    } else {
+      setErrors({
+        email: "",
+        password: "",
+        confirmPassword: "",
+        validform: true,
+      });
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    validate(
+      credentials.email,
+      credentials.password,
+      credentials.confirmPassword
+    );
+    if (errors.validform) {
+      console.log("Register Success");
+    }
   };
 
   return (
@@ -26,7 +87,7 @@ const Signup = () => {
       </div>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-xl">
-        <form className="space-y-6">
+        <form className="space-y-6" onSubmit={handleSubmit}>
           <Input
             title="Email address"
             id="email"
@@ -34,6 +95,7 @@ const Signup = () => {
             placeHolder="Enter your gamil address..."
             value={credentials.email}
             onChange={manageCredentials}
+            errorMessage={errors.email}
           />
           <Input
             title="Password"
@@ -43,6 +105,7 @@ const Signup = () => {
             value={credentials.password}
             onChange={manageCredentials}
             minLength={8}
+            errorMessage={errors.password}
           />
           <Input
             title="Confirm Password"
@@ -53,6 +116,7 @@ const Signup = () => {
             onChange={manageCredentials}
             minLength={8}
           />
+          <p className="text-red-600">{errors.confirmPassword || null}</p>
           <div>
             <Button
               type="submit"

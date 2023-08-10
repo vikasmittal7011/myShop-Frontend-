@@ -11,8 +11,56 @@ const Login = () => {
     password: "",
   });
 
+  const [errors, setErrors] = useState({
+    email: "",
+    password: "",
+    validform: false,
+  });
+
   const manageCredentials = (id, value) => {
     setCredentials({ ...credentials, [id]: value });
+    setErrors({
+      email: "",
+      password: "",
+      validform: false,
+    });
+  };
+
+  const validate = (email, password) => {
+    const passwordPattern =
+      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+    const emailPattern =
+      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,}(?:\.[a-zA-Z]{2,})?$/;
+
+    if (!emailPattern.test(email)) {
+      setErrors({
+        ...errors,
+        email: "Enter a valid email address!",
+        validform: false,
+      });
+    } else if (!passwordPattern.test(password)) {
+      setErrors({
+        ...errors,
+        password: `- at least 8 characters\n
+      - must contain at least 1 uppercase letter, 1 lowercase letter, and 1 number\n
+      - Can contain special characters`,
+        validform: false,
+      });
+    } else {
+      setErrors({
+        email: "",
+        password: "",
+        validform: true,
+      });
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    validate(credentials.email, credentials.password);
+    if (errors.validform) {
+      console.log("Login Success");
+    }
   };
 
   return (
@@ -25,7 +73,7 @@ const Login = () => {
       </div>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-xl">
-        <form className="space-y-6">
+        <form className="space-y-6" onSubmit={handleSubmit}>
           <Input
             title="Email address"
             id="email"
@@ -33,6 +81,7 @@ const Login = () => {
             placeHolder="Enter your gamil address..."
             value={credentials.email}
             onChange={manageCredentials}
+            errorMessage={errors.email}
           />
           <Input
             title="Password"
@@ -45,6 +94,7 @@ const Login = () => {
             value={credentials.password}
             onChange={manageCredentials}
             minLength={8}
+            errorMessage={errors.password}
           />
           <div>
             <Button
