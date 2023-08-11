@@ -10,7 +10,7 @@ export const navLinks = [
 export const profileLinks = [
   { name: "Your Profile", href: "" },
   { name: "Settings", href: "" },
-  { name: "Sign out", href: "" },
+  { name: "Sign out", href: "/signin" },
 ];
 
 export const sortOptions = [
