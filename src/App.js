@@ -12,11 +12,13 @@ import {
 } from "./pages/index";
 import Loader from "./components/common/Loader";
 import Protect from "./pages/Protect";
+import Alert from "./components/common/Alert";
 
 const App = () => {
   return (
     <BrowserRouter>
       <NavBar />
+      <Alert />
       <Suspense fallback={<Loader />}>
         <Routes>
           <Route
