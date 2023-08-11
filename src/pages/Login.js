@@ -11,11 +11,11 @@ import { loginUserAsync, selectUser } from "../features/user/userSlice";
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  let { loggedInUser, message } = useSelector(selectUser);
+  let { loggedInUser, message, status } = useSelector(selectUser);
 
   const [credentials, setCredentials] = useState({
-    email: "",
-    password: "",
+    email: "vikas@gmail.com",
+    password: "Sonu@9876",
   });
 
   const [errors, setErrors] = useState({
@@ -29,7 +29,6 @@ const Login = () => {
     setErrors({
       email: "",
       password: "",
-      validform: false,
     });
   };
 
@@ -43,36 +42,36 @@ const Login = () => {
       setErrors({
         ...errors,
         email: "Enter a valid email address!",
-        validform: false,
       });
+      return false;
     } else if (!passwordPattern.test(password)) {
       setErrors({
         ...errors,
         password: `- at least 8 characters\n
       - must contain at least 1 uppercase letter, 1 lowercase letter, and 1 number\n
       - Can contain special characters`,
-        validform: false,
       });
+      return false;
     } else {
       setErrors({
         email: "",
         password: "",
-        validform: true,
       });
+      return true;
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    validate(credentials.email, credentials.password);
-    if (errors.validform) {
+    const validform = validate(credentials.email, credentials.password);
+    if (validform) {
       dispatch(
         loginUserAsync({
           email: credentials.email,
           password: credentials.password,
         })
       );
-      if (loggedInUser) {
+      if (loggedInUser && status === "idle") {
         navigate("/");
       }
     }
@@ -80,7 +79,7 @@ const Login = () => {
 
   return (
     <>
-      {loggedInUser && <Navigate to="to" replace={true} />}
+      {loggedInUser && <Navigate to="/" replace={true} />}
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img className="mx-auto h-16 w-auto" src={logo} alt="Your Company" />
