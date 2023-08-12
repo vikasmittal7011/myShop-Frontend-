@@ -16,6 +16,7 @@ import Alert from "./components/common/Alert";
 import { fetchItemsByUsertAsync } from "./features/cart/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "./features/user/userSlice";
+import PageNotFound from "./pages/PageNotFound";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -70,7 +71,7 @@ const App = () => {
           />
           <Route path="/signin" exact element={<Login />} />
           <Route path="/signup" exact element={<Signup />} />
-          <Route path="*" exact element={<Home />} />
+          <Route path="*" exact element={<PageNotFound />} />
         </Routes>
       </Suspense>
     </BrowserRouter>
