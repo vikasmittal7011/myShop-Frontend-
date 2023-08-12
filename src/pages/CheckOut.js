@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectCart } from "../features/cart/cartSlice";
 import { useNavigate } from "react-router-dom";
 import { selectUser } from "../features/user/userSlice";
-import { makeOrderAsync } from "../features/order/orderSlice";
+import { makeOrderAsync, selectorder } from "../features/order/orderSlice";
 
 const CheckOut = () => {
   const dispatch = useDispatch();
@@ -16,6 +16,7 @@ const CheckOut = () => {
   const navigate = useNavigate();
   const { items } = useSelector(selectCart);
   const { loggedInUser } = useSelector(selectUser);
+  const { orderPlaced } = useSelector(selectorder);
 
   const [paymentInfo, setPaymentInfo] = useState({
     address: "",
@@ -50,8 +51,13 @@ const CheckOut = () => {
           address: paymentInfo.address,
           paymentMethod: paymentInfo.paymentMethod,
           user: loggedInUser.id,
+          status: "Pending",
         })
       );
+
+      if (orderPlaced) {
+        navigate("/order-success");
+      }
     }
   };
 

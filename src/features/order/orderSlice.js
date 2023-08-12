@@ -4,6 +4,7 @@ import { makeOrder } from "./prderAPI";
 const initialState = {
   status: "idle",
   orders: [],
+  orderPlaced: false,
 };
 
 export const makeOrderAsync = createAsyncThunk(
@@ -26,6 +27,7 @@ export const orderSlice = createSlice({
       .addCase(makeOrderAsync.fulfilled, (state, action) => {
         state.status = "idle";
         state.orders = action.payload;
+        state.orderPlaced = true;
       });
   },
 });

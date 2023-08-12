@@ -17,6 +17,7 @@ import { fetchItemsByUsertAsync } from "./features/cart/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "./features/user/userSlice";
 import PageNotFound from "./pages/PageNotFound";
+import OrderSuccess from "./pages/OrderSuccess";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -58,6 +59,15 @@ const App = () => {
               <Protect>
                 <CheckOut />
               </Protect>
+            }
+          />
+          <Route
+            path="/order-success"
+            exact
+            element={
+              // <Protect>
+                <OrderSuccess />
+              // </Protect>
             }
           />
           <Route
