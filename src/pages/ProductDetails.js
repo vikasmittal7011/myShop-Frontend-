@@ -29,31 +29,28 @@ const colorAndSizes = {
   ],
 };
 
-export default function ProductDetails() {
+const ProductDetails = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const [selectedColor, setSelectedColor] = useState(colorAndSizes.colors[0]);
   const [selectedSize, setSelectedSize] = useState(colorAndSizes.sizes[2]);
   const { selectedProduct, status } = useSelector(selectProducts);
-  console.log(selectedProduct);
 
   useEffect(() => {
     dispatch(fetchProductByIdAsync(id));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if(status !== "idle" || selectProducts === null){
-    return <Loader />
+  if (status !== "idle" || selectedProduct === null) {
+    return <Loader />;
   }
 
   return (
     <>
       <Header heading="Product Overview" />
       <div className="pt-6">
-        {/* Image gallery */}
-        <Images images={selectedProduct.images} />
+        <Images images={selectedProduct?.images} />
 
-        {/* Product info */}
         <ProductInfo
           selectedColor={selectedColor}
           setSelectedColor={setSelectedColor}
@@ -65,4 +62,6 @@ export default function ProductDetails() {
       </div>
     </>
   );
-}
+};
+
+export default ProductDetails;

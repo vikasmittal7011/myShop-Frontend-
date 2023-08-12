@@ -17,7 +17,7 @@ const Images = ({ images }) => {
         </div>
       </div>
       <div className="aspect-h-5 aspect-w-4 lg:aspect-h-4 lg:aspect-w-3 sm:overflow-hidden sm:rounded-lg">
-        { images[3] && <Image src={images[3]} alt={images[3]} />}
+        {images[3] && <Image src={images[3]} alt={images[3]} />}
       </div>
     </div>
   );

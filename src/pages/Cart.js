@@ -1,41 +1,43 @@
+import { useSelector } from "react-redux";
+
 import Header from "../components/common/Header";
 import ViewProduct from "../components/cart/ViewProduct";
 import ViewTotal from "../components/cart/ViewTotal";
-
-const products = [
-  {
-    id: 1,
-    name: "Throwback Hip Bag",
-    href: "#",
-    color: "Salmon",
-    price: "$90.00",
-    quantity: 1,
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg",
-    imageAlt:
-      "Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt.",
-  },
-  {
-    id: 2,
-    name: "Medium Stuff Satchel",
-    href: "#",
-    color: "Blue",
-    price: "$32.00",
-    quantity: 1,
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg",
-    imageAlt:
-      "Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.",
-  },
-];
+import { selectCart } from "../features/cart/cartSlice";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
+  const { items } = useSelector(selectCart);
+
   return (
     <>
       <Header heading="Cart" />
       <div className="mx-auto max-w-5xl px-2 sm:px-6 lg:px-8">
-        <ViewProduct products={products} />
-        <ViewTotal afterCheckout="/checkout" checkoutTitle="Checkout" />
+        {items.length > 0 ? (
+          <>
+            <ViewProduct products={items} />
+            <ViewTotal
+              afterCheckout="/checkout"
+              checkoutTitle="Checkout"
+              products={items}
+            />
+          </>
+        ) : (
+          <div className="flex justify-center my-5 flex-col text-center">
+            <h1 className="text-4xl font-bold">Your cart is empty!!!</h1>
+            <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
+              <p className="text-xl">
+                <Link
+                  to="/"
+                  className="ml-2 font-medium text-indigo-600 hover:text-indigo-500"
+                >
+                  Continue Shopping
+                  <span aria-hidden="true"> &rarr;</span>
+                </Link>
+              </p>
+            </div>
+          </div>
+        )}
       </div>
     </>
   );

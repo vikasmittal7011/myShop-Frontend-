@@ -4,8 +4,12 @@ import ProfileMenu from "./ProfileMenu";
 import { ShoppingCartIcon } from "@heroicons/react/24/outline";
 import Button from "../common/Button";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectCart } from "../../features/cart/cartSlice";
 
 const CardIcon = () => {
+  const { items } = useSelector(selectCart);
+
   return (
     <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
       <Link to="/cart">
@@ -18,9 +22,11 @@ const CardIcon = () => {
           <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
         </Button>
       </Link>
-      <span className="inline-flex items-center rounded-md bg-blue-50 mb-7 -ml-3 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10 z-10">
-        0
-      </span>
+      {items?.length > 0 && (
+        <span className="inline-flex items-center rounded-md bg-blue-50 mb-7 -ml-3 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10 z-10">
+          {items?.length}
+        </span>
+      )}
       <ProfileMenu />
     </div>
   );

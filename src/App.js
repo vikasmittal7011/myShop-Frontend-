@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import NavBar from "./pages/NavBar";
@@ -13,8 +13,19 @@ import {
 import Loader from "./components/common/Loader";
 import Protect from "./pages/Protect";
 import Alert from "./components/common/Alert";
+import { fetchItemsByUsertAsync } from "./features/cart/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUser } from "./features/user/userSlice";
 
 const App = () => {
+  const dispatch = useDispatch();
+  const { loggedInUser } = useSelector(selectUser);
+  useEffect(() => {
+    if (loggedInUser) {
+      dispatch(fetchItemsByUsertAsync(loggedInUser.id));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loggedInUser?.id]);
   return (
     <BrowserRouter>
       <NavBar />

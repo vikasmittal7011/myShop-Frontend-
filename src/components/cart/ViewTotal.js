@@ -1,14 +1,27 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const ViewTotal = ({ afterCheckout, checkoutTitle }) => {
+const ViewTotal = ({ afterCheckout, checkoutTitle, products }) => {
+  const totalPrice = products.reduce(
+    (amount, item) =>
+      Math.round(item?.price * (1 - item?.discountPercentage / 100)) *
+        item.quantity +
+      amount,
+    0
+  );
+  const totalItems = products.reduce((total, item) => item.quantity + total, 0);
+
   return (
     <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
-      <div className="flex justify-between text-base font-medium text-gray-900">
+      <div className="flex justify-between text-base font-medium text-gray-900 mt-2 ">
         <p>Subtotal</p>
-        <p>$262.00</p>
+        <p>$ {totalPrice}</p>
       </div>
-      <p className="mt-0.5 text-sm text-gray-500">
+      <div className="flex justify-between text-base font-medium text-gray-900 mt-2 ">
+        <p>Total Items</p>
+        <p>{totalItems} items</p>
+      </div>
+      <p className="text-sm text-gray-500 mt-2 ">
         Shipping and taxes calculated at checkout.
       </p>
       <div className="mt-6">

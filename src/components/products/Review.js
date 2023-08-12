@@ -3,7 +3,6 @@ import { StarIcon } from "@heroicons/react/20/solid";
 import { classNames } from "../../utils/constant";
 
 const Review = ({ reviews }) => {
-  console.log(reviews);
   return (
     <div className="mt-6">
       <h3 className="sr-only">Reviews</h3>
