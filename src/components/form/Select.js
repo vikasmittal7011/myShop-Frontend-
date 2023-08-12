@@ -1,6 +1,13 @@
 import React from "react";
 
-const Select = ({ title, id, onChange, options, defaultValue }) => {
+const Select = ({
+  title,
+  id,
+  onChange,
+  options,
+  defaultValue,
+  errorMessage,
+}) => {
   const handleChange = (e) => {
     onChange(id, e.target.value);
   };
@@ -31,6 +38,7 @@ const Select = ({ title, id, onChange, options, defaultValue }) => {
           ))}
         </select>
       </div>
+      <p className="text-red-600">{errorMessage || null}</p>
     </div>
   );
 };

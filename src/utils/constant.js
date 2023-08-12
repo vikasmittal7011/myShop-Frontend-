@@ -291,24 +291,3 @@ export const paymentMathods = [
   { id: 1, name: "Cash" },
   { id: 1, name: "Cart Payment" },
 ];
-
-export const temporyAddress = [
-  {
-    name: "Vikas",
-    street: "J-Block, House No 518",
-    city: "Jahangir puri",
-    state: "Delhi",
-    pinCode: "110033",
-    phone: "7011641548",
-    email: "vikasaggrawal700@gmail.com",
-  },
-  {
-    name: "Vikas",
-    street: "House No 565",
-    city: "Sraye Hola",
-    state: "Delhi",
-    pinCode: "110033",
-    phone: "8860111290",
-    email: "dev@gmail.com",
-  },
-];

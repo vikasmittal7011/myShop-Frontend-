@@ -1,8 +1,6 @@
 import React from "react";
 
-import { temporyAddress } from "../../utils/constant";
-
-const SavedAddress = () => {
+const SavedAddress = ({ addresses, handlePaymentInfo }) => {
   return (
     <fieldset>
       <legend className="text-sm font-semibold leading-6 text-gray-900">
@@ -13,19 +11,20 @@ const SavedAddress = () => {
       </p>
       <div className="mt-6 space-y-6">
         <ul className="divide-y divide-gray-100">
-          {temporyAddress.map((address) => (
+          {addresses?.map((address) => (
             <li
               key={address.email}
-              className="flex justify-between gap-x-6 py-5"
+              className="flex justify-between gap-x-6 py-5 border bottom-1 rounded-md border-gray-400 px-3"
             >
               <div className="flex min-w-0 gap-x-4">
                 <input
-                  onChange
+                  onChange={() => {
+                    handlePaymentInfo("address", address);
+                  }}
                   id="address"
                   name="address"
                   type="radio"
-                  className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600 my-auto"
-                  value
+                  className="cursor-pointer h-4 w-4 border-gray-800 text-indigo-600 focus:ring-indigo-600 my-auto"
                 />
                 <div className="min-w-0 flex-auto">
                   <p className="text-sm font-semibold leading-6 text-gray-900">
@@ -45,7 +44,7 @@ const SavedAddress = () => {
               </div>
               <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
                 <p className="mt-1 truncate text-xs leading-5 text-gray-500">
-                  {address.phone}
+                  {address.tel}
                 </p>
                 <p className="mt-1 truncate text-xs leading-5 text-gray-500">
                   {address.email}
