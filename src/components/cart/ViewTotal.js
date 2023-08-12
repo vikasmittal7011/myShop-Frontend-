@@ -1,7 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const ViewTotal = ({ afterCheckout, checkoutTitle, products }) => {
+const ViewTotal = ({
+  afterCheckout,
+  checkoutTitle,
+  products,
+  onClick,
+  message,
+}) => {
   const totalPrice = products.reduce(
     (amount, item) =>
       Math.round(item?.price * (1 - item?.discountPercentage / 100)) *
@@ -25,12 +31,27 @@ const ViewTotal = ({ afterCheckout, checkoutTitle, products }) => {
         Shipping and taxes calculated at checkout.
       </p>
       <div className="mt-6">
-        <Link
-          to={afterCheckout}
-          className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
-        >
-          {checkoutTitle}
-        </Link>
+        {afterCheckout && (
+          <Link
+            to={afterCheckout}
+            className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+          >
+            {checkoutTitle}
+          </Link>
+        )}
+        {onClick && (
+          <>
+            <div
+              onClick={() => {
+                onClick(totalItems, totalPrice);
+              }}
+              className="cursor-pointer flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+            >
+              {checkoutTitle}
+            </div>
+            <p className="text-red-500 font-bold text-xl">{message}</p>
+          </>
+        )}
       </div>
       <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
         <p>

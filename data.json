@@ -2372,5 +2372,43 @@
       "quantity": 1,
       "user": 2
     }
+  ],
+  "orders": [
+    {
+      "items": [
+        {
+          "id": 3,
+          "title": "Samsung Universe 9",
+          "description": "Samsung's new variant which goes beyond Galaxy to the Universe",
+          "price": 1249,
+          "discountPercentage": 15.46,
+          "rating": 4.09,
+          "stock": 36,
+          "brand": "Samsung",
+          "category": "smartphones",
+          "thumbnail": "https://i.dummyjson.com/data/products/3/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/3/1.jpg"
+          ],
+          "quantity": 1,
+          "user": 2
+        }
+      ],
+      "totalItems": 1,
+      "totalPrice": 1056,
+      "address": {
+        "name": "Vikas Mittal",
+        "email": "vikasaggrawal700@gmail.com",
+        "tel": "7011641548",
+        "street": "J-Block, House No - 518",
+        "city": "Jahangir Puri",
+        "state": "Delhi",
+        "pinCode": "110033",
+        "country": "India"
+      },
+      "paymentMethod": "Cash",
+      "user": 2,
+      "id": 1
+    }
   ]
 }

@@ -4,22 +4,55 @@ import Header from "../components/common/Header";
 import Form from "../components/checkout/Form";
 import ViewProduct from "../components/cart/ViewProduct";
 import ViewTotal from "../components/cart/ViewTotal";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectCart } from "../features/cart/cartSlice";
 import { useNavigate } from "react-router-dom";
+import { selectUser } from "../features/user/userSlice";
+import { makeOrderAsync } from "../features/order/orderSlice";
 
 const CheckOut = () => {
+  const dispatch = useDispatch();
+  const [message, setMessage] = useState("");
   const navigate = useNavigate();
   const { items } = useSelector(selectCart);
+  const { loggedInUser } = useSelector(selectUser);
 
   const [paymentInfo, setPaymentInfo] = useState({
     address: "",
     paymentMethod: "",
   });
 
+  const validate = (info) => {
+    if (info.address === "") {
+      setMessage("Select address...");
+      return false;
+    } else if (info.paymentMethod === "") {
+      setMessage("Select payment method...");
+      return false;
+    } else {
+      return true;
+    }
+  };
+
   const handlePaymentInfo = (id, info) => {
     setPaymentInfo({ ...paymentInfo, [id]: info });
-    console.log(id, info);
+    setMessage("");
+  };
+
+  const handleOrder = (totalItems, totalPrice) => {
+    const valid = validate(paymentInfo);
+    if (valid) {
+      dispatch(
+        makeOrderAsync({
+          items,
+          totalItems,
+          totalPrice,
+          address: paymentInfo.address,
+          paymentMethod: paymentInfo.paymentMethod,
+          user: loggedInUser.id,
+        })
+      );
+    }
   };
 
   useEffect(() => {
@@ -43,9 +76,10 @@ const CheckOut = () => {
             </h2>
             <ViewProduct products={items} />
             <ViewTotal
-              afterCheckout="/payment"
+              onClick={handleOrder}
               checkoutTitle="Pay Now"
               products={items}
+              message={message}
             />
           </div>
         </div>
