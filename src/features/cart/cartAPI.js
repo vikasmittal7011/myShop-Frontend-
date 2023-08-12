@@ -40,3 +40,14 @@ export function deleteItem(itemId) {
     resolve({ data: { id: itemId }, item: data });
   });
 }
+
+export function resetCart(userId) {
+  return new Promise(async (resolve) => {
+    const cartItems = await fetchItemsByUser(userId);
+    const items = cartItems.data;
+    for (let item of items) {
+      await deleteItem(item.id);
+    }
+    resolve({ status: "success" });
+  });
+}

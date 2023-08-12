@@ -54,12 +54,14 @@ const CheckOut = () => {
           status: "Pending",
         })
       );
-
-      if (orderPlaced) {
-        navigate("/order-success");
-      }
     }
   };
+
+  useEffect(() => {
+    if (orderPlaced) {
+      navigate("/order-success");
+    }
+  }, [orderPlaced, navigate]);
 
   useEffect(() => {
     if (items.length < 1) {

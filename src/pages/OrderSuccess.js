@@ -1,10 +1,20 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { selectorder } from "../features/order/orderSlice";
+import { resetOrder, selectorder } from "../features/order/orderSlice";
+import { selectUser } from "../features/user/userSlice";
+import { resetCartAsync } from "../features/cart/cartSlice";
 
 const OrderSuccess = () => {
+  const dispatch = useDispatch();
   const { orders } = useSelector(selectorder);
+  const { loggedInUser } = useSelector(selectUser);
+
+  useEffect(() => {
+    dispatch(resetCartAsync(loggedInUser.id));
+    dispatch(resetOrder());
+  }, [orders, loggedInUser, dispatch]);
+
   return (
     <main className="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
       <div className="text-center">

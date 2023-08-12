@@ -65,9 +65,9 @@ const App = () => {
             path="/order-success"
             exact
             element={
-              // <Protect>
+              <Protect>
                 <OrderSuccess />
-              // </Protect>
+              </Protect>
             }
           />
           <Route

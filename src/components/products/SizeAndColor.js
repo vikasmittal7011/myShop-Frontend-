@@ -24,9 +24,9 @@ const SizeAndColor = ({
 
   const handleClick = (w) => {
     w.preventDefault();
-    dispatch(
-      addToCartAsync({ ...productData, quantity: 1, user: loggedInUser.id })
-    );
+    const newItem = { ...productData, quantity: 1, user: loggedInUser.id };
+    delete newItem["id"];
+    dispatch(addToCartAsync(newItem));
     const item = {
       color: "green",
       type: "Success",
