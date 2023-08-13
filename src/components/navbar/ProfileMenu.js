@@ -1,8 +1,14 @@
+import React, { forwardRef } from "react";
 import { Menu } from "@headlessui/react";
 
 import Links from "./Links";
 import { classNames, profileLinks } from "../../utils/constant";
 import TransitionEffet from "../common/TransitionEffet";
+
+// Wrap the Links component with forwardRef
+const ForwardedLinks = forwardRef((props, ref) => {
+  return <Links {...props} forwardedRef={ref} />;
+});
 
 const ProfileMenu = () => {
   return (
@@ -23,7 +29,7 @@ const ProfileMenu = () => {
           {profileLinks.map((item) => (
             <Menu.Item key={item.name}>
               {({ active }) => (
-                <Links
+                <ForwardedLinks
                   to={item.href}
                   className={classNames(
                     active ? "bg-gray-100" : "",
