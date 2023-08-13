@@ -7,7 +7,7 @@ import ViewTotal from "../components/cart/ViewTotal";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCart } from "../features/cart/cartSlice";
 import { useNavigate } from "react-router-dom";
-import { selectUser } from "../features/user/userSlice";
+import { selectUser } from "../features/auth/authSlice";
 import { makeOrderAsync, selectorder } from "../features/order/orderSlice";
 
 const CheckOut = () => {

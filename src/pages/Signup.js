@@ -5,7 +5,7 @@ import Links from "../components/common/Link";
 import Input from "../components/form/Input";
 import Button from "../components/common/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { createUserAsync, selectUser } from "../features/user/userSlice";
+import { createUserAsync, selectUser } from "../features/auth/authSlice";
 import { Navigate, useNavigate } from "react-router-dom";
 
 const Signup = () => {

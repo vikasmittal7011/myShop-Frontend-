@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { selectUser } from "../features/user/userSlice";
+import { selectUser } from "../features/auth/authSlice";
 import { Navigate } from "react-router-dom";
 
 const Protect = ({ children }) => {

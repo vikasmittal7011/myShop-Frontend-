@@ -6,7 +6,7 @@ import Input from "../components/form/Input";
 import Button from "../components/common/Button";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUserAsync, selectUser } from "../features/user/userSlice";
+import { loginUserAsync, selectUser } from "../features/auth/authSlice";
 
 const Login = () => {
   const navigate = useNavigate();

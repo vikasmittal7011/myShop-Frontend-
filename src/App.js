@@ -15,7 +15,7 @@ import Protect from "./pages/Protect";
 import Alert from "./components/common/Alert";
 import { fetchItemsByUsertAsync } from "./features/cart/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { selectUser } from "./features/user/userSlice";
+import { selectUser } from "./features/auth/authSlice";
 import PageNotFound from "./pages/PageNotFound";
 import OrderSuccess from "./pages/OrderSuccess";
 

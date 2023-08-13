@@ -4,7 +4,7 @@ import { classNames } from "../../utils/constant";
 
 import Button from "../common/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { selectUser } from "../../features/user/userSlice";
+import { selectUser } from "../../features/auth/authSlice";
 import {
   addToCartAsync,
   fetchItemsByUsertAsync,

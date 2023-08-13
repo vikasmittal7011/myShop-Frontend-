@@ -7,7 +7,7 @@ import Select from "../form/Select";
 import Button from "../common/Button";
 import { country } from "../../utils/constant";
 import { useDispatch, useSelector } from "react-redux";
-import { selectUser, updateUserAsync } from "../../features/user/userSlice";
+import { selectUser, updateUserAsync } from "../../features/auth/authSlice";
 
 const Form = ({ handlePaymentInfo }) => {
   const dispatch = useDispatch();
