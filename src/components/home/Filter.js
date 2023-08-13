@@ -9,7 +9,7 @@ import {
   fetchProductByFiltersAsync,
   selectProducts,
 } from "../../features/product/productSlice";
-import { Classe, ITEM_PAGE_PER } from "../../utils/constant";
+import { Classes, ITEM_PAGE_PER } from "../../utils/constant";
 import MobileFilter from "./MobileFilter";
 import OpenCloseBTN from "./OpenCloseBTN";
 import SortOptions from "./SortOptions";
@@ -77,7 +77,7 @@ export const Filter = () => {
       <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-16">
           <h1
-            className={`${Classe.h1_size} font-bold tracking-tight text-gray-900`}
+            className={`${Classes.h1_size} font-bold tracking-tight text-gray-900`}
           >
             Filters Products
           </h1>

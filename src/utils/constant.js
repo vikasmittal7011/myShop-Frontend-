@@ -19,7 +19,7 @@ export const sortOptions = [
   { name: "Price: High to Low", sort: "price", order: "desc", current: false },
 ];
 
-export const Classe = {
+export const Classes = {
   h1_size:
     "2xl:text-6xl lg:text-3xl md:text-2xl sm:text-xl l:text-xl s:text-xl",
   commonClass: "cursor-pointer relative items-center py-2",

@@ -1,7 +1,7 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 import { ITEM_PAGE_PER } from "../../utils/constant";
 
-import { Classe } from "../../utils/constant";
+import { Classes } from "../../utils/constant";
 
 const Pagination = ({ handlePage, page, totalProduct = 55 }) => {
   const handleNext = () => {
@@ -19,13 +19,13 @@ const Pagination = ({ handlePage, page, totalProduct = 55 }) => {
       <div className="flex flex-1 justify-between sm:hidden">
         <p
           onClick={handlePrevious}
-          className={`${Classe.commonClass} ${Classe.commonBTNClass}`}
+          className={`${Classes.commonClass} ${Classes.commonBTNClass}`}
         >
           Previous
         </p>
         <p
           onClick={handleNext}
-          className={`${Classe.commonClass} ${Classe.commonBTNClass} ml-3`}
+          className={`${Classes.commonClass} ${Classes.commonBTNClass} ml-3`}
         >
           Next
         </p>
@@ -53,7 +53,7 @@ const Pagination = ({ handlePage, page, totalProduct = 55 }) => {
           >
             <p
               onClick={handlePrevious}
-              className={`${Classe.commonClass}  ${Classe.commonSreenBTNClass} rounded-l-md `}
+              className={`${Classes.commonClass}  ${Classes.commonSreenBTNClass} rounded-l-md `}
             >
               <span className="sr-only">Previous</span>
               <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
@@ -69,8 +69,8 @@ const Pagination = ({ handlePage, page, totalProduct = 55 }) => {
                 aria-current="page"
                 className={`${
                   page === index + 1
-                    ? `${Classe.activeClass} ${Classe.commonClass}`
-                    : `${Classe.hoverClass} ${Classe.commonClass}`
+                    ? `${Classes.activeClass} ${Classes.commonClass}`
+                    : `${Classes.hoverClass} ${Classes.commonClass}`
                 } cursor-pointer`}
               >
                 {index + 1}
@@ -78,7 +78,7 @@ const Pagination = ({ handlePage, page, totalProduct = 55 }) => {
             ))}
             <p
               onClick={handleNext}
-              className={`${Classe.commonClass}  ${Classe.commonSreenBTNClass} rounded-r-md`}
+              className={`${Classes.commonClass}  ${Classes.commonSreenBTNClass} rounded-r-md`}
             >
               <span className="sr-only">Next</span>
               <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />

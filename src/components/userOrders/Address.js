@@ -1,5 +1,5 @@
 import React from "react";
-import { Classe } from "../../utils/constant";
+import { Classes } from "../../utils/constant";
 
 const Address = ({ address }) => {
   return (
@@ -10,7 +10,7 @@ const Address = ({ address }) => {
       <div className="mt-2 space-y-6">
         <ul className="divide-y divide-gray-100">
           <li
-            className={`flex justify-between ${Classe.flexDirectionClass} gap-x-6 py-5 border bottom-1 rounded-md border-gray-400 px-3`}
+            className={`flex justify-between ${Classes.flexDirectionClass} gap-x-6 py-5 border bottom-1 rounded-md border-gray-400 px-3`}
           >
             <div className="flex min-w-0 gap-x-4">
               <div className="min-w-0 flex-auto">

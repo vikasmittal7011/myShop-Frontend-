@@ -1,5 +1,5 @@
 import React from "react";
-import { Classe } from "../../utils/constant";
+import { Classes } from "../../utils/constant";
 import Image from "../common/Image";
 
 const Items = ({ items, title }) => {
@@ -8,7 +8,7 @@ const Items = ({ items, title }) => {
       {items?.map((item, i) => (
         <li
           key={i}
-          className={`flex py-6 ${Classe.flexDirectionClass} l:gap-y-5 s:gap-y-5 xs:gap-y-5`}
+          className={`flex py-6 ${Classes.flexDirectionClass} l:gap-y-5 s:gap-y-5 xs:gap-y-5`}
         >
           <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
             <Image
@@ -21,7 +21,7 @@ const Items = ({ items, title }) => {
           <div className="ml-4 flex flex-1 flex-col">
             <div>
               <div
-                className={`flex justify-between text-base font-medium text-gray-900 ${Classe.flexDirectionClass} gap-y-2`}
+                className={`flex justify-between text-base font-medium text-gray-900 ${Classes.flexDirectionClass} gap-y-2`}
               >
                 <h3>{item?.title}</h3>
                 <div>
