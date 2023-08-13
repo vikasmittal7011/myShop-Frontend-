@@ -15,13 +15,13 @@ import Protect from "./pages/Protect";
 import Alert from "./components/common/Alert";
 import { fetchItemsByUsertAsync } from "./features/cart/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { selectUser } from "./features/auth/authSlice";
+import { selectauth } from "./features/auth/authSlice";
 import PageNotFound from "./pages/PageNotFound";
 import OrderSuccess from "./pages/OrderSuccess";
 
 const App = () => {
   const dispatch = useDispatch();
-  const { loggedInUser } = useSelector(selectUser);
+  const { loggedInUser } = useSelector(selectauth);
   useEffect(() => {
     if (loggedInUser) {
       dispatch(fetchItemsByUsertAsync(loggedInUser.id));

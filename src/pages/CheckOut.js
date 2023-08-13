@@ -7,7 +7,7 @@ import ViewTotal from "../components/cart/ViewTotal";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCart } from "../features/cart/cartSlice";
 import { useNavigate } from "react-router-dom";
-import { selectUser } from "../features/auth/authSlice";
+import { selectauth } from "../features/auth/authSlice";
 import { makeOrderAsync, selectorder } from "../features/order/orderSlice";
 
 const CheckOut = () => {
@@ -15,7 +15,7 @@ const CheckOut = () => {
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
   const { items } = useSelector(selectCart);
-  const { loggedInUser } = useSelector(selectUser);
+  const { loggedInUser } = useSelector(selectauth);
   const { orderPlaced } = useSelector(selectorder);
 
   const [paymentInfo, setPaymentInfo] = useState({

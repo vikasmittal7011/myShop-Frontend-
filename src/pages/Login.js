@@ -6,12 +6,12 @@ import Input from "../components/form/Input";
 import Button from "../components/common/Button";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUserAsync, selectUser } from "../features/auth/authSlice";
+import { loginUserAsync, selectauth } from "../features/auth/authSlice";
 
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  let { loggedInUser, message, status } = useSelector(selectUser);
+  let { loggedInUser, message, status } = useSelector(selectauth);
 
   const [credentials, setCredentials] = useState({
     email: "vikas@gmail.com",

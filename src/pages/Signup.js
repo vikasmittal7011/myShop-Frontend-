@@ -5,13 +5,13 @@ import Links from "../components/common/Link";
 import Input from "../components/form/Input";
 import Button from "../components/common/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { createUserAsync, selectUser } from "../features/auth/authSlice";
+import { createUserAsync, selectauth } from "../features/auth/authSlice";
 import { Navigate, useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { loggedInUser } = useSelector(selectUser);
+  const { loggedInUser } = useSelector(selectauth);
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",

@@ -4,7 +4,7 @@ import { classNames } from "../../utils/constant";
 
 import Button from "../common/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { selectUser } from "../../features/auth/authSlice";
+import { selectauth } from "../../features/auth/authSlice";
 import {
   addToCartAsync,
   fetchItemsByUsertAsync,
@@ -20,7 +20,7 @@ const SizeAndColor = ({
   productData,
 }) => {
   const dispatch = useDispatch();
-  const { loggedInUser } = useSelector(selectUser);
+  const { loggedInUser } = useSelector(selectauth);
 
   const handleClick = (w) => {
     w.preventDefault();

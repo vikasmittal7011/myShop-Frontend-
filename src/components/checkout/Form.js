@@ -7,12 +7,12 @@ import Select from "../form/Select";
 import Button from "../common/Button";
 import { country } from "../../utils/constant";
 import { useDispatch, useSelector } from "react-redux";
-import { selectUser, updateUserAsync } from "../../features/auth/authSlice";
+import { selectauth, updateUserAsync } from "../../features/auth/authSlice";
 
 const Form = ({ handlePaymentInfo }) => {
   const dispatch = useDispatch();
 
-  const { loggedInUser } = useSelector(selectUser);
+  const { loggedInUser } = useSelector(selectauth);
 
   const validatePatterns = {
     email: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,}(?:\.[a-zA-Z]{2,})?$/,
