@@ -27,8 +27,8 @@ const UserOrders = () => {
     <>
       <Header heading="Your Orders" />
       <ul className="divide-y divide-gray-400 mx-10 pb-6">
-        {userOrders.map((order) => (
-          <div className="my-10">
+        {userOrders.map((order, i) => (
+          <div key={i} className="my-10">
             <Headings order={order} />
             <Items items={order.items} title={order.title} />
             <TotalAndItems order={order} />
