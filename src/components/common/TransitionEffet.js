@@ -1,10 +1,9 @@
 import { Transition } from "@headlessui/react";
-import React, { Fragment } from "react";
 
 const TransitionEffet = ({children}) => {
   return (
     <Transition.Child
-      as={Fragment}
+      // as={Fragment}
       enter="transition-opacity ease-linear duration-300"
       enterFrom="opacity-0"
       enterTo="opacity-100"

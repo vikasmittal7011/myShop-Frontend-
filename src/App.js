@@ -18,6 +18,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectauth } from "./features/auth/authSlice";
 import PageNotFound from "./pages/PageNotFound";
 import OrderSuccess from "./pages/OrderSuccess";
+import UserOrders from "./pages/UserOrders";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -67,6 +68,15 @@ const App = () => {
             element={
               <Protect>
                 <OrderSuccess />
+              </Protect>
+            }
+          />
+          <Route
+            path="/user-orders"
+            exact
+            element={
+              <Protect>
+                <UserOrders />
               </Protect>
             }
           />

@@ -2395,23 +2395,6 @@
       "quantity": 1,
       "user": 1,
       "id": 2
-    },
-    {
-      "title": "Samsung Universe 9",
-      "description": "Samsung's new variant which goes beyond Galaxy to the Universe",
-      "price": 1249,
-      "discountPercentage": 15.46,
-      "rating": 4.09,
-      "stock": 36,
-      "brand": "Samsung",
-      "category": "smartphones",
-      "thumbnail": "https://i.dummyjson.com/data/products/3/thumbnail.jpg",
-      "images": [
-        "https://i.dummyjson.com/data/products/3/1.jpg"
-      ],
-      "quantity": 1,
-      "user": 2,
-      "id": 3
     }
   ],
   "orders": [
@@ -2495,6 +2478,66 @@
       "user": 2,
       "status": "Pending",
       "id": 2
+    },
+    {
+      "items": [
+        {
+          "title": "Fog Scent Xpressio Perfume",
+          "description": "Product details of Best Fog Scent Xpressio Perfume 100ml For Men cool long lasting perfumes for Men",
+          "price": 13,
+          "discountPercentage": 8.14,
+          "rating": 4.59,
+          "stock": 61,
+          "brand": "Fog Scent Xpressio",
+          "category": "fragrances",
+          "thumbnail": "https://i.dummyjson.com/data/products/13/thumbnail.webp",
+          "images": [
+            "https://i.dummyjson.com/data/products/13/1.jpg",
+            "https://i.dummyjson.com/data/products/13/2.png",
+            "https://i.dummyjson.com/data/products/13/3.jpg",
+            "https://i.dummyjson.com/data/products/13/4.jpg",
+            "https://i.dummyjson.com/data/products/13/thumbnail.webp"
+          ],
+          "quantity": 1,
+          "user": 2,
+          "id": 3
+        },
+        {
+          "title": "Leather Straps Wristwatch",
+          "description": "Style:Sport ,Clasp:Buckles ,Water Resistance Depth:3Bar",
+          "price": 120,
+          "discountPercentage": 7.14,
+          "rating": 4.63,
+          "stock": 91,
+          "brand": "Naviforce",
+          "category": "mens-watches",
+          "thumbnail": "https://i.dummyjson.com/data/products/61/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/61/1.jpg",
+            "https://i.dummyjson.com/data/products/61/2.png",
+            "https://i.dummyjson.com/data/products/61/3.jpg"
+          ],
+          "quantity": 1,
+          "user": 2,
+          "id": 4
+        }
+      ],
+      "totalItems": 2,
+      "totalPrice": 123,
+      "address": {
+        "name": "Vikas Mittal",
+        "email": "vikasaggrawal700@gmail.com",
+        "tel": "7011641548",
+        "street": "J-Block, House No - 518",
+        "city": "Jahangir Puri",
+        "state": "Delhi",
+        "pinCode": "110033",
+        "country": "India"
+      },
+      "paymentMethod": "Cash",
+      "user": 2,
+      "status": "Pending",
+      "id": 3
     }
   ]
 }

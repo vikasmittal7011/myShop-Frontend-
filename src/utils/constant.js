@@ -9,7 +9,7 @@ export const navLinks = [
 
 export const profileLinks = [
   { name: "Your Profile", href: "" },
-  { name: "Settings", href: "" },
+  { name: "My Orders", href: "/user-orders" },
   { name: "Sign out", href: "/signin" },
 ];
 
@@ -35,6 +35,9 @@ export const Classe = {
 
   activeClass:
     "z-10 inline-flex bg-indigo-600 px-4 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600",
+
+  flexDirectionClass:
+    "lg:flex-row md:flex-row sm:flex-row l:flex-col s:flex-col xs:flex-col",
 };
 
 export const classNames = (...classes) => {

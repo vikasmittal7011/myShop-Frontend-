@@ -6,5 +6,6 @@ const Home = lazy(() => import("./Home"));
 const Cart = lazy(() => import("./Cart"));
 const CheckOut = lazy(() => import("./CheckOut"));
 const ProductDetails = lazy(() => import("./ProductDetails"));
+const UserOrders = lazy(() => import("./UserOrders"));
 
-export { Signup, Login, Home, Cart, CheckOut, ProductDetails };
+export { Signup, Login, Home, Cart, CheckOut, ProductDetails, UserOrders };

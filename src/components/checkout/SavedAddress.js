@@ -14,7 +14,7 @@ const SavedAddress = ({ addresses, handlePaymentInfo }) => {
           {addresses?.map((address) => (
             <li
               key={address.email}
-              className="flex justify-between gap-x-6 py-5 border bottom-1 rounded-md border-gray-400 px-3"
+              className="flex justify-between lg:flex-row md:flex-row sm:flex-row l:flex-col s:flex-col xs:flex-col gap-x-6 py-5 border bottom-1 rounded-md border-gray-400 px-3"
             >
               <div className="flex min-w-0 gap-x-4">
                 <input
@@ -42,7 +42,7 @@ const SavedAddress = ({ addresses, handlePaymentInfo }) => {
                   </p>
                 </div>
               </div>
-              <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+              <div className="shrink-0 sm:flex sm:flex-col sm:items-end">
                 <p className="mt-1 truncate text-xs leading-5 text-gray-500">
                   {address.tel}
                 </p>
