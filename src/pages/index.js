@@ -11,6 +11,7 @@ const Cart = lazy(() => import("./Cart"));
 const CheckOut = lazy(() => import("./CheckOut"));
 const ProductDetails = lazy(() => import("./ProductDetails"));
 const UserOrders = lazy(() => import("./UserOrders"));
+const Logout = lazy(() => import("./Logout"));
 
 export {
   Signup,
@@ -24,4 +25,5 @@ export {
   PageNotFound,
   OrderSuccess,
   UserProfile,
+  Logout,
 };

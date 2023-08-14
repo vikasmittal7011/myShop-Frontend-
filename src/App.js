@@ -14,6 +14,7 @@ import {
   OrderSuccess,
   UserProfile,
   UserOrders,
+  Logout,
 } from "./pages/index";
 import Loader from "./components/common/Loader";
 import Alert from "./components/common/Alert";
@@ -33,7 +34,7 @@ const App = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loggedInUser?.id]);
-  
+
   return (
     <BrowserRouter>
       <NavBar />
@@ -91,6 +92,15 @@ const App = () => {
             element={
               <Protect>
                 <UserOrders />
+              </Protect>
+            }
+          />
+          <Route
+            path="/logout"
+            exact
+            element={
+              <Protect>
+                <Logout />
               </Protect>
             }
           />

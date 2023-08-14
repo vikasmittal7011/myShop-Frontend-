@@ -27,8 +27,8 @@ export function loginUser(userData) {
   });
 }
 
-export function logoutUser() {
+export function logoutUser(id) {
   return new Promise(async (resolve) => {
-    resolve(null);
+    resolve({ data: "Success" });
   });
 }

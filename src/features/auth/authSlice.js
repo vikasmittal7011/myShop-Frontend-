@@ -23,10 +23,13 @@ export const loginUserAsync = createAsyncThunk(
   }
 );
 
-export const logoutUserAsync = createAsyncThunk("auth/logoutUser", async () => {
-  const response = await logoutUser();
-  return response.data;
-});
+export const logoutUserAsync = createAsyncThunk(
+  "auth/logoutUser",
+  async (id) => {
+    const response = await logoutUser(id);
+    return response.data;
+  }
+);
 
 export const authSlice = createSlice({
   name: "auth",
@@ -57,7 +60,7 @@ export const authSlice = createSlice({
       })
       .addCase(logoutUserAsync.fulfilled, (state, action) => {
         state.status = "idle";
-        state.loggedInUser = action.payload;
+        state.loggedInUser = null;
       });
   },
 });
