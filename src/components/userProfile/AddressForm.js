@@ -103,125 +103,127 @@ const AddressForm = ({
     <div className="flex items-center justify-center">
       {isOpen && (
         <div className="fixed py-5 inset-0 flex items-center justify-center bg-black bg-opacity-50 transition-opacity duration-300">
-          <div className="bg-gray-200 rounded-lg p-6 w-3/4 transform transition-transform duration-300">
+          <div className="bg-gray-200 rounded-lg p-6 lg:w-3/4 md:w-3/4 sm:w-3/4 l:w-full s:w-full xs:w-full l:m-5 s:m-5 xs:m-5 transform transition-transform duration-300">
             <div className="flex justify-between items-center mb-4">
               <h5 className="text-lg font-semibold text-purple-600">{title}</h5>
             </div>
             {userInfo && (
               <div className="modal-dialog modal-dialog-scrollable">
                 <form onSubmit={handleSubmit}>
-                  <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                    <div className="col-span-full">
-                      <Input
-                        id="name"
-                        title="full Name"
-                        type="text"
-                        placeHolder="Enter full name..."
-                        value={userInfo.name}
-                        errorMessage={userMistakes.name}
-                        onChange={handleUserInfo}
-                      />
-                    </div>
+                  <div style={{ maxHeight: "90vh", overflowY: "auto" }}>
+                    <div className=" grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                      <div className="col-span-full">
+                        <Input
+                          id="name"
+                          title="Full Name"
+                          type="text"
+                          placeHolder="Enter full name..."
+                          value={userInfo.name}
+                          errorMessage={userMistakes.name}
+                          onChange={handleUserInfo}
+                        />
+                      </div>
 
-                    <div className="sm:col-span-3">
-                      <Input
-                        id="email"
-                        title="Email Address"
-                        type="email"
-                        placeHolder="Enter email address..."
-                        value={userInfo.email}
-                        onChange={handleUserInfo}
-                        errorMessage={userMistakes.email}
-                      />
-                    </div>
+                      <div className="sm:col-span-3">
+                        <Input
+                          id="email"
+                          title="Email Address"
+                          type="email"
+                          placeHolder="Enter email address..."
+                          value={userInfo.email}
+                          onChange={handleUserInfo}
+                          errorMessage={userMistakes.email}
+                        />
+                      </div>
 
-                    <div className="sm:col-span-3">
-                      <Input
-                        id="tel"
-                        title="Phone Number"
-                        type="text"
-                        placeHolder="Enter phone number..."
-                        errorMessage={userMistakes.tel}
-                        onChange={handleUserInfo}
-                        value={userInfo.tel}
-                      />
-                    </div>
+                      <div className="sm:col-span-3">
+                        <Input
+                          id="tel"
+                          title="Phone Number"
+                          type="text"
+                          placeHolder="Enter phone number..."
+                          errorMessage={userMistakes.tel}
+                          onChange={handleUserInfo}
+                          value={userInfo.tel}
+                        />
+                      </div>
 
-                    <div className="sm:col-span-3">
-                      <Select
-                        id="country"
-                        title="Country"
-                        options={country}
-                        defaultValue={userInfo.country}
-                        errorMessage={userMistakes.country}
-                        onChange={handleUserInfo}
-                      />
-                    </div>
+                      <div className="sm:col-span-3">
+                        <Select
+                          id="country"
+                          title="Country"
+                          options={country}
+                          defaultValue={userInfo.country}
+                          errorMessage={userMistakes.country}
+                          onChange={handleUserInfo}
+                        />
+                      </div>
 
-                    <div className="col-span-full">
-                      <Input
-                        id="street"
-                        title="Street Address"
-                        type="text"
-                        placeHolder="Enter stree address..."
-                        onChange={handleUserInfo}
-                        value={userInfo.street}
-                        errorMessage={userMistakes.street}
-                      />
-                    </div>
+                      <div className="col-span-full">
+                        <Input
+                          id="street"
+                          title="Street Address"
+                          type="text"
+                          placeHolder="Enter stree address..."
+                          onChange={handleUserInfo}
+                          value={userInfo.street}
+                          errorMessage={userMistakes.street}
+                        />
+                      </div>
 
-                    <div className="sm:col-span-2 sm:col-start-1">
-                      <Input
-                        id="city"
-                        title="City"
-                        type="text"
-                        placeHolder="Enter city..."
-                        onChange={handleUserInfo}
-                        value={userInfo.city}
-                        errorMessage={userMistakes.city}
-                      />
-                    </div>
+                      <div className="sm:col-span-2 sm:col-start-1">
+                        <Input
+                          id="city"
+                          title="City"
+                          type="text"
+                          placeHolder="Enter city..."
+                          onChange={handleUserInfo}
+                          value={userInfo.city}
+                          errorMessage={userMistakes.city}
+                        />
+                      </div>
 
-                    <div className="sm:col-span-2">
-                      <Input
-                        id="state"
-                        title="State / Province"
-                        type="text"
-                        placeHolder="Enter state / province..."
-                        onChange={handleUserInfo}
-                        value={userInfo.state}
-                        errorMessage={userMistakes.state}
-                      />
-                    </div>
+                      <div className="sm:col-span-2">
+                        <Input
+                          id="state"
+                          title="State / Province"
+                          type="text"
+                          placeHolder="Enter state / province..."
+                          onChange={handleUserInfo}
+                          value={userInfo.state}
+                          errorMessage={userMistakes.state}
+                        />
+                      </div>
 
-                    <div className="sm:col-span-2">
-                      <Input
-                        id="pinCode"
-                        title="ZIP / Postal code"
-                        type="text"
-                        placeHolder="Enter ZIP / Postal code..."
-                        onChange={handleUserInfo}
-                        value={userInfo.pinCode}
-                        errorMessage={userMistakes.pinCode}
-                      />
+                      <div className="sm:col-span-2">
+                        <Input
+                          id="pinCode"
+                          title="ZIP / Postal code"
+                          type="text"
+                          placeHolder="Enter ZIP / Postal code..."
+                          onChange={handleUserInfo}
+                          value={userInfo.pinCode}
+                          errorMessage={userMistakes.pinCode}
+                        />
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex justify-end my-5">
-                    <Button
-                      onClick={() => {
-                        handleModel();
-                        setUserInfo(null);
-                      }}
-                      className="bg-gray-300 hover:bg-gray-400 text-gray-700 font-semibold py-2 px-4 mr-2 rounded"
-                    >
-                      Close
-                    </Button>
-                    <Button
-                      type="submit"
-                      className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
-                    >
-                      {action}
-                    </Button>
+                    <div className="flex justify-end my-5">
+                      <Button
+                        onClick={() => {
+                          handleModel();
+                          setUserInfo(null);
+                        }}
+                        className="bg-gray-300 hover:bg-gray-400 text-gray-700 font-semibold py-2 px-4 mr-2 rounded"
+                      >
+                        Close
+                      </Button>
+                      <Button
+                        type="submit"
+                        className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
+                      >
+                        {action}
+                      </Button>
+                    </div>
                   </div>
                 </form>
               </div>
