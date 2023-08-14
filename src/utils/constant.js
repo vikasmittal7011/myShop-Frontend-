@@ -8,7 +8,7 @@ export const navLinks = [
 ];
 
 export const profileLinks = [
-  { name: "Your Profile", href: "" },
+  { name: "My Profile", href: "/user-profile" },
   { name: "My Orders", href: "/user-orders" },
   { name: "Sign out", href: "/signin" },
 ];

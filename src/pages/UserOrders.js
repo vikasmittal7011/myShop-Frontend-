@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { selectauth } from "../features/auth/authSlice";
 import { fetchUserOrdersAsync, selectuser } from "../features/user/userSlice";
 import Loader from "../components/common/Loader";
 import Header from "../components/common/Header";
@@ -12,12 +11,11 @@ import Address from "../components/userOrders/Address";
 
 const UserOrders = () => {
   const dispatch = useDispatch();
-  const { loggedInUser } = useSelector(selectauth);
-  const { userOrders, status } = useSelector(selectuser);
+  const { userOrders, status, userData } = useSelector(selectuser);
 
   useEffect(() => {
-    dispatch(fetchUserOrdersAsync(loggedInUser?.id));
-  }, [loggedInUser, dispatch]);
+    dispatch(fetchUserOrdersAsync(userData?.id));
+  }, [userData, dispatch]);
 
   if (status !== "idle" || !userOrders) {
     return <Loader />;

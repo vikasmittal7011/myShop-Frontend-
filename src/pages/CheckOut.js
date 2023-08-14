@@ -7,15 +7,15 @@ import ViewTotal from "../components/cart/ViewTotal";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCart } from "../features/cart/cartSlice";
 import { useNavigate } from "react-router-dom";
-import { selectauth } from "../features/auth/authSlice";
 import { makeOrderAsync, selectorder } from "../features/order/orderSlice";
+import { selectuser } from "../features/user/userSlice";
 
 const CheckOut = () => {
   const dispatch = useDispatch();
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
   const { items } = useSelector(selectCart);
-  const { loggedInUser } = useSelector(selectauth);
+  const { userData } = useSelector(selectuser);
   const { orderPlaced } = useSelector(selectorder);
 
   const [paymentInfo, setPaymentInfo] = useState({
@@ -50,7 +50,7 @@ const CheckOut = () => {
           totalPrice,
           address: paymentInfo.address,
           paymentMethod: paymentInfo.paymentMethod,
-          user: loggedInUser.id,
+          user: userData.id,
           status: "Pending",
         })
       );

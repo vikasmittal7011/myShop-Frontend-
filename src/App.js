@@ -19,6 +19,8 @@ import { selectauth } from "./features/auth/authSlice";
 import PageNotFound from "./pages/PageNotFound";
 import OrderSuccess from "./pages/OrderSuccess";
 import UserOrders from "./pages/UserOrders";
+import UserProfile from "./pages/UserProfile";
+import { fetchUserDataAsync } from "./features/user/userSlice";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -26,6 +28,7 @@ const App = () => {
   useEffect(() => {
     if (loggedInUser) {
       dispatch(fetchItemsByUsertAsync(loggedInUser.id));
+      dispatch(fetchUserDataAsync(loggedInUser.id));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loggedInUser?.id]);
@@ -68,6 +71,15 @@ const App = () => {
             element={
               <Protect>
                 <OrderSuccess />
+              </Protect>
+            }
+          />
+          <Route
+            path="/user-profile"
+            exact
+            element={
+              <Protect>
+                <UserProfile />
               </Protect>
             }
           />

@@ -7,12 +7,12 @@ import Select from "../form/Select";
 import Button from "../common/Button";
 import { country } from "../../utils/constant";
 import { useDispatch, useSelector } from "react-redux";
-import { selectauth, updateUserAsync } from "../../features/auth/authSlice";
+import { selectuser, updateUserAsync } from "../../features/user/userSlice";
 
 const Form = ({ handlePaymentInfo }) => {
   const dispatch = useDispatch();
 
-  const { loggedInUser } = useSelector(selectauth);
+  const { userData } = useSelector(selectuser);
 
   const validatePatterns = {
     email: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,}(?:\.[a-zA-Z]{2,})?$/,
@@ -104,8 +104,8 @@ const Form = ({ handlePaymentInfo }) => {
     if (valid) {
       dispatch(
         updateUserAsync({
-          ...loggedInUser,
-          addresses: [...loggedInUser.addresses, userInfo],
+          ...userData,
+          addresses: [...userData.addresses, userInfo],
         })
       );
       setUserInfo(initUserInfo);
@@ -241,7 +241,7 @@ const Form = ({ handlePaymentInfo }) => {
             <div className="mt-10 space-y-10">
               <SavedAddress
                 handlePaymentInfo={handlePaymentInfo}
-                addresses={loggedInUser.addresses}
+                addresses={userData.addresses}
               />
               <PaymentMethods handlePaymentInfo={handlePaymentInfo} />
             </div>
