@@ -9,22 +9,23 @@ import {
   Cart,
   CheckOut,
   ProductDetails,
+  Protect,
+  PageNotFound,
+  OrderSuccess,
+  UserProfile,
+  UserOrders,
 } from "./pages/index";
 import Loader from "./components/common/Loader";
-import Protect from "./pages/Protect";
 import Alert from "./components/common/Alert";
 import { fetchItemsByUsertAsync } from "./features/cart/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { selectauth } from "./features/auth/authSlice";
-import PageNotFound from "./pages/PageNotFound";
-import OrderSuccess from "./pages/OrderSuccess";
-import UserOrders from "./pages/UserOrders";
-import UserProfile from "./pages/UserProfile";
 import { fetchUserDataAsync } from "./features/user/userSlice";
 
 const App = () => {
   const dispatch = useDispatch();
   const { loggedInUser } = useSelector(selectauth);
+
   useEffect(() => {
     if (loggedInUser) {
       dispatch(fetchItemsByUsertAsync(loggedInUser.id));
@@ -32,6 +33,7 @@ const App = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loggedInUser?.id]);
+  
   return (
     <BrowserRouter>
       <NavBar />
