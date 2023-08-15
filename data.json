@@ -1838,6 +1838,24 @@
         "https://i.dummyjson.com/data/products/100/3.jpg",
         "https://i.dummyjson.com/data/products/100/thumbnail.jpg"
       ]
+    },
+    {
+      "title": "Dummy",
+      "description": "Dummy Data",
+      "price": "202",
+      "discountPercentage": "25",
+      "stock": "15",
+      "rating": 0,
+      "thumbnail": "https://i.dummyjson.com/data/products/1/1.jpg",
+      "images": [
+        "https://i.dummyjson.com/data/products/1/1.jpg",
+        "https://i.dummyjson.com/data/products/1/1.jpg",
+        "https://i.dummyjson.com/data/products/1/1.jpg",
+        "https://i.dummyjson.com/data/products/1/1.jpg"
+      ],
+      "brand": "Huawei",
+      "category": "smartphones",
+      "id": 101
     }
   ],
   "category": [
@@ -2334,11 +2352,13 @@
       "email": "vikasaggrawal700@gmail.com",
       "password": "Sonu@9876",
       "addresses": [],
+      "role": "admin",
       "id": 1
     },
     {
       "email": "vikas@gmail.com",
       "password": "Sonu@9876",
+      "role": "user",
       "addresses": [
         {
           "name": "Vikas Gupta",

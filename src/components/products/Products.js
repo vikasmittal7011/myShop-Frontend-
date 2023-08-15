@@ -1,9 +1,10 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { StarIcon } from "@heroicons/react/20/solid";
+import { useSelector } from "react-redux";
 
 import Loader from "../common/Loader";
 import Pagination from "./Pagination";
+import { selectauth } from "../../features/auth/authSlice";
+import ProductList from "./ProductList";
+import { Link } from "react-router-dom";
 
 const Products = ({
   handlePage,
@@ -13,62 +14,33 @@ const Products = ({
   status,
   totalItems,
 }) => {
+  const { loggedInUser } = useSelector(selectauth);
+
   if (status !== "idle") {
     return <Loader />;
   }
 
   return (
-    <div className="mx-auto max-w-2xl px-4 pb-16 sm:px-6 sm:pb-12 lg:max-w-7xl lg:px-8">
-      <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
-        {products?.map((product) => (
-          <div key={product.id} className="group relative">
-            <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
-              <img
-                src={product?.thumbnail}
-                alt={product?.title}
-                className="h-full w-full object-cover object-center lg:h-full lg:w-full"
-              />
-            </div>
-            <div className="mt-4 flex justify-between">
-              <div>
-                <h3 className="text-sm text-gray-700">
-                  <Link to={`product-details/${product.id}`}>
-                    <span
-                      aria-hidden="true"
-                      className="absolute inset-0 w-50"
-                    />
-                    {product?.title?.length >= 25
-                      ? product?.title?.slice(0, 25) + "...`"
-                      : product?.title}
-                  </Link>
-                </h3>
-                <StarIcon className="w-5 h-5 mr-1 inline" />
-                <p className="text-sm text-gray-500 inline align-bottom">
-                  {product?.rating}
-                </p>
-              </div>
-              <div>
-                <p className="text-sm font-medium text-gray-900">
-                  ${" "}
-                  {Math.round(
-                    product?.price * (1 - product?.discountPercentage / 100)
-                  )}
-                </p>
-                <p className="text-sm font-medium text-red-400 line-through">
-                  $ {product?.price}
-                </p>
-              </div>
-            </div>
-          </div>
-        ))}
+    <>
+      <div className="mx-auto max-w-2xl px-4 pb-16 sm:px-6 sm:pb-12 lg:max-w-7xl lg:px-8">
+        {loggedInUser?.role === "admin" && (
+          <Link
+            to="/create-product"
+            className="mb-10 flex items-center justify-center rounded-md border border-transparent bg-green-600 px-3 py-1 text-base font-medium text-white shadow-sm hover:bg-green-700"
+            type="button"
+          >
+            Add New Product
+          </Link>
+        )}
+        <ProductList products={products} loggedInUser={loggedInUser} />
+        <Pagination
+          handlePage={handlePage}
+          page={page}
+          setPage={setPage}
+          totalProduct={totalItems}
+        />
       </div>
-      <Pagination
-        handlePage={handlePage}
-        page={page}
-        setPage={setPage}
-        totalProduct={totalItems}
-      />
-    </div>
+    </>
   );
 };
 

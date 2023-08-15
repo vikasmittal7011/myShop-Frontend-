@@ -13,6 +13,8 @@ const ProductDetails = lazy(() => import("./ProductDetails"));
 const UserOrders = lazy(() => import("./UserOrders"));
 const Logout = lazy(() => import("./Logout"));
 const ForgotPassword = lazy(() => import("./ForgotPassword"));
+const ProductCreateForm = lazy(() => import("./ProductCreateForm"));
+const AdminProtect = lazy(() => import("./AdminProtect"));
 
 export {
   Signup,
@@ -28,4 +30,6 @@ export {
   UserProfile,
   Logout,
   ForgotPassword,
+  ProductCreateForm,
+  AdminProtect,
 };

@@ -16,6 +16,8 @@ import {
   UserOrders,
   Logout,
   ForgotPassword,
+  ProductCreateForm,
+  AdminProtect,
 } from "./pages/index";
 import Loader from "./components/common/Loader";
 import Alert from "./components/common/Alert";
@@ -112,6 +114,15 @@ const App = () => {
               <Protect>
                 <ProductDetails />
               </Protect>
+            }
+          />
+          <Route
+            path="/create-product"
+            exact
+            element={
+              <AdminProtect>
+                <ProductCreateForm />
+              </AdminProtect>
             }
           />
           <Route path="/signin" exact element={<Login />} />

@@ -128,7 +128,7 @@ const Form = ({ handlePaymentInfo }) => {
               <div className="col-span-full">
                 <Input
                   id="name"
-                  title="full Name"
+                  title="Full Name"
                   type="text"
                   placeHolder="Enter full name..."
                   value={userInfo.name}
