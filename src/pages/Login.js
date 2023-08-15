@@ -106,7 +106,7 @@ const Login = () => {
               type="password"
               showLink={true}
               linkText="Forget Password?"
-              linkNavigate="/"
+              linkNavigate="/forgot-password"
               placeHolder="Enter your password..."
               value={credentials.password}
               onChange={manageCredentials}

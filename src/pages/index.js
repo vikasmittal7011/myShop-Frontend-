@@ -12,6 +12,7 @@ const CheckOut = lazy(() => import("./CheckOut"));
 const ProductDetails = lazy(() => import("./ProductDetails"));
 const UserOrders = lazy(() => import("./UserOrders"));
 const Logout = lazy(() => import("./Logout"));
+const ForgotPassword = lazy(() => import("./ForgotPassword"));
 
 export {
   Signup,
@@ -26,4 +27,5 @@ export {
   OrderSuccess,
   UserProfile,
   Logout,
+  ForgotPassword,
 };

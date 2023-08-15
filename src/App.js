@@ -15,6 +15,7 @@ import {
   UserProfile,
   UserOrders,
   Logout,
+  ForgotPassword,
 } from "./pages/index";
 import Loader from "./components/common/Loader";
 import Alert from "./components/common/Alert";
@@ -114,6 +115,7 @@ const App = () => {
             }
           />
           <Route path="/signin" exact element={<Login />} />
+          <Route path="/forgot-password" exact element={<ForgotPassword />} />
           <Route path="/signup" exact element={<Signup />} />
           <Route path="*" exact element={<PageNotFound />} />
         </Routes>
