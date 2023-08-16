@@ -1,5 +1,6 @@
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Input from "../components/form/Input";
 import TextArea from "../components/form/TextArea";
@@ -7,13 +8,18 @@ import Select from "../components/form/Select";
 import Header from "../components/common/Header";
 import Button from "../components/common/Button";
 import {
+  clearSelectedProduct,
   createProductAsync,
+  fetchProductByIdAsync,
   selectProducts,
+  updateProductAsync,
 } from "../features/product/productSlice";
 
 const ProductCreateForm = () => {
+  const navigate = useNavigate();
+  const { id } = useParams();
   const dispatch = useDispatch();
-  const { brand, category } = useSelector(selectProducts);
+  const { brand, category, selectedProduct } = useSelector(selectProducts);
 
   const productDetailsOne = {
     title: "",
@@ -142,14 +148,46 @@ const ProductCreateForm = () => {
       delete product["image2"];
       delete product["image3"];
       delete product["image4"];
+      product["price"] = +product.price;
+      product["discountPercentage"] = +product.discountPercentage;
+      product["stock"] = +product.stock;
 
-      dispatch(createProductAsync(product));
+      if (id) {
+        product.id = id;
+        product.rating = selectedProduct.rating || 0;
+        dispatch(updateProductAsync(product));
+        navigate(`/product-details/${product.id}`);
+      } else {
+        dispatch(createProductAsync(product));
+        navigate(`/`);
+      }
+
       setProductInfo({
         ...productDetailsOne,
         ...productDetailsTwo,
       });
     }
   };
+
+  useEffect(() => {
+    if (id) {
+      dispatch(fetchProductByIdAsync(id));
+    } else {
+      dispatch(clearSelectedProduct());
+    }
+  }, [id, dispatch]);
+
+  useEffect(() => {
+    if (selectedProduct && id) {
+      setProductInfo({
+        ...selectedProduct,
+        image1: selectedProduct.images?.[1],
+        image2: selectedProduct.images?.[2],
+        image3: selectedProduct.images?.[3],
+        image4: selectedProduct.images?.[4],
+      });
+    }
+  }, [selectedProduct, id]);
 
   return (
     <>
@@ -308,11 +346,12 @@ const ProductCreateForm = () => {
               >
                 Reset
               </Button>
+
               <Button
                 type="submit"
                 className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                Add
+                {id ? "Save Changes" : "Add"}
               </Button>
             </div>
           </div>

@@ -125,6 +125,15 @@ const App = () => {
               </AdminProtect>
             }
           />
+          <Route
+            path="/edit-product/:id"
+            exact
+            element={
+              <AdminProtect>
+                <ProductCreateForm />
+              </AdminProtect>
+            }
+          />
           <Route path="/signin" exact element={<Login />} />
           <Route path="/forgot-password" exact element={<ForgotPassword />} />
           <Route path="/signup" exact element={<Signup />} />

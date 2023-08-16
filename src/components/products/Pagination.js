@@ -30,7 +30,7 @@ const Pagination = ({ handlePage, page, totalProduct = 55 }) => {
           Next
         </p>
       </div>
-      <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
+      <div className="hidden sm:flex sm:flex-1 sm:items-start sm:justify-between sm:flex-col sm:space-y-3">
         <div className="mr-2">
           <p className="text-sm text-gray-700">
             Showing{" "}
