@@ -2,14 +2,27 @@ import React from "react";
 import { StarIcon } from "@heroicons/react/20/solid";
 import { Link } from "react-router-dom";
 
-const ProductList = ({ products }) => {
+import Button from "../common/Button";
+import Image from "../common/Image";
+import { useDispatch } from "react-redux";
+import { updateProductAsync } from "../../features/product/productSlice";
+
+const AdminProductList = ({ products, loggedInUser }) => {
+  const dispatch = useDispatch();
+  const handleDelete = (id) => {
+    const index = products.findIndex((product) => product.id === id);
+    const product = { ...products[index] };
+    product.deleted = true;
+    dispatch(updateProductAsync(product));
+  };
+
   return (
     <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
       {products?.map((product, i) => (
         <div key={i}>
           <div key={product.id} className="group relative">
             <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
-              <img
+              <Image
                 src={product?.thumbnail}
                 alt={product?.title}
                 className="h-full w-full object-cover object-center lg:h-full lg:w-full"
@@ -45,11 +58,29 @@ const ProductList = ({ products }) => {
                 </p>
               </div>
             </div>
-            {product.stock <= 0 && (
-              <p className="font-medium text-red-400">
-                Product is Out Of Stock
+            {product.deleted && (
+              <p className="absolute top-0 left-2 text-md font-bold text-red-400 my-2">
+                This Product was Removed
               </p>
             )}
+          </div>
+          <div className="flex justify-between my-3">
+            <Button
+              onClick={() => {
+                handleDelete(product.id);
+              }}
+              className="flex items-center justify-center rounded-md border border-transparent bg-red-600 px-3 py-1 text-base font-medium text-white shadow-sm hover:bg-red-700"
+              type="button"
+            >
+              Remove
+            </Button>
+            <Link
+              to={`/edit-product/${product.id}`}
+              className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-3 py-1 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+              type="button"
+            >
+              Update
+            </Link>
           </div>
         </div>
       ))}
@@ -57,4 +88,4 @@ const ProductList = ({ products }) => {
   );
 };
 
-export default ProductList;
+export default AdminProductList;

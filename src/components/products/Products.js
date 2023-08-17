@@ -1,10 +1,11 @@
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { selectauth } from "../../features/auth/authSlice";
 
 import Loader from "../common/Loader";
 import Pagination from "./Pagination";
-import { selectauth } from "../../features/auth/authSlice";
 import ProductList from "./ProductList";
-import { Link } from "react-router-dom";
+import AdminProductList from "./AdminProductList";
 
 const Products = ({
   handlePage,
@@ -32,7 +33,11 @@ const Products = ({
             Add New Product
           </Link>
         )}
-        <ProductList products={products} loggedInUser={loggedInUser} />
+        {loggedInUser.role === "user" ? (
+          <ProductList products={products} />
+        ) : (
+          <AdminProductList products={products} />
+        )}
         <Pagination
           handlePage={handlePage}
           page={page}

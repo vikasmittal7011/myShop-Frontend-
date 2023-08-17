@@ -3,7 +3,7 @@ export const ITEM_PAGE_PER = 10;
 export const userNavLinks = [{ name: "Home", href: "/" }];
 
 export const adminNavLinks = [
-  { name: "Home", href: "/admin-home" },
+  { name: "Home", href: "/" },
   { name: "Order", href: "/admin-orders" },
 ];
 
