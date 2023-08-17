@@ -2,7 +2,7 @@ export const ITEM_PAGE_PER = 10;
 
 export const navLinks = [
   { name: "Home", href: "/" },
-  { name: "Team", href: "/team" },
+  { name: "Order", href: "/admin-orders" },
   { name: "Projects", href: "/pro" },
   { name: "Calendar", href: "/cal" },
 ];
@@ -11,6 +11,13 @@ export const profileLinks = [
   { name: "My Profile", href: "/user-profile" },
   { name: "My Orders", href: "/user-orders" },
   { name: "Sign out", href: "/logout" },
+];
+
+export const orderStatus = [
+  { name: "Pending", code: "Pending" },
+  { name: "Dispatch", code: "Dispatch" },
+  { name: "Delivered", code: "Delivered" },
+  { name: "Cancel", code: "Cancel" },
 ];
 
 export const sortOptions = [
@@ -292,5 +299,5 @@ export const country = [
 
 export const paymentMathods = [
   { id: 1, name: "Cash" },
-  { id: 1, name: "Cart Payment" },
+  { id: 1, name: "Cart" },
 ];

@@ -18,6 +18,7 @@ import {
   ForgotPassword,
   ProductCreateForm,
   AdminProtect,
+  AdminOrders,
 } from "./pages/index";
 import Loader from "./components/common/Loader";
 import Alert from "./components/common/Alert";
@@ -131,6 +132,15 @@ const App = () => {
             element={
               <AdminProtect>
                 <ProductCreateForm />
+              </AdminProtect>
+            }
+          />
+          <Route
+            path="/admin-orders"
+            exact
+            element={
+              <AdminProtect>
+                <AdminOrders />
               </AdminProtect>
             }
           />

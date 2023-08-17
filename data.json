@@ -2380,9 +2380,65 @@
           "state": "Delhi",
           "pinCode": "110033",
           "country": "India"
+        },
+        {
+          "name": "demo",
+          "email": "demo@gmail.com",
+          "tel": "7621876783",
+          "street": "njndj",
+          "city": "jncj",
+          "state": "kjknsdjdn2",
+          "pinCode": "221",
+          "country": "Armenia"
         }
       ],
       "id": 2
+    },
+    {
+      "email": "demo@gmail.com",
+      "password": "Demo@9876",
+      "role": "user",
+      "addresses": [
+        {
+          "name": "demo",
+          "email": "deme1@gmail.com",
+          "tel": "7958252626",
+          "street": "assad",
+          "city": "saadsad",
+          "state": "sadsad",
+          "pinCode": "2132",
+          "country": "Azerbaijan"
+        }
+      ],
+      "id": 3
+    },
+    {
+      "email": "test@gmail.com",
+      "password": "Test@9876",
+      "role": "user",
+      "addresses": [
+        {
+          "name": "test",
+          "email": "test@gmail.com",
+          "tel": "56198165498",
+          "street": "kniwqnf",
+          "city": "wjnfjwnj",
+          "state": "jnejknewjfn",
+          "pinCode": "56495",
+          "country": "Armenia"
+        },
+        {
+          "name": "a",
+          "email": "a@gmail.com",
+          "tel": "63298389",
+          "street": "jshbnsab",
+          "city": "bjsj ",
+          "state": "jnskjj",
+          "pinCode": "298123",
+          "country": "Slovakia"
+        }
+      ],
+      "id": 4
     }
   ],
   "cart": [
@@ -2426,27 +2482,6 @@
       "quantity": 1,
       "user": 1,
       "id": 2
-    },
-    {
-      "title": "OPPOF19",
-      "description": "OPPO F19 is officially announced on April 2021.",
-      "price": 280,
-      "discountPercentage": 17.91,
-      "rating": 4.3,
-      "stock": 123,
-      "brand": "OPPO",
-      "category": "smartphones",
-      "thumbnail": "https://i.dummyjson.com/data/products/4/thumbnail.jpg",
-      "images": [
-        "https://i.dummyjson.com/data/products/4/1.jpg",
-        "https://i.dummyjson.com/data/products/4/2.jpg",
-        "https://i.dummyjson.com/data/products/4/3.jpg",
-        "https://i.dummyjson.com/data/products/4/4.jpg",
-        "https://i.dummyjson.com/data/products/4/thumbnail.jpg"
-      ],
-      "quantity": 1,
-      "user": 2,
-      "id": 3
     }
   ],
   "orders": [
@@ -2487,7 +2522,7 @@
       },
       "paymentMethod": "Cash",
       "user": 2,
-      "status": "Pending",
+      "status": "Dispatch",
       "id": 1
     },
     {
@@ -2590,6 +2625,411 @@
       "user": 2,
       "status": "Pending",
       "id": 3
+    },
+    {
+      "items": [
+        {
+          "title": "Infinix INBOOK",
+          "description": "Infinix Inbook X1 Ci3 10th 8GB 256GB 14 Win10 Grey – 1 Year Warranty",
+          "price": 1099,
+          "discountPercentage": 11.83,
+          "rating": 4.54,
+          "stock": 96,
+          "brand": "Infinix",
+          "category": "laptops",
+          "thumbnail": "https://i.dummyjson.com/data/products/9/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/9/1.jpg",
+            "https://i.dummyjson.com/data/products/9/2.png",
+            "https://i.dummyjson.com/data/products/9/3.png",
+            "https://i.dummyjson.com/data/products/9/4.jpg",
+            "https://i.dummyjson.com/data/products/9/thumbnail.jpg"
+          ],
+          "quantity": 2,
+          "user": 3,
+          "id": 4
+        }
+      ],
+      "totalItems": 2,
+      "totalPrice": 1938,
+      "address": {
+        "name": "demo",
+        "email": "deme1@gmail.com",
+        "tel": "7958252626",
+        "street": "assad",
+        "city": "saadsad",
+        "state": "sadsad",
+        "pinCode": "2132",
+        "country": "Azerbaijan"
+      },
+      "paymentMethod": "Cart",
+      "user": 3,
+      "status": "Pending",
+      "id": 4
+    },
+    {
+      "items": [
+        {
+          "title": "HP Pavilion 15-DK1056WM",
+          "description": "HP Pavilion 15-DK1056WM Gaming Laptop 10th Gen Core i5, 8GB, 256GB SSD, GTX 1650 4GB, Windows 10",
+          "price": 1099,
+          "discountPercentage": 6.18,
+          "rating": 4.43,
+          "stock": 89,
+          "brand": "HP Pavilion",
+          "category": "laptops",
+          "thumbnail": "https://i.dummyjson.com/data/products/10/thumbnail.jpeg",
+          "images": [
+            "https://i.dummyjson.com/data/products/10/1.jpg",
+            "https://i.dummyjson.com/data/products/10/2.jpg",
+            "https://i.dummyjson.com/data/products/10/3.jpg",
+            "https://i.dummyjson.com/data/products/10/thumbnail.jpeg"
+          ],
+          "quantity": 3,
+          "user": 3,
+          "id": 4
+        },
+        {
+          "title": "Royal Blue Premium Watch",
+          "description": "Men Silver Chain Royal Blue Premium Watch Latest Analog Watch",
+          "price": 50,
+          "discountPercentage": 2.56,
+          "rating": 4.89,
+          "stock": 142,
+          "brand": "SKMEI 9117",
+          "category": "mens-watches",
+          "thumbnail": "https://i.dummyjson.com/data/products/63/thumbnail.webp",
+          "images": [
+            "https://i.dummyjson.com/data/products/63/1.jpg",
+            "https://i.dummyjson.com/data/products/63/2.jpg",
+            "https://i.dummyjson.com/data/products/63/3.png",
+            "https://i.dummyjson.com/data/products/63/4.jpeg"
+          ],
+          "quantity": 5,
+          "user": 3,
+          "id": 5
+        }
+      ],
+      "totalItems": 8,
+      "totalPrice": 3338,
+      "address": {
+        "name": "demo",
+        "email": "deme1@gmail.com",
+        "tel": "7958252626",
+        "street": "assad",
+        "city": "saadsad",
+        "state": "sadsad",
+        "pinCode": "2132",
+        "country": "Azerbaijan"
+      },
+      "paymentMethod": "Cart",
+      "user": 3,
+      "status": "Pending",
+      "id": 5
+    },
+    {
+      "items": [
+        {
+          "title": "new arrivals Fashion motocross goggles",
+          "description": "new arrivals Fashion motocross goggles motorcycle motocross racing motorcycle",
+          "price": 900,
+          "discountPercentage": 3.85,
+          "rating": 4.06,
+          "stock": 109,
+          "brand": "JIEPOLLY",
+          "category": "motorcycle",
+          "thumbnail": "https://i.dummyjson.com/data/products/94/thumbnail.webp",
+          "images": [
+            "https://i.dummyjson.com/data/products/94/1.webp",
+            "https://i.dummyjson.com/data/products/94/2.jpg",
+            "https://i.dummyjson.com/data/products/94/3.jpg",
+            "https://i.dummyjson.com/data/products/94/thumbnail.webp"
+          ],
+          "quantity": 4,
+          "user": 4,
+          "id": 4
+        },
+        {
+          "title": "3 DOOR PORTABLE",
+          "description": "Material: Stainless Steel and Fabric Item Size: 110 cm x 45 cm x 175 cm Package Contents: 1 Storage Wardrobe",
+          "price": 41,
+          "discountPercentage": 7.98,
+          "rating": 4.06,
+          "stock": 68,
+          "brand": "AmnaMart",
+          "category": "furniture",
+          "thumbnail": "https://i.dummyjson.com/data/products/35/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/35/1.jpg",
+            "https://i.dummyjson.com/data/products/35/2.jpg",
+            "https://i.dummyjson.com/data/products/35/3.jpg",
+            "https://i.dummyjson.com/data/products/35/4.jpg",
+            "https://i.dummyjson.com/data/products/35/thumbnail.jpg"
+          ],
+          "quantity": 6,
+          "user": 4,
+          "id": 5
+        }
+      ],
+      "totalItems": 10,
+      "totalPrice": 3688,
+      "address": {
+        "name": "test",
+        "email": "test@gmail.com",
+        "tel": "56198165498",
+        "street": "kniwqnf",
+        "city": "wjnfjwnj",
+        "state": "jnejknewjfn",
+        "pinCode": "56495",
+        "country": "Armenia"
+      },
+      "paymentMethod": "Cash",
+      "user": 4,
+      "status": "Pending",
+      "id": 6
+    },
+    {
+      "items": [
+        {
+          "title": "OPPOF19",
+          "description": "OPPO F19 is officially announced on April 2021.",
+          "price": 280,
+          "discountPercentage": 17.91,
+          "rating": 4.3,
+          "stock": 123,
+          "brand": "OPPO",
+          "category": "smartphones",
+          "thumbnail": "https://i.dummyjson.com/data/products/4/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/4/1.jpg",
+            "https://i.dummyjson.com/data/products/4/2.jpg",
+            "https://i.dummyjson.com/data/products/4/3.jpg",
+            "https://i.dummyjson.com/data/products/4/4.jpg",
+            "https://i.dummyjson.com/data/products/4/thumbnail.jpg"
+          ],
+          "quantity": 5,
+          "user": 2,
+          "id": 3
+        },
+        {
+          "title": "Round Silver Frame Sun Glasses",
+          "description": "A pair of sunglasses can protect your eyes from being hurt. For car driving, vacation travel, outdoor activities, social gatherings,",
+          "price": 19,
+          "discountPercentage": 10.1,
+          "rating": 4.94,
+          "stock": 78,
+          "brand": "Designer Sun Glasses",
+          "category": "sunglasses",
+          "thumbnail": "https://i.dummyjson.com/data/products/81/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/81/1.jpg",
+            "https://i.dummyjson.com/data/products/81/2.jpg",
+            "https://i.dummyjson.com/data/products/81/3.jpg",
+            "https://i.dummyjson.com/data/products/81/4.webp",
+            "https://i.dummyjson.com/data/products/81/thumbnail.jpg"
+          ],
+          "quantity": 8,
+          "user": 2,
+          "id": 4
+        },
+        {
+          "title": "lighting ceiling kitchen",
+          "description": "Wholesale slim hanging decorative kid room lighting ceiling kitchen chandeliers pendant light modern",
+          "price": 30,
+          "discountPercentage": 14.89,
+          "rating": 4.83,
+          "stock": 96,
+          "brand": "lightingbrilliance",
+          "category": "lighting",
+          "thumbnail": "https://i.dummyjson.com/data/products/96/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/96/1.jpg",
+            "https://i.dummyjson.com/data/products/96/2.jpg",
+            "https://i.dummyjson.com/data/products/96/3.jpg",
+            "https://i.dummyjson.com/data/products/96/4.jpg",
+            "https://i.dummyjson.com/data/products/96/thumbnail.jpg"
+          ],
+          "quantity": 7,
+          "user": 2,
+          "id": 5
+        }
+      ],
+      "totalItems": 20,
+      "totalPrice": 1468,
+      "address": {
+        "name": "demo",
+        "email": "demo@gmail.com",
+        "tel": "7621876783",
+        "street": "njndj",
+        "city": "jncj",
+        "state": "kjknsdjdn2",
+        "pinCode": "221",
+        "country": "Armenia"
+      },
+      "paymentMethod": "Cash",
+      "user": 2,
+      "status": "Pending",
+      "id": 7
+    },
+    {
+      "items": [
+        {
+          "title": "Infinix INBOOK",
+          "description": "Infinix Inbook X1 Ci3 10th 8GB 256GB 14 Win10 Grey – 1 Year Warranty",
+          "price": 1099,
+          "discountPercentage": 11.83,
+          "rating": 4.54,
+          "stock": 96,
+          "brand": "Infinix",
+          "category": "laptops",
+          "thumbnail": "https://i.dummyjson.com/data/products/9/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/9/1.jpg",
+            "https://i.dummyjson.com/data/products/9/2.png",
+            "https://i.dummyjson.com/data/products/9/3.png",
+            "https://i.dummyjson.com/data/products/9/4.jpg",
+            "https://i.dummyjson.com/data/products/9/thumbnail.jpg"
+          ],
+          "quantity": 6,
+          "user": 2,
+          "id": 3
+        }
+      ],
+      "totalItems": 6,
+      "totalPrice": 5814,
+      "address": {
+        "name": "Vikas Gupta",
+        "email": "vikasaggrawal700@gmail.com",
+        "tel": "7011641548",
+        "street": "J-Block, House No - 518",
+        "city": "Jahangir Puri",
+        "state": "Delhi",
+        "pinCode": "110033",
+        "country": "India"
+      },
+      "paymentMethod": "Cash",
+      "user": 2,
+      "status": "Pending",
+      "id": 8
+    },
+    {
+      "items": [
+        {
+          "title": "Stainless Steel Women",
+          "description": "Fashion Skmei 1830 Shell Dial Stainless Steel Women Wrist Watch Lady Bracelet Watch Quartz Watches Ladies",
+          "price": 35,
+          "discountPercentage": 8.98,
+          "rating": 4.08,
+          "stock": 111,
+          "brand": "Bracelet",
+          "category": "womens-watches",
+          "thumbnail": "https://i.dummyjson.com/data/products/70/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/70/1.jpg",
+            "https://i.dummyjson.com/data/products/70/2.jpg",
+            "https://i.dummyjson.com/data/products/70/thumbnail.jpg"
+          ],
+          "quantity": 4,
+          "user": 3,
+          "id": 3
+        }
+      ],
+      "totalItems": 4,
+      "totalPrice": 128,
+      "address": {
+        "name": "demo",
+        "email": "deme1@gmail.com",
+        "tel": "7958252626",
+        "street": "assad",
+        "city": "saadsad",
+        "state": "sadsad",
+        "pinCode": "2132",
+        "country": "Azerbaijan"
+      },
+      "paymentMethod": "Cash",
+      "user": 3,
+      "status": "Pending",
+      "id": 9
+    },
+    {
+      "items": [
+        {
+          "title": "MacBook Pro",
+          "description": "MacBook Pro 2021 with mini-LED display may launch between September, November",
+          "price": 1749,
+          "discountPercentage": 11.02,
+          "rating": 4.57,
+          "stock": 83,
+          "brand": "Apple",
+          "category": "laptops",
+          "thumbnail": "https://i.dummyjson.com/data/products/6/thumbnail.png",
+          "images": [
+            "https://i.dummyjson.com/data/products/6/1.png",
+            "https://i.dummyjson.com/data/products/6/2.jpg",
+            "https://i.dummyjson.com/data/products/6/3.png",
+            "https://i.dummyjson.com/data/products/6/4.jpg"
+          ],
+          "quantity": 1,
+          "user": 3,
+          "id": 3
+        }
+      ],
+      "totalItems": 1,
+      "totalPrice": 1556,
+      "address": {
+        "name": "demo",
+        "email": "deme1@gmail.com",
+        "tel": "7958252626",
+        "street": "assad",
+        "city": "saadsad",
+        "state": "sadsad",
+        "pinCode": "2132",
+        "country": "Azerbaijan"
+      },
+      "paymentMethod": "Cash",
+      "user": 3,
+      "status": "Pending",
+      "id": 10
+    },
+    {
+      "items": [
+        {
+          "title": "HP Pavilion 15-DK1056WM",
+          "description": "HP Pavilion 15-DK1056WM Gaming Laptop 10th Gen Core i5, 8GB, 256GB SSD, GTX 1650 4GB, Windows 10",
+          "price": 1099,
+          "discountPercentage": 6.18,
+          "rating": 4.43,
+          "stock": 89,
+          "brand": "HP Pavilion",
+          "category": "laptops",
+          "thumbnail": "https://i.dummyjson.com/data/products/10/thumbnail.jpeg",
+          "images": [
+            "https://i.dummyjson.com/data/products/10/1.jpg",
+            "https://i.dummyjson.com/data/products/10/2.jpg",
+            "https://i.dummyjson.com/data/products/10/3.jpg",
+            "https://i.dummyjson.com/data/products/10/thumbnail.jpeg"
+          ],
+          "quantity": 1,
+          "user": 4,
+          "id": 3
+        }
+      ],
+      "totalItems": 1,
+      "totalPrice": 1031,
+      "address": {
+        "name": "a",
+        "email": "a@gmail.com",
+        "tel": "63298389",
+        "street": "jshbnsab",
+        "city": "bjsj ",
+        "state": "jnskjj",
+        "pinCode": "298123",
+        "country": "Slovakia"
+      },
+      "paymentMethod": "Cart",
+      "user": 4,
+      "status": "Pending",
+      "id": 11
     }
   ]
 }

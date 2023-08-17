@@ -100,12 +100,12 @@ const Form = ({ handlePaymentInfo }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const valid = validate(userInfo);
+    const valid = validate(userInfo, userData);
     if (valid) {
       dispatch(
         updateUserAsync({
           ...userData,
-          addresses: [...userData.addresses, userInfo],
+          addresses: [...userData?.addresses, userInfo],
         })
       );
       setUserInfo(initUserInfo);
@@ -239,10 +239,12 @@ const Form = ({ handlePaymentInfo }) => {
 
           <div className="border-b border-gray-900/10 pb-12">
             <div className="mt-10 space-y-10">
-              <SavedAddress
-                handlePaymentInfo={handlePaymentInfo}
-                addresses={userData.addresses}
-              />
+              {userData?.addresses && (
+                <SavedAddress
+                  handlePaymentInfo={handlePaymentInfo}
+                  addresses={userData?.addresses}
+                />
+              )}
               <PaymentMethods handlePaymentInfo={handlePaymentInfo} />
             </div>
           </div>

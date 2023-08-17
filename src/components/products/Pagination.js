@@ -6,7 +6,7 @@ import { Classes } from "../../utils/constant";
 const Pagination = ({ handlePage, page, totalProduct = 55 }) => {
   const handleNext = () => {
     handlePage(
-      Math.round(totalProduct / ITEM_PAGE_PER) > page ? page + 1 : page
+      Math.round(totalProduct / ITEM_PAGE_PER) >= page ? page + 1 : page
     );
   };
 
