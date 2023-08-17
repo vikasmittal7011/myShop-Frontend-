@@ -13,9 +13,7 @@ export const userProfileLinks = [
   { name: "Sign out", href: "/logout" },
 ];
 
-export const adminProfileLinks = [
-  { name: "Sign out", href: "/logout" },
-];
+export const adminProfileLinks = [{ name: "Sign out", href: "/logout" }];
 
 export const orderStatus = [
   { name: "Pending", code: "Pending" },
@@ -304,4 +302,39 @@ export const country = [
 export const paymentMathods = [
   { id: 1, name: "Cash" },
   { id: 1, name: "Cart" },
+];
+
+export const footerLinks = [
+  {
+    id: "Company",
+    options: [
+      { name: "About" },
+      { name: "Meet the Team" },
+      { name: "History" },
+      { name: "Careers" },
+    ],
+  },
+  {
+    id: "Services",
+    options: [
+      { name: "1on1 Coaching" },
+      { name: "Company Review" },
+      { name: "Accounts Review" },
+      { name: "HR Consulting" },
+      { name: "SEO Optimisation" },
+    ],
+  },
+  {
+    id: "Helpful Links",
+    options: [{ name: "Contact" }, { name: "FAQs" }, { name: "Live Chat" }],
+  },
+  {
+    id: "Legal",
+    options: [
+      { name: "Privacy Policy" },
+      { name: "Terms &amp; Conditions" },
+      { name: "Returns Policy" },
+      { name: "Accessibility" },
+    ],
+  },
 ];

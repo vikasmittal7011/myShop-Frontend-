@@ -11,6 +11,7 @@ import {
 } from "../features/product/productSlice";
 import Loader from "../components/common/Loader";
 import NavBar from "./NavBar";
+import Footer from "../components/common/Footer";
 
 const colorAndSizes = {
   colors: [
@@ -62,6 +63,7 @@ const ProductDetails = () => {
             colorAndSizes={colorAndSizes}
           />
         </div>
+        <Footer />
       </NavBar>
     </>
   );

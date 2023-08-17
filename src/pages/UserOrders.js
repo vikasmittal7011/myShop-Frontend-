@@ -9,6 +9,7 @@ import Items from "../components/userOrders/Items";
 import TotalAndItems from "../components/userOrders/TotalAndItems";
 import Address from "../components/userOrders/Address";
 import NavBar from "./NavBar";
+import Footer from "../components/common/Footer";
 
 const UserOrders = () => {
   const dispatch = useDispatch();
@@ -36,6 +37,7 @@ const UserOrders = () => {
             </div>
           ))}
         </ul>
+        <Footer />
       </NavBar>
     </>
   );

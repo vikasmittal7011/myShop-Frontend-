@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { makeOrderAsync, selectorder } from "../features/order/orderSlice";
 import { selectuser } from "../features/user/userSlice";
 import NavBar from "./NavBar";
+import Footer from "../components/common/Footer";
 
 const CheckOut = () => {
   const dispatch = useDispatch();
@@ -94,6 +95,7 @@ const CheckOut = () => {
             </div>
           </div>
         </div>
+        <Footer />
       </NavBar>
     </>
   );

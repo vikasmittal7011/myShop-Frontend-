@@ -7,6 +7,7 @@ import AddressForm from "../components/userProfile/AddressForm";
 import Button from "../components/common/Button";
 import { useState } from "react";
 import NavBar from "./NavBar";
+import Footer from "../components/common/Footer";
 
 const UserProfile = () => {
   const dispatch = useDispatch();
@@ -75,6 +76,7 @@ const UserProfile = () => {
           </Button>
           <Addresses user={userData || null} />
         </div>
+        <Footer />
       </NavBar>
     </>
   );

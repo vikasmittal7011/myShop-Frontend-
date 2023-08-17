@@ -6,6 +6,7 @@ import ViewTotal from "../components/cart/ViewTotal";
 import { selectCart } from "../features/cart/cartSlice";
 import { Link } from "react-router-dom";
 import NavBar from "./NavBar";
+import Footer from "../components/common/Footer";
 
 const Cart = () => {
   const { items } = useSelector(selectCart);
@@ -41,6 +42,7 @@ const Cart = () => {
             </div>
           )}
         </div>
+        <Footer />
       </NavBar>
     </>
   );
