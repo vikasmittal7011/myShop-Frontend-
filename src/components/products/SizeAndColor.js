@@ -8,6 +8,7 @@ import { selectauth } from "../../features/auth/authSlice";
 import {
   addToCartAsync,
   fetchItemsByUsertAsync,
+  selectCart,
 } from "../../features/cart/cartSlice";
 import { setAlertAsync } from "../../features/alert/alertSlice";
 
@@ -21,18 +22,33 @@ const SizeAndColor = ({
 }) => {
   const dispatch = useDispatch();
   const { loggedInUser } = useSelector(selectauth);
+  const { items } = useSelector(selectCart);
 
   const handleClick = (w) => {
     w.preventDefault();
-    const newItem = { ...productData, quantity: 1, user: loggedInUser.id };
-    delete newItem["id"];
-    dispatch(addToCartAsync(newItem));
-    const item = {
-      color: "green",
-      type: "Success",
-      message: "Item is successfully added to your cart",
-    };
-    dispatch(setAlertAsync(item));
+    if (items.findIndex((item) => item.productId === productData.id) < 0) {
+      const newItem = {
+        ...productData,
+        productId: productData.id,
+        quantity: 1,
+        user: loggedInUser.id,
+      };
+      delete newItem["id"];
+      dispatch(addToCartAsync(newItem));
+      const item = {
+        color: "green",
+        type: "Success",
+        message: "Item is successfully added to your cart",
+      };
+      dispatch(setAlertAsync(item));
+    } else {
+      const item = {
+        color: "red",
+        type: "Failed",
+        message: "Item is already added to your cart",
+      };
+      dispatch(setAlertAsync(item));
+    }
     dispatch(fetchItemsByUsertAsync(loggedInUser?.id));
   };
 
