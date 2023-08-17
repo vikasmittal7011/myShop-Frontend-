@@ -1,7 +1,6 @@
 import React, { Suspense, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import NavBar from "./pages/NavBar";
 import {
   Home,
   Login,
@@ -19,6 +18,7 @@ import {
   ProductCreateForm,
   AdminProtect,
   AdminOrders,
+  AdminHome,
 } from "./pages/index";
 import Loader from "./components/common/Loader";
 import Alert from "./components/common/Alert";
@@ -41,7 +41,6 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <NavBar />
       <Alert />
       <Suspense fallback={<Loader />}>
         <Routes>
@@ -115,6 +114,15 @@ const App = () => {
               <Protect>
                 <ProductDetails />
               </Protect>
+            }
+          />
+          <Route
+            path="/admin-home"
+            exact
+            element={
+              <AdminProtect>
+                <AdminHome />
+              </AdminProtect>
             }
           />
           <Route

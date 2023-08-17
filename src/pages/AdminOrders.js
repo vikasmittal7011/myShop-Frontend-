@@ -7,6 +7,7 @@ import Headers from "../components/adminOrders/Headers";
 import Body from "../components/adminOrders/Body";
 import Header from "../components/common/Header";
 import Pagination from "../components/products/Pagination";
+import NavBar from "./NavBar";
 
 const AdminOrders = () => {
   const { orders, totalOrders } = useSelector(selectorder);
@@ -38,29 +39,31 @@ const AdminOrders = () => {
 
   return (
     <>
-      <Header heading="Manage Orders" />
-      <div className="overflow-x-auto">
-        <div className="flex items-center justify-center font-sans overflow-x">
-          <div className="w-full">
-            <div className="bg-white shadow-md rounded my-6 mx-5">
-              <table className="min-w-max w-full table-auto">
-                <Headers handleSort={handleSort} sort={sort} />
-                <Body
-                  orders={orders}
-                  handleEdit={handleEdit}
-                  handleShow={handleShow}
-                  editableOrderId={editableOrderId}
-                />
-              </table>
+      <NavBar>
+        <Header heading="Manage Orders" />
+        <div className="overflow-x-auto">
+          <div className="flex items-center justify-center font-sans overflow-x">
+            <div className="w-full">
+              <div className="bg-white shadow-md rounded my-6 mx-5">
+                <table className="min-w-max w-full table-auto">
+                  <Headers handleSort={handleSort} sort={sort} />
+                  <Body
+                    orders={orders}
+                    handleEdit={handleEdit}
+                    handleShow={handleShow}
+                    editableOrderId={editableOrderId}
+                  />
+                </table>
+              </div>
             </div>
           </div>
+          <Pagination
+            handlePage={handlePage}
+            page={page}
+            totalProduct={totalOrders}
+          />
         </div>
-        <Pagination
-          handlePage={handlePage}
-          page={page}
-          totalProduct={totalOrders}
-        />
-      </div>
+      </NavBar>
     </>
   );
 };

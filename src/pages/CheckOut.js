@@ -9,6 +9,7 @@ import { selectCart } from "../features/cart/cartSlice";
 import { useNavigate } from "react-router-dom";
 import { makeOrderAsync, selectorder } from "../features/order/orderSlice";
 import { selectuser } from "../features/user/userSlice";
+import NavBar from "./NavBar";
 
 const CheckOut = () => {
   const dispatch = useDispatch();
@@ -72,26 +73,28 @@ const CheckOut = () => {
 
   return (
     <>
-      <Header heading="CheckOut Your Items" />
-      <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 mt-5">
-        <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-5">
-          <div className="lg:col-span-3">
-            <Form handlePaymentInfo={handlePaymentInfo} />
-          </div>
-          <div className="lg:col-span-2">
-            <h2 className="text-base font-semibold leading-7 text-gray-900">
-              Product Information
-            </h2>
-            <ViewProduct products={items} />
-            <ViewTotal
-              onClick={handleOrder}
-              checkoutTitle="Pay Now"
-              products={items}
-              message={message}
-            />
+      <NavBar>
+        <Header heading="CheckOut Your Items" />
+        <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 mt-5">
+          <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-5">
+            <div className="lg:col-span-3">
+              <Form handlePaymentInfo={handlePaymentInfo} />
+            </div>
+            <div className="lg:col-span-2">
+              <h2 className="text-base font-semibold leading-7 text-gray-900">
+                Product Information
+              </h2>
+              <ViewProduct products={items} />
+              <ViewTotal
+                onClick={handleOrder}
+                checkoutTitle="Pay Now"
+                products={items}
+                message={message}
+              />
+            </div>
           </div>
         </div>
-      </div>
+      </NavBar>
     </>
   );
 };

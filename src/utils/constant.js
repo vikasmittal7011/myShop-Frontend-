@@ -1,15 +1,19 @@
 export const ITEM_PAGE_PER = 10;
 
-export const navLinks = [
-  { name: "Home", href: "/" },
+export const userNavLinks = [{ name: "Home", href: "/" }];
+
+export const adminNavLinks = [
+  { name: "Home", href: "/admin-home" },
   { name: "Order", href: "/admin-orders" },
-  { name: "Projects", href: "/pro" },
-  { name: "Calendar", href: "/cal" },
 ];
 
-export const profileLinks = [
+export const userProfileLinks = [
   { name: "My Profile", href: "/user-profile" },
   { name: "My Orders", href: "/user-orders" },
+  { name: "Sign out", href: "/logout" },
+];
+
+export const adminProfileLinks = [
   { name: "Sign out", href: "/logout" },
 ];
 

@@ -10,6 +10,7 @@ import {
   selectProducts,
 } from "../features/product/productSlice";
 import Loader from "../components/common/Loader";
+import NavBar from "./NavBar";
 
 const colorAndSizes = {
   colors: [
@@ -47,19 +48,21 @@ const ProductDetails = () => {
 
   return (
     <>
-      <Header heading="Product Overview" />
-      <div className="pt-6">
-        <Images images={selectedProduct?.images} />
+      <NavBar>
+        <Header heading="Product Overview" />
+        <div className="pt-6">
+          <Images images={selectedProduct?.images} />
 
-        <ProductInfo
-          selectedColor={selectedColor}
-          setSelectedColor={setSelectedColor}
-          selectedSize={selectedSize}
-          setSelectedSize={setSelectedSize}
-          product={selectedProduct}
-          colorAndSizes={colorAndSizes}
-        />
-      </div>
+          <ProductInfo
+            selectedColor={selectedColor}
+            setSelectedColor={setSelectedColor}
+            selectedSize={selectedSize}
+            setSelectedSize={setSelectedSize}
+            product={selectedProduct}
+            colorAndSizes={colorAndSizes}
+          />
+        </div>
+      </NavBar>
     </>
   );
 };
