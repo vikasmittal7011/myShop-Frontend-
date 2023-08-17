@@ -1,7 +1,8 @@
 import React from "react";
 import { RadioGroup } from "@headlessui/react";
-import { classNames } from "../../utils/constant";
+import { useAlert } from "react-alert";
 
+import { classNames } from "../../utils/constant";
 import Button from "../common/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { selectauth } from "../../features/auth/authSlice";
@@ -10,7 +11,6 @@ import {
   fetchItemsByUsertAsync,
   selectCart,
 } from "../../features/cart/cartSlice";
-import { setAlertAsync } from "../../features/alert/alertSlice";
 
 const SizeAndColor = ({
   selectedColor,
@@ -21,6 +21,7 @@ const SizeAndColor = ({
   productData,
 }) => {
   const dispatch = useDispatch();
+  const alert = useAlert();
   const { loggedInUser } = useSelector(selectauth);
   const { items } = useSelector(selectCart);
 
@@ -34,20 +35,10 @@ const SizeAndColor = ({
         user: loggedInUser.id,
       };
       delete newItem["id"];
+      alert.success("Item is successfully add to your cart");
       dispatch(addToCartAsync(newItem));
-      const item = {
-        color: "green",
-        type: "Success",
-        message: "Item is successfully added to your cart",
-      };
-      dispatch(setAlertAsync(item));
     } else {
-      const item = {
-        color: "red",
-        type: "Failed",
-        message: "Item is already added to your cart",
-      };
-      dispatch(setAlertAsync(item));
+      alert.error("Item is already added to your cart");
     }
     dispatch(fetchItemsByUsertAsync(loggedInUser?.id));
   };
