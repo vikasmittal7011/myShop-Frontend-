@@ -1,11 +1,11 @@
 import React from "react";
 import CartItems from "./CartItems";
 
-const ViewProduct = ({ products }) => {
+const ViewProduct = ({ items }) => {
   return (
     <div className="mt-8">
       <div className="flow-root">
-        <CartItems products={products} />
+        <CartItems items={items} />
       </div>
     </div>
   );

@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
+import NavBar from "./NavBar";
 import Header from "../components/common/Header";
+import Footer from "../components/common/Footer";
 import Form from "../components/checkout/Form";
 import ViewProduct from "../components/cart/ViewProduct";
 import ViewTotal from "../components/cart/ViewTotal";
-import { useDispatch, useSelector } from "react-redux";
 import { selectCart } from "../features/cart/cartSlice";
-import { useNavigate } from "react-router-dom";
-import { makeOrderAsync, selectorder } from "../features/order/orderSlice";
 import { selectuser } from "../features/user/userSlice";
-import NavBar from "./NavBar";
-import Footer from "../components/common/Footer";
+import { makeOrderAsync, selectorder } from "../features/order/orderSlice";
 
 const CheckOut = () => {
   const dispatch = useDispatch();
@@ -89,7 +89,7 @@ const CheckOut = () => {
               <ViewTotal
                 onClick={handleOrder}
                 checkoutTitle="Pay Now"
-                products={items}
+                items={items}
                 message={message}
               />
             </div>

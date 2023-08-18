@@ -4,18 +4,18 @@ import { Link } from "react-router-dom";
 const ViewTotal = ({
   afterCheckout,
   checkoutTitle,
-  products,
+  items,
   onClick,
   message,
 }) => {
-  const totalPrice = products.reduce(
+  const totalPrice = items.reduce(
     (amount, item) =>
       Math.round(item?.price * (1 - item?.discountPercentage / 100)) *
         item.quantity +
       amount,
     0
   );
-  const totalItems = products.reduce((total, item) => item.quantity + total, 0);
+  const totalItems = items.reduce((total, item) => item.quantity + total, 0);
 
   return (
     <div className="border-t border-gray-200 px-4 py-6 sm:px-6">

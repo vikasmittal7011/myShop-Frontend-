@@ -6,14 +6,33 @@ import Button from "../common/Button";
 import Image from "../common/Image";
 import { useDispatch } from "react-redux";
 import { updateProductAsync } from "../../features/product/productSlice";
+import Modal from "../common/Modal";
+import { useAlert } from "react-alert";
+import { useState } from "react";
 
 const AdminProductList = ({ products, loggedInUser }) => {
+  const alert = useAlert();
+  const [isOpen, setIsOpen] = useState(false);
+  const [itemId, setItemId] = useState(-1);
   const dispatch = useDispatch();
   const handleDelete = (id) => {
     const index = products.findIndex((product) => product.id === id);
     const product = { ...products[index] };
     product.deleted = true;
     dispatch(updateProductAsync(product));
+    alert.success("Product was delete successfully");
+  };
+
+  const handleRestore = (id) => {
+    const index = products.findIndex((product) => product.id === id);
+    const product = { ...products[index] };
+    product.deleted = false;
+    dispatch(updateProductAsync(product));
+    alert.success("Product was restore successfully");
+  };
+
+  const handleModal = () => {
+    setIsOpen(!isOpen);
   };
 
   return (
@@ -65,15 +84,38 @@ const AdminProductList = ({ products, loggedInUser }) => {
             )}
           </div>
           <div className="flex justify-between my-3">
-            <Button
-              onClick={() => {
-                handleDelete(product.id);
-              }}
-              className="flex items-center justify-center rounded-md border border-transparent bg-red-600 px-3 py-1 text-base font-medium text-white shadow-sm hover:bg-red-700"
-              type="button"
-            >
-              Remove
-            </Button>
+            <Modal
+              isOpen={product.id === itemId && isOpen}
+              handleModal={handleModal}
+              message="Are sure to delete this product ? "
+              title={`Remove ${product.title}`}
+              action="Delete"
+              handleDelete={handleDelete}
+              itemId={itemId}
+            />
+            {!product.deleted && (
+              <Button
+                onClick={() => {
+                  handleModal();
+                  setItemId(product.id);
+                }}
+                className="flex items-center justify-center rounded-md border border-transparent bg-red-600 px-3 py-1 text-base font-medium text-white shadow-sm hover:bg-red-700"
+                type="button"
+              >
+                Remove
+              </Button>
+            )}
+            {product.deleted && (
+              <Button
+                onClick={() => {
+                  handleRestore(product.id);
+                }}
+                className="flex items-center justify-center rounded-md border border-transparent bg-green-600 px-3 py-1 text-base font-medium text-white shadow-sm hover:bg-green-700"
+                type="button"
+              >
+                Restore
+              </Button>
+            )}
             <Link
               to={`/edit-product/${product.id}`}
               className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-3 py-1 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
