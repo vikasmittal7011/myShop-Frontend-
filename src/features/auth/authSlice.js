@@ -5,6 +5,7 @@ const initialState = {
   loggedInUser: null,
   status: "idle",
   message: null,
+  token: "",
 };
 
 export const createUserAsync = createAsyncThunk(
@@ -42,14 +43,20 @@ export const authSlice = createSlice({
       })
       .addCase(createUserAsync.fulfilled, (state, action) => {
         state.status = "idle";
-        state.loggedInUser = action.payload;
+        state.loggedInUser = action.payload.user;
+        state.token = action.payload.token;
+      })
+      .addCase(createUserAsync.rejected, (state, action) => {
+        state.status = "failed";
+        state.message = action.error;
       })
       .addCase(loginUserAsync.pending, (state) => {
         state.status = "loading";
       })
       .addCase(loginUserAsync.fulfilled, (state, action) => {
         state.status = "idle";
-        state.loggedInUser = action.payload;
+        state.loggedInUser = action.payload.user;
+        state.token = action.payload.token;
       })
       .addCase(loginUserAsync.rejected, (state, action) => {
         state.status = "failed";

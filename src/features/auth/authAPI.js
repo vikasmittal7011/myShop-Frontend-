@@ -1,28 +1,33 @@
+const API = process.env.REACT_APP_API;
+
 export function createUser(userData) {
-  return new Promise(async (resolve) => {
-    const response = await fetch("http://localhost:5000/users", {
+  return new Promise(async (resolve, reject) => {
+    const response = await fetch(API + "auth", {
       method: "POST",
       body: JSON.stringify(userData),
       headers: { "content-type": "application/json" },
     });
     const data = await response.json();
-    resolve({ data });
+    if (data.success) {
+      resolve({ data });
+    } else {
+      reject({ message: data.message });
+    }
   });
 }
 
 export function loginUser(userData) {
   return new Promise(async (resolve, reject) => {
-    const { email, password } = userData;
-    const response = await fetch("http://localhost:5000/users?email=" + email);
+    const response = await fetch(API + "auth/login", {
+      method: "POST",
+      body: JSON.stringify(userData),
+      headers: { "Content-Type": "application/json" },
+    });
     const data = await response.json();
-    if (data.length) {
-      if (password === data[0].password) {
-        resolve({ data: data[0] });
-      } else {
-        reject({ message: "Password Not match!!" });
-      }
+    if (data.success) {
+      resolve({ data });
     } else {
-      reject({ message: "User Not Found!!" });
+      reject({ message: data.message });
     }
   });
 }

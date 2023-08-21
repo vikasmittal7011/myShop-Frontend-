@@ -6,23 +6,22 @@ import Input from "../components/form/Input";
 import Button from "../components/common/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { createUserAsync, selectauth } from "../features/auth/authSlice";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 const Signup = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { loggedInUser } = useSelector(selectauth);
+  const { loggedInUser, message, status } = useSelector(selectauth);
   const [credentials, setCredentials] = useState({
-    email: "",
-    password: "",
-    confirmPassword: "",
+    name: "Test",
+    email: "test@gmail.co",
+    password: "Test@9876",
+    confirmPassword: "Test@9876",
   });
 
   const [errors, setErrors] = useState({
     email: "",
     password: "",
     confirmPassword: "",
-    validform: false,
   });
 
   const manageCredentials = (id, value) => {
@@ -31,74 +30,76 @@ const Signup = () => {
       email: "",
       password: "",
       confirmPassword: "",
-      validform: false,
     });
   };
 
-  const validate = (email, password, confirmPassword) => {
+  const validate = (data) => {
     const passwordPattern =
       /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
     const emailPattern =
       /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,}(?:\.[a-zA-Z]{2,})?$/;
 
-    if (!emailPattern.test(email)) {
+    if (data.name === "") {
+      setErrors({
+        ...errors,
+        email: "Enter a valid name!",
+      });
+      return false;
+    } else if (!emailPattern.test(data.email)) {
       setErrors({
         ...errors,
         email: "Enter a valid email address!",
-        validform: false,
       });
-    } else if (!passwordPattern.test(password)) {
+      return false;
+    } else if (!passwordPattern.test(data.password)) {
       setErrors({
         ...errors,
         password: `- at least 8 characters\n
-      - must contain at least 1 uppercase letter, 1 lowercase letter, and 1 number\n
-      - Can contain special characters`,
-        validform: false,
+        - must contain at least 1 uppercase letter, 1 lowercase letter, and 1 number\n
+        - Can contain special characters`,
       });
-    } else if (password !== confirmPassword) {
+      return false;
+    } else if (data.password !== data.confirmPassword) {
       setErrors({
         ...errors,
         confirmPassword: `Password should be match`,
-        validform: false,
       });
+      return false;
     } else {
       setErrors({
         email: "",
         password: "",
         confirmPassword: "",
-        validform: true,
       });
+      return true;
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    validate(
-      credentials.email,
-      credentials.password,
-      credentials.confirmPassword
-    );
-    if (errors.validform) {
+    const valid = validate(credentials);
+    if (valid) {
       dispatch(
         createUserAsync({
+          name: credentials.name,
           email: credentials.email,
           password: credentials.password,
         })
       );
-      setCredentials({
-        email: "",
-        password: "",
-        confirmPassword: "",
-      });
-      if (loggedInUser) {
-        navigate("/");
+      if (status !== "failed") {
+        setCredentials({
+          name: "",
+          email: "",
+          password: "",
+          confirmPassword: "",
+        });
       }
     }
   };
 
   return (
     <>
-      {loggedInUser && <Navigate to="to" replace={true} />}
+      {loggedInUser && <Navigate to="/" replace={true} />}
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img className="mx-auto h-12 w-auto" src={logo} alt="Your Company" />
@@ -108,7 +109,17 @@ const Signup = () => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-xl">
+          <p className="text-red-600">{message?.message || null}</p>
           <form className="space-y-6" onSubmit={handleSubmit}>
+            <Input
+              title="Name"
+              id="name"
+              type="text"
+              placeHolder="Enter your name..."
+              value={credentials.name}
+              onChange={manageCredentials}
+              errorMessage={errors.name}
+            />
             <Input
               title="Email address"
               id="email"

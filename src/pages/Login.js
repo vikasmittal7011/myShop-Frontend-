@@ -14,7 +14,7 @@ const Login = () => {
   let { loggedInUser, message, status } = useSelector(selectauth);
 
   const [credentials, setCredentials] = useState({
-    email: "vikasaggrawal700@gmail.com",
+    email: "vikas@gmail.com",
     password: "Sonu@9876",
   });
 
