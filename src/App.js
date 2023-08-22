@@ -21,7 +21,7 @@ import {
   AdminHome,
 } from "./pages/index";
 import Loader from "./components/common/Loader";
-import { fetchItemsByUsertAsync } from "./features/cart/cartSlice";
+// import { fetchItemsByUsertAsync } from "./features/cart/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { selectauth } from "./features/auth/authSlice";
 import { fetchUserDataAsync } from "./features/user/userSlice";
@@ -30,7 +30,7 @@ import AlertTemplate from "react-alert-template-basic";
 
 const App = () => {
   const dispatch = useDispatch();
-  const { loggedInUser } = useSelector(selectauth);
+  const { loggedInUser, token } = useSelector(selectauth);
 
   const options = {
     timeout: 5000,
@@ -39,8 +39,8 @@ const App = () => {
 
   useEffect(() => {
     if (loggedInUser) {
-      dispatch(fetchItemsByUsertAsync(loggedInUser.id));
-      dispatch(fetchUserDataAsync(loggedInUser.id));
+      // dispatch(fetchItemsByUsertAsync(loggedInUser.id));
+      dispatch(fetchUserDataAsync({ id: loggedInUser.id, token }));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loggedInUser?.id]);

@@ -5,12 +5,13 @@ const initialState = {
   status: "idle",
   userOrders: [],
   userData: {},
+  message: "",
 };
 
 export const fetchUserDataAsync = createAsyncThunk(
   "user/fetchUserData",
-  async (userData) => {
-    const response = await fetchUserData(userData);
+  async ({ id, token }) => {
+    const response = await fetchUserData(id, token);
     return response.data;
   }
 );

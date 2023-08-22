@@ -14,17 +14,19 @@ const UserProfile = () => {
 
   const [isOpen, setIsOpen] = useState(false);
   const [addressData, setAddressData] = useState({
-    name: "",
-    email: "",
-    tel: "",
-    street: "",
-    city: "",
-    state: "",
-    pinCode: "",
-    country: "Select your country",
+    name: "Vikas Gupta",
+    email: "vikassaggrawal700@gmail.comm",
+    tel: "7001641581",
+    street: "J 518",
+    city: "J P",
+    state: "Delhi",
+    pinCode: "110033",
+    country: "IndiaF",
   });
 
-  const { userData } = useSelector(selectuser);
+  const {
+    userData: { user },
+  } = useSelector(selectuser);
 
   const handleModel = () => {
     setIsOpen(!isOpen);
@@ -32,8 +34,8 @@ const UserProfile = () => {
 
   const formAction = (address) => {
     const newUser = {
-      ...userData,
-      addresses: [...userData.addresses, address],
+      ...user,
+      addresses: [...user.addresses, address],
     };
     dispatch(updateUserAsync(newUser));
     handleModel();
@@ -63,10 +65,10 @@ const UserProfile = () => {
         <Header heading="My Profile" />
         <div className="mx-10 my-8">
           <h2 className="font-bold text-xl mb-3 text-green-500">
-            Name: {userData?.addresses?.[0]?.name}
+            Name: {user?.name}
           </h2>
           <h2 className="font-bold text-xl mb-1 text-blue-400">
-            Email: {userData?.email}
+            Email: {user?.email}
           </h2>
           <Button
             onClick={handleModel}
@@ -74,7 +76,7 @@ const UserProfile = () => {
           >
             Add New Address
           </Button>
-          <Addresses user={userData || null} />
+          <Addresses user={user || null} />
         </div>
         <Footer />
       </NavBar>

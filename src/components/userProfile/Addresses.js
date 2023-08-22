@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { updateUserAsync } from "../../features/user/userSlice";
 import { useState } from "react";
 import AddressForm from "./AddressForm";
+import Modal from "../common/Modal";
 
 const Addresses = ({ user }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,6 +18,8 @@ const Addresses = ({ user }) => {
     pinCode: "",
     country: "Select your country",
   });
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [itemId, setItemId] = useState(-1);
 
   const dispatch = useDispatch();
 
@@ -41,8 +44,13 @@ const Addresses = ({ user }) => {
     delete address.index;
     const newUser = { ...user, addresses: [...user.addresses] };
     newUser.addresses.splice(index, 1, address);
+    console.log(newUser);
     dispatch(updateUserAsync(newUser));
     handleModel();
+  };
+
+  const handleModal = () => {
+    setIsModalOpen(!isModalOpen);
   };
 
   return (
@@ -77,7 +85,7 @@ const Addresses = ({ user }) => {
                           {address?.street},
                         </p>
                         <p className="text-sm leading-6 text-gray-900">
-                          {address?.city}, {address?.state},
+                          {address?.city}, {address?.state}, {address.country}
                         </p>
                         <p className="text-sm leading-6 text-gray-900"></p>
                         <p className="text-sm leading-6 text-gray-900">
@@ -95,9 +103,19 @@ const Addresses = ({ user }) => {
                     </div>
                   </li>
                   <div className="flex justify-between">
+                    <Modal
+                      isOpen={i === itemId && isModalOpen}
+                      handleModal={handleModal}
+                      message="Are sure to delete this address"
+                      title={`Remove ${address.name} name address`}
+                      action="Delete"
+                      handleDelete={handleRemove}
+                      itemId={itemId}
+                    />
                     <Button
                       onClick={() => {
-                        handleRemove(i);
+                        handleModal();
+                        setItemId(i);
                       }}
                       className="flex items-center justify-center rounded-md border border-transparent bg-red-600 px-3 py-1 text-base font-medium text-white shadow-sm hover:bg-red-700"
                       type="button"
