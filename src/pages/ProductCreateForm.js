@@ -291,59 +291,63 @@ const ProductCreateForm = () => {
                   />
                 </div>
 
-                <div className="col-span-full">
-                  <ImageInput
-                    id="thumbnail"
-                    title="Thumbnail"
-                    onChange={handleProductInfo}
-                    value={productInfo.thumbnail}
-                    errorMessage={productMistakes.thumbnail}
-                  />
-                </div>
+                {!id && (
+                  <>
+                    <div className="col-span-full">
+                      <ImageInput
+                        id="thumbnail"
+                        title="Thumbnail"
+                        onChange={handleProductInfo}
+                        value={productInfo.thumbnail}
+                        errorMessage={productMistakes.thumbnail}
+                      />
+                    </div>
 
-                <div className="sm:col-span-3">
-                  <ImageInput
-                    id="image1"
-                    title="Image 1"
-                    type="text"
-                    onChange={handleProductInfo}
-                    value={productInfo.image1}
-                    errorMessage={productMistakes.image1}
-                  />
-                </div>
+                    <div className="sm:col-span-3">
+                      <ImageInput
+                        id="image1"
+                        title="Image 1"
+                        type="text"
+                        onChange={handleProductInfo}
+                        value={productInfo.image1}
+                        errorMessage={productMistakes.image1}
+                      />
+                    </div>
 
-                <div className="sm:col-span-3">
-                  <ImageInput
-                    id="image2"
-                    title="Image 2"
-                    type="text"
-                    onChange={handleProductInfo}
-                    value={productInfo.image2}
-                    errorMessage={productMistakes.image2}
-                  />
-                </div>
+                    <div className="sm:col-span-3">
+                      <ImageInput
+                        id="image2"
+                        title="Image 2"
+                        type="text"
+                        onChange={handleProductInfo}
+                        value={productInfo.image2}
+                        errorMessage={productMistakes.image2}
+                      />
+                    </div>
 
-                <div className="sm:col-span-3">
-                  <ImageInput
-                    id="image3"
-                    title="Image 3"
-                    type="text"
-                    onChange={handleProductInfo}
-                    value={productInfo.image3}
-                    errorMessage={productMistakes.image3}
-                  />
-                </div>
+                    <div className="sm:col-span-3">
+                      <ImageInput
+                        id="image3"
+                        title="Image 3"
+                        type="text"
+                        onChange={handleProductInfo}
+                        value={productInfo.image3}
+                        errorMessage={productMistakes.image3}
+                      />
+                    </div>
 
-                <div className="sm:col-span-3">
-                  <ImageInput
-                    id="image4"
-                    title="Image 4"
-                    type="text"
-                    onChange={handleProductInfo}
-                    value={productInfo.image4}
-                    errorMessage={productMistakes.image4}
-                  />
-                </div>
+                    <div className="sm:col-span-3">
+                      <ImageInput
+                        id="image4"
+                        title="Image 4"
+                        type="text"
+                        onChange={handleProductInfo}
+                        value={productInfo.image4}
+                        errorMessage={productMistakes.image4}
+                      />
+                    </div>
+                  </>
+                )}
               </div>
 
               <div className="mt-6 flex items-center justify-end gap-x-6">

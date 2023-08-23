@@ -5,9 +5,6 @@ export const userNavLinks = [{ name: "Home", href: "/" }];
 export const adminNavLinks = [
   { name: "Home", href: "/" },
   { name: "Order", href: "/admin-orders" },
-  { name: "New Product", href: "/create-product" },
-  { name: "New Brand", href: "/create-brand" },
-  { name: "New Category", href: "/create-category" },
 ];
 
 export const userProfileLinks = [
@@ -16,7 +13,12 @@ export const userProfileLinks = [
   { name: "Sign out", href: "/logout" },
 ];
 
-export const adminProfileLinks = [{ name: "Sign out", href: "/logout" }];
+export const adminProfileLinks = [
+  { name: "New Product", href: "/create-product" },
+  { name: "New Brand", href: "/create-brand" },
+  { name: "New Category", href: "/create-category" },
+  { name: "Sign out", href: "/logout" },
+];
 
 export const orderStatus = [
   { name: "Pending", code: "Pending" },
