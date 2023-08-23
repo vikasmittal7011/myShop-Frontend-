@@ -2,10 +2,12 @@ import React from "react";
 import { Disclosure } from "@headlessui/react";
 import FilterTitle from "./FilterTitle";
 import { useSelector } from "react-redux";
-import { selectProducts } from "../../features/product/productSlice";
+import { selectBrand } from "../../features/brand/brandSlice";
+import { selectCategory } from "../../features/category/categorySlice";
 
 const FilterForm = ({ handleFilters }) => {
-  const { brand, category } = useSelector(selectProducts);
+  const { brand } = useSelector(selectBrand);
+  const { category } = useSelector(selectCategory);
 
   const filters = [
     {
@@ -39,11 +41,11 @@ const FilterForm = ({ handleFilters }) => {
               <Disclosure.Panel className="pt-6">
                 <div className="space-y-4">
                   {section.options.map((option, optionIdx) => (
-                    <div key={option.value} className="flex items-center">
+                    <div key={optionIdx} className="flex items-center">
                       <input
                         id={`filter-${section.id}-${optionIdx}`}
                         name={`${section.id}[]`}
-                        defaultValue={option.value}
+                        defaultValue={option.id}
                         type="checkbox"
                         onChange={(e) => {
                           handleFilters(section.id, e);
@@ -55,7 +57,7 @@ const FilterForm = ({ handleFilters }) => {
                         htmlFor={`filter-${section.id}-${optionIdx}`}
                         className="ml-3 text-sm text-gray-600"
                       >
-                        {option.label}
+                        {option.name}
                       </label>
                     </div>
                   ))}

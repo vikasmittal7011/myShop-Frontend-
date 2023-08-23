@@ -45,7 +45,7 @@ export const brandSlice = createSlice({
       })
       .addCase(fetchAllBrandAsync.fulfilled, (state, action) => {
         state.status = "idle";
-        state.brand = action.payload;
+        state.brand = action.payload.brand;
       });
   },
 });

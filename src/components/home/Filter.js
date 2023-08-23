@@ -4,11 +4,11 @@ import { Menu } from "@headlessui/react";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
-  fetchAllBrandAsync,
-  fetchAllCategoryAsync,
   fetchProductByFiltersAsync,
   selectProducts,
 } from "../../features/product/productSlice";
+import { fetchAllBrandAsync } from "../../features/brand/brandSlice";
+import { fetchAllCategoryAsync } from "../../features/category/categorySlice";
 import { Classes, ITEM_PAGE_PER } from "../../utils/constant";
 import MobileFilter from "./MobileFilter";
 import OpenCloseBTN from "./OpenCloseBTN";
@@ -18,7 +18,11 @@ import Buttons from "./Buttons";
 import Products from "../products/Products";
 
 export const Filter = () => {
-  const { products, status, totalItems } = useSelector(selectProducts);
+  const {
+    products: { products },
+    status,
+    totalItems,
+  } = useSelector(selectProducts);
 
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [filters, setFilters] = useState({ category: [], brand: [] });
@@ -101,7 +105,7 @@ export const Filter = () => {
             <FilterForm handleFilters={handleFilters} />
 
             <div className="lg:col-span-3">
-              {products.lenght > 0 && (
+              {products && (
                 <Products
                   handlePage={handlePage}
                   page={page}

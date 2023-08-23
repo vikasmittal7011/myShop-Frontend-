@@ -34,7 +34,7 @@ export const categorySlice = createSlice({
       })
       .addCase(createCategoryAsync.fulfilled, (state, action) => {
         state.status = "idle";
-        state.brand.push(action.payload);
+        state.category.push(action.payload);
       })
       .addCase(createCategoryAsync.rejected, (state, action) => {
         state.status = "failed";
@@ -45,7 +45,7 @@ export const categorySlice = createSlice({
       })
       .addCase(fetchAllCategoryAsync.fulfilled, (state, action) => {
         state.status = "idle";
-        state.brand = action.payload;
+        state.category = action.payload.category;
       });
   },
 });

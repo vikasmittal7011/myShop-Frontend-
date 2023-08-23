@@ -2,11 +2,13 @@ import { Disclosure } from "@headlessui/react";
 import React from "react";
 import { useSelector } from "react-redux";
 
-import { selectProducts } from "../../features/product/productSlice";
 import FilterTitle from "./FilterTitle";
+import { selectBrand } from "../../features/brand/brandSlice";
+import { selectCategory } from "../../features/category/categorySlice";
 
 const MobileFilterForm = ({ handleFilters }) => {
-  const { brand, category } = useSelector(selectProducts);
+  const { brand } = useSelector(selectBrand);
+  const { category } = useSelector(selectCategory);
 
   const filters = [
     {
@@ -39,11 +41,11 @@ const MobileFilterForm = ({ handleFilters }) => {
               <Disclosure.Panel className="pt-6">
                 <div className="space-y-6">
                   {section.options.map((option, optionIdx) => (
-                    <div key={option.value} className="flex items-center">
+                    <div key={optionIdx} className="flex items-center">
                       <input
                         id={`filter-mobile-${section.id}-${optionIdx}`}
                         name={`${section.id}[]`}
-                        defaultValue={option.value}
+                        defaultValue={option.id}
                         type="checkbox"
                         onChange={(e) => {
                           handleFilters(section.id, e);
@@ -55,7 +57,7 @@ const MobileFilterForm = ({ handleFilters }) => {
                         htmlFor={`filter-mobile-${section.id}-${optionIdx}`}
                         className="ml-3 min-w-0 flex-1 text-gray-500"
                       >
-                        {option.label}
+                        {option.name}
                       </label>
                     </div>
                   ))}

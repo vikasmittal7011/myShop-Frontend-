@@ -154,7 +154,6 @@ const ProductCreateForm = () => {
       formData.append("image2", productInfo.image2);
       formData.append("image3", productInfo.image3);
       formData.append("image4", productInfo.image4);
-      console.log(productInfo);
 
       if (id) {
         productInfo.id = id;

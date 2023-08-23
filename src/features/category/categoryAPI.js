@@ -1,10 +1,14 @@
 const API = process.env.REACT_APP_API;
 
 export function fetchAllCategory() {
-  return new Promise(async (resolve) => {
+  return new Promise(async (resolve, reject) => {
     const response = await fetch(API + "category");
     const data = await response.json();
-    resolve({ data });
+    if (data.success) {
+      resolve({ data });
+    } else {
+      reject({ message: data.message });
+    }
   });
 }
 
