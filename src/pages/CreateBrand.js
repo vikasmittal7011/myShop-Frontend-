@@ -1,14 +1,17 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import React, { useState } from "react";
 
 import Input from "../components/form/Input";
 import Header from "../components/common/Header";
 import Button from "../components/common/Button";
 import NavBar from "./NavBar";
-import { createBrandAsync } from "../features/brand/brandSlice";
+import { createBrandAsync, selectBrand } from "../features/brand/brandSlice";
+import { useAlert } from "react-alert";
 
 const CreateBrand = () => {
   const dispatch = useDispatch();
+  const { status } = useSelector(selectBrand);
+  const alert = useAlert();
 
   const [name, setName] = useState("");
   const [errors, setErrors] = useState("");
@@ -32,6 +35,11 @@ const CreateBrand = () => {
     if (valid) {
       dispatch(createBrandAsync({ name: name }));
       setName("");
+      if (status !== "loading" && status !== "failed") {
+        alert.success(name + " is added successfully");
+      } else {
+        alert.success(name + " failed to add");
+      }
     }
   };
 

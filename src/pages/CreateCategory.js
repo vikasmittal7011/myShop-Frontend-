@@ -1,14 +1,20 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import React, { useState } from "react";
 
 import Input from "../components/form/Input";
 import Header from "../components/common/Header";
 import Button from "../components/common/Button";
 import NavBar from "./NavBar";
-import { createCategoryAsync } from "../features/category/categorySlice";
+import {
+  createCategoryAsync,
+  selectCategory,
+} from "../features/category/categorySlice";
+import { useAlert } from "react-alert";
 
 const CreateCategory = () => {
   const dispatch = useDispatch();
+  const { status } = useSelector(selectCategory);
+  const alert = useAlert();
 
   const [name, setName] = useState("");
   const [errors, setErrors] = useState("");
@@ -32,6 +38,11 @@ const CreateCategory = () => {
     if (valid) {
       dispatch(createCategoryAsync({ name: name }));
       setName("");
+      if (status !== "loading" && status !== "failed") {
+        alert.success(name + " is added successfully");
+      } else {
+        alert.success(name + " failed to add");
+      }
     }
   };
 

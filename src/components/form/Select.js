@@ -32,7 +32,7 @@ const Select = ({
         >
           <option value="">{defaultValue}</option>
           {options?.map((o, i) => (
-            <option key={i} value={o.name || o.value}>
+            <option key={i} value={o.id || o.name}>
               {o.name || o.label}
             </option>
           ))}

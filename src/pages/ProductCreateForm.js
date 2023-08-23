@@ -16,12 +16,18 @@ import {
   updateProductAsync,
 } from "../features/product/productSlice";
 import NavBar from "./NavBar";
+import { selectBrand } from "../features/brand/brandSlice";
+import { selectCategory } from "../features/category/categorySlice";
+import { useAlert } from "react-alert";
 
 const ProductCreateForm = () => {
   const navigate = useNavigate();
+  const alert = useAlert();
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { brand, category, selectedProduct } = useSelector(selectProducts);
+  const { selectedProduct, status } = useSelector(selectProducts);
+  const { brand } = useSelector(selectBrand);
+  const { category } = useSelector(selectCategory);
 
   const productDetailsOne = {
     title: "",
@@ -39,10 +45,8 @@ const ProductCreateForm = () => {
   };
 
   const productDetailsTwo = {
-    brand: "64e06555269d90da84e9c36e",
-    category: "64e065c4c1f15f3f3dc5aadb",
-    // brand: "Select Brand",
-    // category: "Select Category",
+    brand: "Select Brand",
+    category: "Select Category",
   };
 
   const [productInfo, setProductInfo] = useState({
@@ -162,7 +166,12 @@ const ProductCreateForm = () => {
         navigate(`/product-details/${productInfo.id}`);
       } else {
         dispatch(createProductAsync(formData));
-        navigate(`/`);
+        if (status !== "loading" && status !== "failed") {
+          alert.success(productInfo.title + " is added successfully");
+          navigate(`/`);
+        } else {
+          alert.success(productInfo.title + " failed to add");
+        }
       }
 
       setProductInfo({

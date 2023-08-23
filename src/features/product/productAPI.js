@@ -9,10 +9,15 @@ export function fetchAllProduct() {
 }
 
 export function fetchProductById(id) {
-  return new Promise(async (resolve) => {
-    const response = await fetch("http://localhost:5000/products/" + id);
+  return new Promise(async (resolve, reject) => {
+    const response = await fetch(API + "product/" + id);
     const data = await response.json();
-    resolve({ data });
+    console.log(data);
+    if (data.success) {
+      resolve({ data: data.product });
+    } else {
+      reject({ data: data.message });
+    }
   });
 }
 
@@ -44,13 +49,17 @@ export function fetchProductByFilters(filters, sort, page) {
 }
 
 export function createProduct(product) {
-  return new Promise(async (resolve) => {
+  return new Promise(async (resolve, reject) => {
     const response = await fetch(API + "product", {
       method: "POST",
       body: product,
     });
     const data = await response.json();
-    resolve({ data });
+    if (data.success) {
+      resolve({ data });
+    } else {
+      reject({ data: data.message });
+    }
   });
 }
 
