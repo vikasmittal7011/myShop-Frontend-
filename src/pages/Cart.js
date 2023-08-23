@@ -9,20 +9,22 @@ import NavBar from "./NavBar";
 import Footer from "../components/common/Footer";
 
 const Cart = () => {
-  const { items } = useSelector(selectCart);
+  const {
+    items: { cart },
+  } = useSelector(selectCart);
 
   return (
     <>
       <NavBar>
         <Header heading="Cart" />
         <div className="mx-auto max-w-5xl px-2 sm:px-6 lg:px-8">
-          {items.length > 0 ? (
+          {cart.length > 0 ? (
             <>
-              <ViewProduct items={items} />
+              <ViewProduct items={cart} />
               <ViewTotal
                 afterCheckout="/checkout"
                 checkoutTitle="Checkout"
-                items={items}
+                items={cart}
               />
             </>
           ) : (

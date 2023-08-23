@@ -16,7 +16,9 @@ const CheckOut = () => {
   const dispatch = useDispatch();
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
-  const { items } = useSelector(selectCart);
+  const {
+    items: { cart },
+  } = useSelector(selectCart);
   const { userData } = useSelector(selectuser);
   const { orderPlaced } = useSelector(selectorder);
 
@@ -47,7 +49,7 @@ const CheckOut = () => {
     if (valid) {
       dispatch(
         makeOrderAsync({
-          items,
+          cart,
           totalItems,
           totalPrice,
           address: paymentInfo.address,
@@ -66,11 +68,11 @@ const CheckOut = () => {
   }, [orderPlaced, navigate]);
 
   useEffect(() => {
-    if (items.length < 1) {
+    if (cart.length < 1) {
       navigate("/");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [items]);
+  }, [cart]);
 
   return (
     <>
@@ -85,11 +87,11 @@ const CheckOut = () => {
               <h2 className="text-base font-semibold leading-7 text-gray-900">
                 Product Information
               </h2>
-              <ViewProduct products={items} />
+              <ViewProduct items={cart} />
               <ViewTotal
                 onClick={handleOrder}
                 checkoutTitle="Pay Now"
-                items={items}
+                items={cart}
                 message={message}
               />
             </div>

@@ -40,8 +40,8 @@ const CartItems = ({ items }) => {
           <li key={item?.id} className="flex py-6">
             <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
               <Image
-                src={item?.thumbnail}
-                alt={item?.title}
+                src={process.env.REACT_APP_API + item?.item?.thumbnail}
+                alt={item?.item?.title}
                 className="h-full w-full object-cover object-center"
               />
             </div>
@@ -50,24 +50,25 @@ const CartItems = ({ items }) => {
               <div>
                 <div className="flex justify-between text-base font-medium text-gray-900">
                   <h3>
-                    <Link to={`/item-details/${item?.id}`}>
-                      {item?.title}
+                    <Link to={`/item-details/${item?.item?.id}`}>
+                      {item?.item?.title}
                     </Link>
                   </h3>
                   <div>
                     <p className="text-sm font-medium text-gray-900">
                       ${" "}
                       {Math.round(
-                        item?.price * (1 - item?.discountPercentage / 100)
+                        item?.item?.price *
+                          (1 - item?.item?.discountPercentage / 100)
                       )}
                     </p>
                     <p className="text-sm font-medium text-red-400 line-through">
-                      $ {item?.price}
+                      $ {item?.item?.price}
                     </p>
                   </div>
                 </div>
                 <p className="mt-1 text-sm text-gray-500">
-                  {item?.color || "Blue"}
+                  {item?.item?.color || "Blue"}
                 </p>
               </div>
               <div className="flex flex-1 items-end justify-between text-sm">
@@ -87,7 +88,7 @@ const CartItems = ({ items }) => {
                   isOpen={item.id === itemId && isOpen}
                   handleModal={handleModal}
                   message="Are sure to delete this item from cart"
-                  title={`Remove ${item.title}`}
+                  title={`Remove ${item?.item.title}`}
                   action="Delete"
                   handleDelete={handleDelete}
                   itemId={itemId}
