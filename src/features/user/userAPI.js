@@ -29,7 +29,6 @@ export function fetchUserOrders(userId) {
 
 export function updateUser(update) {
   return new Promise(async (resolve) => {
-    console.log(update);
     const response = await fetch(API + "user/" + update.id, {
       method: "PATCH",
       body: JSON.stringify(update),

@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import Input from "../components/form/Input";
 import TextArea from "../components/form/TextArea";
 import Select from "../components/form/Select";
+import ImageInput from "../components/form/ImageInput";
 import Header from "../components/common/Header";
 import Button from "../components/common/Button";
 import {
@@ -38,8 +39,10 @@ const ProductCreateForm = () => {
   };
 
   const productDetailsTwo = {
-    brand: "Select Brand",
-    category: "Select Category",
+    brand: "64e06555269d90da84e9c36e",
+    category: "64e065c4c1f15f3f3dc5aadb",
+    // brand: "Select Brand",
+    // category: "Select Category",
   };
 
   const [productInfo, setProductInfo] = useState({
@@ -138,28 +141,28 @@ const ProductCreateForm = () => {
     e.preventDefault();
     const valid = validation(productInfo);
     if (valid) {
-      const product = { ...productInfo };
-      product.images = [
-        product.image1,
-        product.image2,
-        product.image3,
-        product.image4,
-      ];
-      delete product["image1"];
-      delete product["image2"];
-      delete product["image3"];
-      delete product["image4"];
-      product["price"] = +product.price;
-      product["discountPercentage"] = +product.discountPercentage;
-      product["stock"] = +product.stock;
+      const formData = new FormData();
+      formData.append("title", productInfo.title);
+      formData.append("description", productInfo.description);
+      formData.append("price", +productInfo.price);
+      formData.append("discountPercentage", +productInfo.discountPercentage);
+      formData.append("stock", +productInfo.stock);
+      formData.append("brand", productInfo.brand);
+      formData.append("category", productInfo.category);
+      formData.append("thumbnail", productInfo.thumbnail);
+      formData.append("image1", productInfo.image1);
+      formData.append("image2", productInfo.image2);
+      formData.append("image3", productInfo.image3);
+      formData.append("image4", productInfo.image4);
+      console.log(productInfo);
 
       if (id) {
-        product.id = id;
-        product.rating = selectedProduct.rating || 0;
-        dispatch(updateProductAsync(product));
-        navigate(`/product-details/${product.id}`);
+        productInfo.id = id;
+        productInfo.rating = selectedProduct.rating || 0;
+        dispatch(updateProductAsync(productInfo));
+        navigate(`/product-details/${productInfo.id}`);
       } else {
-        dispatch(createProductAsync(product));
+        dispatch(createProductAsync(formData));
         navigate(`/`);
       }
 
@@ -281,10 +284,9 @@ const ProductCreateForm = () => {
                 </div>
 
                 <div className="col-span-full">
-                  <Input
+                  <ImageInput
                     id="thumbnail"
                     title="Thumbnail"
-                    type="text"
                     onChange={handleProductInfo}
                     value={productInfo.thumbnail}
                     errorMessage={productMistakes.thumbnail}
@@ -292,7 +294,7 @@ const ProductCreateForm = () => {
                 </div>
 
                 <div className="sm:col-span-3">
-                  <Input
+                  <ImageInput
                     id="image1"
                     title="Image 1"
                     type="text"
@@ -303,7 +305,7 @@ const ProductCreateForm = () => {
                 </div>
 
                 <div className="sm:col-span-3">
-                  <Input
+                  <ImageInput
                     id="image2"
                     title="Image 2"
                     type="text"
@@ -314,7 +316,7 @@ const ProductCreateForm = () => {
                 </div>
 
                 <div className="sm:col-span-3">
-                  <Input
+                  <ImageInput
                     id="image3"
                     title="Image 3"
                     type="text"
@@ -325,7 +327,7 @@ const ProductCreateForm = () => {
                 </div>
 
                 <div className="sm:col-span-3">
-                  <Input
+                  <ImageInput
                     id="image4"
                     title="Image 4"
                     type="text"

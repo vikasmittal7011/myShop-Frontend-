@@ -44,7 +44,6 @@ const Addresses = ({ user }) => {
     delete address.index;
     const newUser = { ...user, addresses: [...user.addresses] };
     newUser.addresses.splice(index, 1, address);
-    console.log(newUser);
     dispatch(updateUserAsync(newUser));
     handleModel();
   };

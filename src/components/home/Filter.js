@@ -101,14 +101,16 @@ export const Filter = () => {
             <FilterForm handleFilters={handleFilters} />
 
             <div className="lg:col-span-3">
-              <Products
-                handlePage={handlePage}
-                page={page}
-                setPage={setPage}
-                products={products}
-                status={status}
-                totalItems={totalItems}
-              />
+              {products.lenght > 0 && (
+                <Products
+                  handlePage={handlePage}
+                  page={page}
+                  setPage={setPage}
+                  products={products}
+                  status={status}
+                  totalItems={totalItems}
+                />
+              )}
             </div>
           </div>
         </section>

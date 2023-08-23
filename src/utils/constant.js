@@ -5,6 +5,7 @@ export const userNavLinks = [{ name: "Home", href: "/" }];
 export const adminNavLinks = [
   { name: "Home", href: "/" },
   { name: "Order", href: "/admin-orders" },
+  { name: "New Product", href: "/create-product" },
 ];
 
 export const userProfileLinks = [
