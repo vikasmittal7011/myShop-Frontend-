@@ -4,7 +4,6 @@ export function fetchProductById(id) {
   return new Promise(async (resolve, reject) => {
     const response = await fetch(API + "product/" + id);
     const data = await response.json();
-    console.log(data);
     if (data.success) {
       resolve({ data: data.product });
     } else {

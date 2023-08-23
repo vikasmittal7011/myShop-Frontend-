@@ -23,18 +23,18 @@ const SizeAndColor = ({
   const dispatch = useDispatch();
   const alert = useAlert();
   const { loggedInUser } = useSelector(selectauth);
-  const { items } = useSelector(selectCart);
+  const {
+    items: { cart },
+  } = useSelector(selectCart);
 
   const handleClick = (w) => {
     w.preventDefault();
-    if (items.findIndex((item) => item.productId === productData.id) < 0) {
+    if (cart.findIndex((item) => item.productId === productData.id) < 0) {
       const newItem = {
-        ...productData,
-        productId: productData.id,
+        item: productData.id,
         quantity: 1,
         user: loggedInUser.id,
       };
-      delete newItem["id"];
       alert.success("Item is successfully add to your cart");
       dispatch(addToCartAsync(newItem));
     } else {

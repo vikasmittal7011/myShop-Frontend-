@@ -1,18 +1,24 @@
+const API = process.env.REACT_APP_API;
+
 export function addToCart(item) {
-  return new Promise(async (resolve) => {
-    const response = await fetch("http://localhost:5000/cart", {
+  return new Promise(async (resolve, reject) => {
+    const response = await fetch(API + "cart", {
       method: "POST",
       body: JSON.stringify(item),
       headers: { "content-type": "application/json" },
     });
     const data = await response.json();
-    resolve({ data });
+    if (data.success) {
+      resolve({ data: data.data });
+    } else {
+      reject({ message: data.messsage });
+    }
   });
 }
 
 export function fetchItemsByUser(userId) {
   return new Promise(async (resolve) => {
-    const response = await fetch("http://localhost:5000/cart?user=" + userId);
+    const response = await fetch(API + "cart/" + userId);
     const data = await response.json();
     resolve({ data });
   });
