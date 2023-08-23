@@ -17,6 +17,8 @@ const ProductCreateForm = lazy(() => import("./ProductCreateForm"));
 const AdminProtect = lazy(() => import("./AdminProtect"));
 const AdminOrders = lazy(() => import("./AdminOrders"));
 const AdminHome = lazy(() => import("./AdminHome"));
+const CreateBrand = lazy(() => import("./CreateBrand"));
+const CreateCategory = lazy(() => import("./CreateCategory"));
 
 export {
   Signup,
@@ -36,4 +38,6 @@ export {
   AdminProtect,
   AdminOrders,
   AdminHome,
+  CreateBrand,
+  CreateCategory,
 };

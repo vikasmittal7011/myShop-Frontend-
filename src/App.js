@@ -19,6 +19,8 @@ import {
   AdminProtect,
   AdminOrders,
   AdminHome,
+  CreateBrand,
+  CreateCategory,
 } from "./pages/index";
 import Loader from "./components/common/Loader";
 // import { fetchItemsByUsertAsync } from "./features/cart/cartSlice";
@@ -137,6 +139,24 @@ const App = () => {
               element={
                 <AdminProtect>
                   <ProductCreateForm />
+                </AdminProtect>
+              }
+            />
+            <Route
+              path="/create-brand"
+              exact
+              element={
+                <AdminProtect>
+                  <CreateBrand />
+                </AdminProtect>
+              }
+            />
+            <Route
+              path="/create-category"
+              exact
+              element={
+                <AdminProtect>
+                  <CreateCategory />
                 </AdminProtect>
               }
             />

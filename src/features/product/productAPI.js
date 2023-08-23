@@ -43,25 +43,8 @@ export function fetchProductByFilters(filters, sort, page) {
   });
 }
 
-export function fetchAllCategory() {
-  return new Promise(async (resolve) => {
-    const response = await fetch(API + "category");
-    const data = await response.json();
-    resolve({ data });
-  });
-}
-
-export function fetchAllBrand() {
-  return new Promise(async (resolve) => {
-    const response = await fetch(API + "brand");
-    const data = await response.json();
-    resolve({ data });
-  });
-}
-
 export function createProduct(product) {
   return new Promise(async (resolve) => {
-    console.log(product);
     const response = await fetch(API + "product", {
       method: "POST",
       body: product,

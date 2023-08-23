@@ -9,7 +9,7 @@ const Home = () => {
     <>
       <NavBar>
         <Header heading="Products" />
-        <Filter />
+        {/* <Filter /> */}
         <Footer />
       </NavBar>
     </>
