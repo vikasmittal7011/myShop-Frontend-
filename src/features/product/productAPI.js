@@ -1,13 +1,5 @@
 const API = process.env.REACT_APP_API;
 
-export function fetchAllProduct() {
-  return new Promise(async (resolve) => {
-    const response = await fetch("http://localhost:5000/products");
-    const data = await response.json();
-    resolve({ data });
-  });
-}
-
 export function fetchProductById(id) {
   return new Promise(async (resolve, reject) => {
     const response = await fetch(API + "product/" + id);
@@ -43,7 +35,7 @@ export function fetchProductByFilters(filters, sort, page) {
   return new Promise(async (resolve) => {
     const response = await fetch(API + "product?" + queryString);
     const data = await response.json();
-    const totalItems = await response.headers.get("X-Total-Count");
+    const totalItems = response.headers.get("X-Total-Count");
     resolve({ data: { products: data, totalItems: +totalItems } });
   });
 }
@@ -64,16 +56,17 @@ export function createProduct(product) {
 }
 
 export function updateProduct(product) {
-  return new Promise(async (resolve) => {
-    const response = await fetch(
-      "http://localhost:5000/products/" + product.id,
-      {
-        method: "PATCH",
-        body: JSON.stringify(product),
-        headers: { "content-type": "application/json" },
-      }
-    );
+  return new Promise(async (resolve, reject) => {
+    const response = await fetch(API + "product/" + product.id, {
+      method: "PATCH",
+      body: JSON.stringify(product),
+      headers: { "content-type": "application/json" },
+    });
     const data = await response.json();
-    resolve({ data });
+    if (data.success) {
+      resolve({ data: data.product });
+    } else {
+      reject({ data: data.message });
+    }
   });
 }
