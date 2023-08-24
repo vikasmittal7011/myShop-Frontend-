@@ -27,7 +27,7 @@ const UserOrders = () => {
     <>
       <NavBar>
         <Header heading="Your Orders" />
-        <ul className="divide-y divide-gray-400 mx-10 pb-6">
+        <ul className="divide-y divide-gray-400 lg:mx-10 md:mx-10 sm:mx-10 l:mx-10 s:mx-10 xs:mx-[20px]  pb-6">
           {userOrders.map((order, i) => (
             <div key={i} className="my-10">
               <Headings order={order} />

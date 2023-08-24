@@ -17,7 +17,7 @@ export function fetchUserData(id, token) {
 //Todo
 export function fetchUserOrders(userId) {
   return new Promise(async (resolve, reject) => {
-    const response = await fetch("http://localhost:5000/orders?user=" + userId);
+    const response = await fetch(API + "order/" + userId);
     const data = await response.json();
     if (data.success) {
       resolve({ ...data });

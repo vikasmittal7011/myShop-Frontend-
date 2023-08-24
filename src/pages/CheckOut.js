@@ -45,11 +45,8 @@ const CheckOut = () => {
   const handleOrder = (totalItems, totalPrice) => {
     const valid = validate(paymentInfo);
     if (valid) {
-      const itemIds = items.map((item) => {
-        return item.id;
-      });
       const newOrder = {
-        items: itemIds,
+        items,
         totalItems,
         totalPrice,
         address: paymentInfo.address,
