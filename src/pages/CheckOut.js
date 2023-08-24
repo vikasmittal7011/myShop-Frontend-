@@ -45,17 +45,19 @@ const CheckOut = () => {
   const handleOrder = (totalItems, totalPrice) => {
     const valid = validate(paymentInfo);
     if (valid) {
-      dispatch(
-        makeOrderAsync({
-          items,
-          totalItems,
-          totalPrice,
-          address: paymentInfo.address,
-          paymentMethod: paymentInfo.paymentMethod,
-          user: userData.id,
-          status: "Pending",
-        })
-      );
+      const itemIds = items.map((item) => {
+        return item.id;
+      });
+      const newOrder = {
+        items: itemIds,
+        totalItems,
+        totalPrice,
+        address: paymentInfo.address,
+        paymentMethod: paymentInfo.paymentMethod,
+        user: userData.id,
+        status: "Pending",
+      };
+      dispatch(makeOrderAsync(newOrder));
     }
   };
 

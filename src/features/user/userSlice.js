@@ -12,7 +12,7 @@ export const fetchUserDataAsync = createAsyncThunk(
   "user/fetchUserData",
   async ({ id, token }) => {
     const response = await fetchUserData(id, token);
-    return response.data;
+    return response.data.user;
   }
 );
 
@@ -28,7 +28,7 @@ export const updateUserAsync = createAsyncThunk(
   "auth/updateUser",
   async (update) => {
     const response = await updateUser(update);
-    return response.data;
+    return response.data.user;
   }
 );
 

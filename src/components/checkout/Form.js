@@ -12,9 +12,7 @@ import { selectuser, updateUserAsync } from "../../features/user/userSlice";
 const Form = ({ handlePaymentInfo }) => {
   const dispatch = useDispatch();
 
-  const {
-    userData: { user },
-  } = useSelector(selectuser);
+  const { userData } = useSelector(selectuser);
 
   const validatePatterns = {
     email: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,}(?:\.[a-zA-Z]{2,})?$/,
@@ -102,12 +100,12 @@ const Form = ({ handlePaymentInfo }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const valid = validate(userInfo, user);
+    const valid = validate(userInfo, userData);
     if (valid) {
       dispatch(
         updateUserAsync({
-          ...user,
-          addresses: [...user?.addresses, userInfo],
+          ...userData,
+          addresses: [...userData?.addresses, userInfo],
         })
       );
       setUserInfo(initUserInfo);
@@ -241,10 +239,10 @@ const Form = ({ handlePaymentInfo }) => {
 
           <div className="border-b border-gray-900/10 pb-12">
             <div className="mt-10 space-y-10">
-              {user?.addresses && (
+              {userData?.addresses && (
                 <SavedAddress
                   handlePaymentInfo={handlePaymentInfo}
-                  addresses={user?.addresses}
+                  addresses={userData?.addresses}
                 />
               )}
               <PaymentMethods handlePaymentInfo={handlePaymentInfo} />

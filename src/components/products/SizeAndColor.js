@@ -20,7 +20,6 @@ const SizeAndColor = ({
   const alert = useAlert();
   const { loggedInUser } = useSelector(selectauth);
   const { items } = useSelector(selectCart);
-  console.log(items, productData.id);
 
   const handleClick = (w) => {
     w.preventDefault();

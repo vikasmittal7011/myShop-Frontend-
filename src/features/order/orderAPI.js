@@ -1,6 +1,8 @@
+const API = process.env.REACT_APP_API;
+
 export function makeOrder(order) {
   return new Promise(async (resolve) => {
-    const response = await fetch("http://localhost:5000/orders", {
+    const response = await fetch(API + "order", {
       method: "POST",
       body: JSON.stringify(order),
       headers: { "content-type": "application/json" },

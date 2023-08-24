@@ -24,9 +24,7 @@ const UserProfile = () => {
     country: "IndiaF",
   });
 
-  const {
-    userData: { user },
-  } = useSelector(selectuser);
+  const { userData } = useSelector(selectuser);
 
   const handleModel = () => {
     setIsOpen(!isOpen);
@@ -34,8 +32,8 @@ const UserProfile = () => {
 
   const formAction = (address) => {
     const newUser = {
-      ...user,
-      addresses: [...user.addresses, address],
+      ...userData,
+      addresses: [...userData.addresses, address],
     };
     dispatch(updateUserAsync(newUser));
     handleModel();
@@ -65,10 +63,10 @@ const UserProfile = () => {
         <Header heading="My Profile" />
         <div className="mx-10 my-8">
           <h2 className="font-bold text-xl mb-3 text-green-500">
-            Name: {user?.name}
+            Name: {userData?.name}
           </h2>
           <h2 className="font-bold text-xl mb-1 text-blue-400">
-            Email: {user?.email}
+            Email: {userData?.email}
           </h2>
           <Button
             onClick={handleModel}
@@ -76,7 +74,7 @@ const UserProfile = () => {
           >
             Add New Address
           </Button>
-          <Addresses user={user || null} />
+          <Addresses user={userData || null} />
         </div>
         <Footer />
       </NavBar>
