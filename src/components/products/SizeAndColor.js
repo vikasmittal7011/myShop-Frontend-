@@ -20,10 +20,11 @@ const SizeAndColor = ({
   const alert = useAlert();
   const { loggedInUser } = useSelector(selectauth);
   const { items } = useSelector(selectCart);
+  console.log(items, productData.id);
 
   const handleClick = (w) => {
     w.preventDefault();
-    if (items.findIndex((item) => item.productId === productData.id) < 0) {
+    if (items.findIndex((item) => item.item.id === productData.id) < 0) {
       const newItem = {
         item: productData.id,
         quantity: 1,
