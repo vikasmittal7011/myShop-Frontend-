@@ -14,7 +14,7 @@ export function makeOrder(order) {
 
 export function updateOrder(order) {
   return new Promise(async (resolve) => {
-    const response = await fetch("http://localhost:5000/orders/" + order.id, {
+    const response = await fetch(API + "order/" + order.id, {
       method: "PATCH",
       body: JSON.stringify(order),
       headers: { "content-type": "application/json" },

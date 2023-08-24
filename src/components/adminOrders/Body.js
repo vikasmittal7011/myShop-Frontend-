@@ -2,6 +2,7 @@ import { EyeIcon, PencilIcon } from "@heroicons/react/24/outline";
 import { useDispatch } from "react-redux";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+
 import Image from "../common/Image";
 import { orderStatus } from "../../utils/constant";
 import { updateOrderAsync } from "../../features/order/orderSlice";
@@ -82,7 +83,7 @@ const Body = ({ orders, handleShow, handleEdit, editableOrderId }) => {
             </td>
             <td className="py-3 px-6 text-start">
               <div className="flex items-center justify-center flex-col">
-                {order.address.name}, <br />
+                {order.address.name} <br />
                 {order.address.street},<br />
                 {order.address.city}, <br />
                 {order.address.state}, {order.address.pinCode},{" "}

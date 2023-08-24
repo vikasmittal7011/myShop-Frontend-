@@ -32,7 +32,7 @@ export const updateOrderAsync = createAsyncThunk(
   "order/updateOrder",
   async (order) => {
     const response = await updateOrder(order);
-    return response.data;
+    return response.data.data;
   }
 );
 
