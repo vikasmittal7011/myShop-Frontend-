@@ -9,7 +9,7 @@ export function addToCart(item) {
     });
     const data = await response.json();
     if (data.success) {
-      resolve({ data: data.data });
+      resolve({ data });
     } else {
       reject({ message: data.messsage });
     }
@@ -24,18 +24,24 @@ export function fetchItemsByUser(userId) {
   });
 }
 
+//TOOD
 export function updateItem(update) {
-  return new Promise(async (resolve) => {
-    const response = await fetch("http://localhost:5000/cart/" + update.id, {
+  return new Promise(async (resolve, reject) => {
+    const response = await fetch(API + "cart/" + update.id, {
       method: "PATCH",
       body: JSON.stringify(update),
       headers: { "content-type": "application/json" },
     });
     const data = await response.json();
-    resolve({ data });
+    if (data.success) {
+      resolve({ data });
+    } else {
+      reject({ message: data.messsage });
+    }
   });
 }
 
+//TOOD
 export function deleteItem(itemId) {
   return new Promise(async (resolve) => {
     const response = await fetch("http://localhost:5000/cart/" + itemId, {
@@ -47,6 +53,7 @@ export function deleteItem(itemId) {
   });
 }
 
+//TOOD
 export function resetCart(userId) {
   return new Promise(async (resolve) => {
     const cartItems = await fetchItemsByUser(userId);

@@ -6,11 +6,7 @@ import { classNames } from "../../utils/constant";
 import Button from "../common/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { selectauth } from "../../features/auth/authSlice";
-import {
-  addToCartAsync,
-  fetchItemsByUsertAsync,
-  selectCart,
-} from "../../features/cart/cartSlice";
+import { addToCartAsync, selectCart } from "../../features/cart/cartSlice";
 
 const SizeAndColor = ({
   selectedColor,
@@ -23,24 +19,21 @@ const SizeAndColor = ({
   const dispatch = useDispatch();
   const alert = useAlert();
   const { loggedInUser } = useSelector(selectauth);
-  const {
-    items: { cart },
-  } = useSelector(selectCart);
+  const { items } = useSelector(selectCart);
 
   const handleClick = (w) => {
     w.preventDefault();
-    if (cart.findIndex((item) => item.productId === productData.id) < 0) {
+    if (items.findIndex((item) => item.productId === productData.id) < 0) {
       const newItem = {
         item: productData.id,
         quantity: 1,
         user: loggedInUser.id,
       };
-      alert.success("Item is successfully add to your cart");
       dispatch(addToCartAsync(newItem));
+      alert.success("Item is successfully add to your cart");
     } else {
       alert.error("Item is already added to your cart");
     }
-    dispatch(fetchItemsByUsertAsync(loggedInUser?.id));
   };
 
   return (

@@ -19,7 +19,12 @@ const CartItems = ({ items }) => {
 
   const handleChange = (e, item) => {
     if (+e.target.value > 0) {
-      const update = { ...item, quantity: +e.target.value };
+      const update = {
+        item: item.item.id,
+        quantity: +e.target.value,
+        user: item.user,
+        id: item.id,
+      };
       dispatch(updateItemAsync(update));
     }
   };

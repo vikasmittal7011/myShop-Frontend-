@@ -10,7 +10,7 @@ import Footer from "../components/common/Footer";
 
 const Cart = () => {
   const {
-    items: { cart },
+    items,
   } = useSelector(selectCart);
 
   return (
@@ -18,13 +18,13 @@ const Cart = () => {
       <NavBar>
         <Header heading="Cart" />
         <div className="mx-auto max-w-5xl px-2 sm:px-6 lg:px-8">
-          {cart.length > 0 ? (
+          {items.length > 0 ? (
             <>
-              <ViewProduct items={cart} />
+              <ViewProduct items={items} />
               <ViewTotal
                 afterCheckout="/checkout"
                 checkoutTitle="Checkout"
-                items={cart}
+                items={items}
               />
             </>
           ) : (
