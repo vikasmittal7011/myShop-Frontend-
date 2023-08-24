@@ -8,6 +8,7 @@ import Body from "../components/adminOrders/Body";
 import Header from "../components/common/Header";
 import Pagination from "../components/products/Pagination";
 import NavBar from "./NavBar";
+import Loader from "../components/common/Loader";
 
 const AdminOrders = () => {
   const { orders, totalOrders } = useSelector(selectorder);
@@ -37,6 +38,10 @@ const AdminOrders = () => {
     dispatch(fetchAllOrdersAsync({ pagination, sort }));
   }, [dispatch, page, sort]);
 
+  if (!orders) {
+    return <Loader />;
+  }
+
   return (
     <>
       <NavBar>
@@ -57,12 +62,12 @@ const AdminOrders = () => {
               </div>
             </div>
           </div>
-          <Pagination
-            handlePage={handlePage}
-            page={page}
-            totalProduct={totalOrders}
-          />
         </div>
+        <Pagination
+          handlePage={handlePage}
+          page={page}
+          totalProduct={totalOrders}
+        />
       </NavBar>
     </>
   );

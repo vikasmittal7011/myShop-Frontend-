@@ -25,10 +25,10 @@ const Headers = ({ handleSort, sort }) => {
         <th
           className="py-3 px-6 text-left cursor-pointer"
           onClick={() => {
-            mangeSort("id");
+            mangeSort("createdAt");
           }}
         >
-          Order# {showArrows("id")}
+          Order# {showArrows("createdAt")}
         </th>
         <th className="py-3 px-6 text-left">Items</th>
         <th

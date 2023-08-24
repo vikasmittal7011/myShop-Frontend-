@@ -12,7 +12,7 @@ export const makeOrderAsync = createAsyncThunk(
   "order/makeOrder",
   async (order) => {
     const response = await makeOrder(order);
-    return response.data;
+    return response.data.data;
   }
 );
 
@@ -20,7 +20,11 @@ export const fetchAllOrdersAsync = createAsyncThunk(
   "order/fetchAllOrders",
   async ({ pagination, sort }) => {
     const response = await fetchAllOrders(pagination, sort);
-    return response.data;
+
+    return {
+      orders: response.data.orders.orders,
+      totalOrders: response.data.totalOrders,
+    };
   }
 );
 

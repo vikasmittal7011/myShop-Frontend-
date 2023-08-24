@@ -36,7 +36,7 @@ export function fetchAllOrders(page, sort) {
   }
 
   return new Promise(async (resolve) => {
-    const response = await fetch("http://localhost:5000/orders?" + queryString);
+    const response = await fetch(API + "order?" + queryString);
     const data = await response.json();
     const totalOrders = response.headers.get("X-Total-Count");
     resolve({ data: { orders: data, totalOrders: +totalOrders } });
