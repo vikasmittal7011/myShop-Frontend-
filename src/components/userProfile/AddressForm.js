@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from "react";
-import Button from "../common/Button";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import Input from "../form/Input";
 import Select from "../form/Select";
+import Button from "../common/Button";
 import { country } from "../../utils/constant";
+import { clearMessage, selectuser } from "../../features/user/userSlice";
 
 const AddressForm = ({
   title,
@@ -12,6 +15,9 @@ const AddressForm = ({
   initUserInfo,
   formAction,
 }) => {
+  const { message } = useSelector(selectuser);
+  const dispatch = useDispatch();
+
   const validatePatterns = {
     email: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,}(?:\.[a-zA-Z]{2,})?$/,
   };
@@ -91,6 +97,12 @@ const AddressForm = ({
     }
   };
 
+  useEffect(() => {
+    setTimeout(() => {
+      dispatch(clearMessage());
+    }, 4000);
+  }, [message?.message, dispatch]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const valid = validate(userInfo);
@@ -106,6 +118,9 @@ const AddressForm = ({
           <div className="bg-gray-200 rounded-lg p-6 lg:w-3/4 md:w-3/4 sm:w-3/4 l:w-full s:w-full xs:w-full l:m-5 s:m-5 xs:m-5 transform transition-transform duration-300">
             <div className="flex justify-between items-center mb-4">
               <h5 className="text-lg font-semibold text-purple-600">{title}</h5>
+              <p className="text-red-600 text-center my-3 font-bold text-2xl capitalize">
+                {message?.message}
+              </p>
             </div>
             {userInfo && (
               <div className="modal-dialog modal-dialog-scrollable">

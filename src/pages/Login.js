@@ -1,12 +1,16 @@
-import React, { useState } from "react";
-
-import logo from "../assets/logo.png";
-import Links from "../components/common/Link";
-import Input from "../components/form/Input";
-import Button from "../components/common/Button";
+import { useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUserAsync, selectauth } from "../features/auth/authSlice";
+
+import logo from "../assets/logo.png";
+import Input from "../components/form/Input";
+import Links from "../components/common/Link";
+import Button from "../components/common/Button";
+import {
+  clearMessage,
+  loginUserAsync,
+  selectauth,
+} from "../features/auth/authSlice";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -77,6 +81,12 @@ const Login = () => {
     }
   };
 
+  useEffect(() => {
+    setTimeout(() => {
+      dispatch(clearMessage());
+    }, 4000);
+  }, [message?.message, dispatch]);
+
   return (
     <>
       {loggedInUser && <Navigate to="/" replace={true} />}
@@ -89,7 +99,11 @@ const Login = () => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-xl">
-          <p className="text-red-600">{message?.message || null}</p>
+          {message && (
+            <p className="text-red-600 my-3 font-bold text-2xl capitalize">
+              {message?.message}
+            </p>
+          )}
           <form className="space-y-6" onSubmit={handleSubmit}>
             <Input
               title="Email address"
@@ -122,7 +136,6 @@ const Login = () => {
               </Button>
             </div>
           </form>
-
           <p className="mt-10 text-center text-sm text-gray-500">
             Not a member?{" "}
             <Links

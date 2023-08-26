@@ -1,16 +1,20 @@
+import { useAlert } from "react-alert";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import React, { useState } from "react";
 
+import NavBar from "./NavBar";
 import Input from "../components/form/Input";
 import Header from "../components/common/Header";
 import Button from "../components/common/Button";
-import NavBar from "./NavBar";
-import { createBrandAsync, selectBrand } from "../features/brand/brandSlice";
-import { useAlert } from "react-alert";
+import {
+  clearMessage,
+  createBrandAsync,
+  selectBrand,
+} from "../features/brand/brandSlice";
 
 const CreateBrand = () => {
   const dispatch = useDispatch();
-  const { status } = useSelector(selectBrand);
+  const { status, message } = useSelector(selectBrand);
   const alert = useAlert();
 
   const [name, setName] = useState("");
@@ -43,10 +47,19 @@ const CreateBrand = () => {
     }
   };
 
+  useEffect(() => {
+    setTimeout(() => {
+      dispatch(clearMessage());
+    }, 4000);
+  }, [message?.message, dispatch]);
+
   return (
     <>
       <NavBar>
         <Header heading="Add New Brand" />
+        <p className="text-red-600 my-3 font-bold text-2xl capitalize">
+          {message?.message}
+        </p>
         <form onSubmit={handleSubmit} className="m-10">
           <div className="space-y-12">
             <div className="border-b border-gray-900/10 pb-12">

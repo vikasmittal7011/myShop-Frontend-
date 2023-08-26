@@ -1,7 +1,9 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { useAlert } from "react-alert";
 
+import NavBar from "./NavBar";
 import Input from "../components/form/Input";
 import TextArea from "../components/form/TextArea";
 import Select from "../components/form/Select";
@@ -9,23 +11,22 @@ import ImageInput from "../components/form/ImageInput";
 import Header from "../components/common/Header";
 import Button from "../components/common/Button";
 import {
+  clearMessage,
   clearSelectedProduct,
   createProductAsync,
   fetchProductByIdAsync,
   selectProducts,
   updateProductAsync,
 } from "../features/product/productSlice";
-import NavBar from "./NavBar";
 import { selectBrand } from "../features/brand/brandSlice";
 import { selectCategory } from "../features/category/categorySlice";
-import { useAlert } from "react-alert";
 
 const ProductCreateForm = () => {
   const navigate = useNavigate();
   const alert = useAlert();
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { selectedProduct, status } = useSelector(selectProducts);
+  const { selectedProduct, status, message } = useSelector(selectProducts);
   const { brand } = useSelector(selectBrand);
   const { category } = useSelector(selectCategory);
 
@@ -201,10 +202,19 @@ const ProductCreateForm = () => {
     }
   }, [selectedProduct, id]);
 
+  useEffect(() => {
+    setTimeout(() => {
+      dispatch(clearMessage());
+    }, 4000);
+  }, [message?.message, dispatch]);
+
   return (
     <>
       <NavBar>
         <Header heading="Add New Product" />
+        <p className="text-red-600 my-3 font-bold text-2xl capitalize">
+          {message?.message}
+        </p>
         <form onSubmit={handleSubmit} className="m-10">
           <div className="space-y-12">
             <div className="border-b border-gray-900/10 pb-12">

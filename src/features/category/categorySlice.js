@@ -54,7 +54,7 @@ export const categorySlice = createSlice({
   },
 });
 
-export const { clearCart } = categorySlice.actions;
+export const { clearMessage } = categorySlice.actions;
 
 export const selectCategory = (state) => state.category;
 

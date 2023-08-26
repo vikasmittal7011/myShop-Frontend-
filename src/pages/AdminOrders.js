@@ -1,17 +1,22 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAllOrdersAsync, selectorder } from "../features/order/orderSlice";
 
 import { ITEM_PAGE_PER } from "../utils/constant";
+import NavBar from "./NavBar";
 import Headers from "../components/adminOrders/Headers";
 import Body from "../components/adminOrders/Body";
-import Header from "../components/common/Header";
 import Pagination from "../components/products/Pagination";
-import NavBar from "./NavBar";
+import Header from "../components/common/Header";
 import Loader from "../components/common/Loader";
+import {
+  clearMessage,
+  fetchAllOrdersAsync,
+  selectorder,
+} from "../features/order/orderSlice";
 
 const AdminOrders = () => {
-  const { orders, totalOrders } = useSelector(selectorder);
+  const { orders, totalOrders, message } = useSelector(selectorder);
+  console.log(message);
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
   const [sort, setSort] = useState({ _sort: "id", _order: "asc" });
@@ -38,6 +43,12 @@ const AdminOrders = () => {
     dispatch(fetchAllOrdersAsync({ pagination, sort }));
   }, [dispatch, page, sort]);
 
+  useEffect(() => {
+    setTimeout(() => {
+      dispatch(clearMessage());
+    }, 4000);
+  }, [message?.message, dispatch]);
+
   if (!orders) {
     return <Loader />;
   }
@@ -46,6 +57,9 @@ const AdminOrders = () => {
     <>
       <NavBar>
         <Header heading="Manage Orders" />
+        <p className="text-red-600 my-3 font-bold text-2xl capitalize">
+          {message?.message}
+        </p>
         <div className="overflow-x-auto">
           <div className="flex items-center justify-center font-sans overflow-x">
             <div className="w-full">

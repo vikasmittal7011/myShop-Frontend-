@@ -10,6 +10,7 @@ import {
 const initialState = {
   items: [],
   status: "idle",
+  message: ""
 };
 
 export const addToCartAsync = createAsyncThunk(
@@ -126,7 +127,7 @@ export const cartSlice = createSlice({
   },
 });
 
-export const { clearCart } = cartSlice.actions;
+export const { clearMessage } = cartSlice.actions;
 
 export const selectCart = (state) => state.cart;
 

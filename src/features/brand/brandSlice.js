@@ -54,7 +54,7 @@ export const brandSlice = createSlice({
   },
 });
 
-export const { clearCart } = brandSlice.actions;
+export const { clearMessage } = brandSlice.actions;
 
 export const selectBrand = (state) => state.brand;
 

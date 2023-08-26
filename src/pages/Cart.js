@@ -1,22 +1,31 @@
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { clearMessage, selectCart } from "../features/cart/cartSlice";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
-import Header from "../components/common/Header";
+import NavBar from "./NavBar";
 import ViewProduct from "../components/cart/ViewProduct";
 import ViewTotal from "../components/cart/ViewTotal";
-import { selectCart } from "../features/cart/cartSlice";
-import { Link } from "react-router-dom";
-import NavBar from "./NavBar";
 import Footer from "../components/common/Footer";
+import Header from "../components/common/Header";
 
 const Cart = () => {
-  const {
-    items,
-  } = useSelector(selectCart);
+  const dispatch = useDispatch();
+  const { items, message } = useSelector(selectCart);
+
+  useEffect(() => {
+    setTimeout(() => {
+      dispatch(clearMessage());
+    }, 4000);
+  }, [message?.message, dispatch]);
 
   return (
     <>
       <NavBar>
         <Header heading="Cart" />
+        <p className="text-red-600 my-3 font-bold text-2xl capitalize">
+          {message?.message}
+        </p>
         <div className="mx-auto max-w-5xl px-2 sm:px-6 lg:px-8">
           {items.length > 0 ? (
             <>

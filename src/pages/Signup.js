@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
 
 import logo from "../assets/logo.png";
-import Links from "../components/common/Link";
 import Input from "../components/form/Input";
+import Links from "../components/common/Link";
 import Button from "../components/common/Button";
-import { useDispatch, useSelector } from "react-redux";
-import { createUserAsync, selectauth } from "../features/auth/authSlice";
-import { Navigate } from "react-router-dom";
+import {
+  clearMessage,
+  createUserAsync,
+  selectauth,
+} from "../features/auth/authSlice";
 
 const Signup = () => {
   const dispatch = useDispatch();
@@ -97,6 +101,12 @@ const Signup = () => {
     }
   };
 
+  useEffect(() => {
+    setTimeout(() => {
+      dispatch(clearMessage());
+    }, 4000);
+  }, [message?.message, dispatch]);
+
   return (
     <>
       {loggedInUser && <Navigate to="/" replace={true} />}
@@ -109,7 +119,9 @@ const Signup = () => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-xl">
-          <p className="text-red-600">{message?.message || null}</p>
+          <p className="text-red-600 my-3 font-bold text-2xl capitalize">
+            {message?.message}
+          </p>
           <form className="space-y-6" onSubmit={handleSubmit}>
             <Input
               title="Name"
@@ -158,7 +170,6 @@ const Signup = () => {
               </Button>
             </div>
           </form>
-
           <p className="mt-10 text-center text-sm text-gray-500">
             Alrady have a member?{" "}
             <Links

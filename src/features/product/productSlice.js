@@ -11,6 +11,7 @@ const initialState = {
   status: "idle",
   totalItems: 0,
   selectedProduct: null,
+  message: ""
 };
 
 export const fetchProductByIdAsync = createAsyncThunk(

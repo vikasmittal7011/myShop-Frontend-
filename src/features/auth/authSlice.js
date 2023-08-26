@@ -37,7 +37,7 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     clearMessage: (state) => {
-      state.message = "";
+      state.message = null;
     },
   },
   extraReducers: (builder) => {
@@ -76,7 +76,7 @@ export const authSlice = createSlice({
   },
 });
 
-export const { clearCart } = authSlice.actions;
+export const { clearMessage } = authSlice.actions;
 
 export const selectauth = (state) => state.auth;
 

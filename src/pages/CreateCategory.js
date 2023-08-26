@@ -1,19 +1,20 @@
+import { useState, useEffect } from "react";
+import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
-import React, { useState } from "react";
 
 import Input from "../components/form/Input";
 import Header from "../components/common/Header";
 import Button from "../components/common/Button";
 import NavBar from "./NavBar";
 import {
+  clearMessage,
   createCategoryAsync,
   selectCategory,
 } from "../features/category/categorySlice";
-import { useAlert } from "react-alert";
 
 const CreateCategory = () => {
   const dispatch = useDispatch();
-  const { status } = useSelector(selectCategory);
+  const { status, message } = useSelector(selectCategory);
   const alert = useAlert();
 
   const [name, setName] = useState("");
@@ -46,10 +47,19 @@ const CreateCategory = () => {
     }
   };
 
+  useEffect(() => {
+    setTimeout(() => {
+      dispatch(clearMessage());
+    }, 4000);
+  }, [message?.message, dispatch]);
+
   return (
     <>
       <NavBar>
         <Header heading="Add New Category" />
+        <p className="text-red-600 my-3 font-bold text-2xl capitalize">
+          {message?.message}
+        </p>
         <form onSubmit={handleSubmit} className="m-10">
           <div className="space-y-12">
             <div className="border-b border-gray-900/10 pb-12">

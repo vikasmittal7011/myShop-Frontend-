@@ -6,6 +6,7 @@ import ProductInfo from "../components/products/ProductInfo";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  clearMessage,
   fetchProductByIdAsync,
   selectProducts,
 } from "../features/product/productSlice";
@@ -36,12 +37,18 @@ const ProductDetails = () => {
   const dispatch = useDispatch();
   const [selectedColor, setSelectedColor] = useState(colorAndSizes.colors[0]);
   const [selectedSize, setSelectedSize] = useState(colorAndSizes.sizes[2]);
-  const { selectedProduct, status } = useSelector(selectProducts);
+  const { selectedProduct, status, message } = useSelector(selectProducts);
 
   useEffect(() => {
     dispatch(fetchProductByIdAsync(id));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      dispatch(clearMessage());
+    }, 4000);
+  }, [message?.message, dispatch]);
 
   if (status !== "idle" || selectedProduct === null) {
     return <Loader />;
@@ -51,6 +58,9 @@ const ProductDetails = () => {
     <>
       <NavBar>
         <Header heading="Product Overview" />
+        <p className="text-red-600 my-3 font-bold text-2xl capitalize">
+          {message?.message}
+        </p>
         <div className="pt-6">
           <Images images={selectedProduct?.images} />
 

@@ -6,6 +6,7 @@ const initialState = {
   orders: [],
   orderPlaced: false,
   totalOrders: 0,
+  message: "",
 };
 
 export const makeOrderAsync = createAsyncThunk(
@@ -44,7 +45,7 @@ export const orderSlice = createSlice({
       state.orderPlaced = false;
     },
     clearMessage: (state) => {
-      state.message = "";
+      state.message = null;
     },
   },
   extraReducers: (builder) => {
