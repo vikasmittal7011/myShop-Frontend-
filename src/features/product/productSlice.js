@@ -63,12 +63,20 @@ export const productSlice = createSlice({
         state.products = action.payload.products;
         state.totalItems = action.payload.totalItems;
       })
+      .addCase(fetchProductByFiltersAsync.rejected, (state, action) => {
+        state.status = "idle";
+        state.message = action.payload.message;
+      })
       .addCase(fetchProductByIdAsync.pending, (state) => {
         state.status = "loading";
       })
       .addCase(fetchProductByIdAsync.fulfilled, (state, action) => {
         state.status = "idle";
         state.selectedProduct = action.payload;
+      })
+      .addCase(fetchProductByIdAsync.rejected, (state, action) => {
+        state.status = "idle";
+        state.message = action.payload.message;
       })
       .addCase(createProductAsync.pending, (state) => {
         state.status = "loading";
@@ -90,6 +98,10 @@ export const productSlice = createSlice({
           (product) => product.id === action.payload.id
         );
         state.products.products[index] = action.payload;
+      })
+      .addCase(updateProductAsync.rejected, (state, action) => {
+        state.status = "idle";
+        state.message = action.payload.message;
       });
   },
 });

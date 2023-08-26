@@ -45,6 +45,10 @@ export const authSlice = createSlice({
         state.status = "idle";
         state.userData = action.payload;
       })
+      .addCase(fetchUserDataAsync.rejected, (state, action) => {
+        state.status = "idle";
+        state.message = action.payload.message;
+      })
       .addCase(fetchUserOrdersAsync.pending, (state) => {
         state.status = "loading";
       })
@@ -52,12 +56,20 @@ export const authSlice = createSlice({
         state.status = "idle";
         state.userOrders = action.payload;
       })
+      .addCase(fetchUserOrdersAsync.rejected, (state, action) => {
+        state.status = "idle";
+        state.message = action.payload.message;
+      })
       .addCase(updateUserAsync.pending, (state) => {
         state.status = "loading";
       })
       .addCase(updateUserAsync.fulfilled, (state, action) => {
         state.status = "idle";
         state.userData = action.payload;
+      })
+      .addCase(updateUserAsync.rejected, (state, action) => {
+        state.status = "idle";
+        state.message = action.payload.message;
       });
   },
 });

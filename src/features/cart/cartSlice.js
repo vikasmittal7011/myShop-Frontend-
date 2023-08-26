@@ -55,7 +55,11 @@ export const resetCartAsync = createAsyncThunk(
 export const cartSlice = createSlice({
   name: "cart",
   initialState,
-  reducers: {},
+  reducers: {
+    clearMessage: (state) => {
+      state.message = "";
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(addToCartAsync.pending, (state) => {
@@ -65,12 +69,20 @@ export const cartSlice = createSlice({
         state.status = "idle";
         state.items.push(action.payload);
       })
+      .addCase(addToCartAsync.rejected, (state, action) => {
+        state.status = "idle";
+        state.message = action.payload.message;
+      })
       .addCase(fetchItemsByUsertAsync.pending, (state) => {
         state.status = "loading";
       })
       .addCase(fetchItemsByUsertAsync.fulfilled, (state, action) => {
         state.status = "idle";
         state.items = action.payload;
+      })
+      .addCase(fetchItemsByUsertAsync.rejected, (state, action) => {
+        state.status = "idle";
+        state.message = action.payload.message;
       })
       .addCase(updateItemAsync.pending, (state) => {
         state.status = "loading";
@@ -82,6 +94,10 @@ export const cartSlice = createSlice({
         );
         state.items[index] = action.payload;
       })
+      .addCase(updateItemAsync.rejected, (state, action) => {
+        state.status = "idle";
+        state.message = action.payload.message;
+      })
       .addCase(deleteItemAsync.pending, (state) => {
         state.status = "loading";
       })
@@ -92,15 +108,25 @@ export const cartSlice = createSlice({
         );
         state.items.splice(index, 1);
       })
+      .addCase(deleteItemAsync.rejected, (state, action) => {
+        state.status = "idle";
+        state.message = action.payload.message;
+      })
       .addCase(resetCartAsync.pending, (state) => {
         state.status = "loading";
       })
       .addCase(resetCartAsync.fulfilled, (state, action) => {
         state.status = "idle";
         state.items = [];
+      })
+      .addCase(resetCartAsync.rejected, (state, action) => {
+        state.status = "idle";
+        state.message = action.payload.message;
       });
   },
 });
+
+export const { clearCart } = cartSlice.actions;
 
 export const selectCart = (state) => state.cart;
 
