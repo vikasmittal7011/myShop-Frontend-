@@ -45,7 +45,7 @@ export const categorySlice = createSlice({
       })
       .addCase(createCategoryAsync.rejected, (state, action) => {
         state.status = "failed";
-        state.message = action.payload.meesage;
+        state.message = action.error;
       })
       .addCase(fetchAllCategoryAsync.pending, (state) => {
         state.status = "loading";

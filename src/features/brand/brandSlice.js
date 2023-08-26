@@ -45,7 +45,7 @@ export const brandSlice = createSlice({
       })
       .addCase(createBrandAsync.rejected, (state, action) => {
         state.status = "failed";
-        state.message = action.payload.meesage;
+        state.message = action.error;
       })
       .addCase(fetchAllBrandAsync.pending, (state) => {
         state.status = "loading";
