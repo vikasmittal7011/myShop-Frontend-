@@ -20,7 +20,7 @@ const UserOrders = () => {
   const { userOrders, status, userData, message } = useSelector(selectuser);
 
   useEffect(() => {
-    dispatch(fetchUserOrdersAsync(userData?.id));
+    dispatch(fetchUserOrdersAsync());
   }, [userData, dispatch]);
 
   useEffect(() => {

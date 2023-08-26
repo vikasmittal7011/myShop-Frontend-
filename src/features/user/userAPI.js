@@ -1,4 +1,5 @@
 const API = process.env.REACT_APP_API;
+const token = localStorage.getItem("token");
 
 export function fetchUserData(token) {
   return new Promise(async (resolve, reject) => {
@@ -14,9 +15,13 @@ export function fetchUserData(token) {
   });
 }
 
-export function fetchUserOrders(userId) {
+export function fetchUserOrders() {
   return new Promise(async (resolve, reject) => {
-    const response = await fetch(API + "order/" + userId);
+    const response = await fetch(API + "order/user", {
+      headers: {
+        authorization: "Bearea " + token,
+      },
+    });
     const data = await response.json();
     if (data.success) {
       resolve({ ...data });
@@ -33,7 +38,7 @@ export function updateUser(update) {
       body: JSON.stringify(update),
       headers: {
         "content-type": "application/json",
-        authorization: "Bearea " + localStorage.getItem("token"),
+        authorization: "Bearea " + token,
       },
     });
     const data = await response.json();

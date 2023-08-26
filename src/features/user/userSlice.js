@@ -18,8 +18,8 @@ export const fetchUserDataAsync = createAsyncThunk(
 
 export const fetchUserOrdersAsync = createAsyncThunk(
   "user/fetchUserOrders",
-  async (userData) => {
-    const response = await fetchUserOrders(userData);
+  async () => {
+    const response = await fetchUserOrders();
     return response.data;
   }
 );
@@ -55,7 +55,7 @@ export const userSlice = createSlice({
       })
       .addCase(fetchUserDataAsync.rejected, (state, action) => {
         state.status = "idle";
-        state.message = action.payload;
+        state.message = action.error;
       })
       .addCase(fetchUserOrdersAsync.pending, (state) => {
         state.status = "loading";
@@ -66,7 +66,7 @@ export const userSlice = createSlice({
       })
       .addCase(fetchUserOrdersAsync.rejected, (state, action) => {
         state.status = "idle";
-        state.message = action.payload;
+        state.message = action.error;
       })
       .addCase(updateUserAsync.pending, (state) => {
         state.status = "loading";
@@ -77,7 +77,7 @@ export const userSlice = createSlice({
       })
       .addCase(updateUserAsync.rejected, (state, action) => {
         state.status = "idle";
-        state.message = action.payload;
+        state.message = action.error;
       });
   },
 });
