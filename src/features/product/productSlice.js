@@ -74,7 +74,7 @@ export const productSlice = createSlice({
       })
       .addCase(fetchProductByFiltersAsync.rejected, (state, action) => {
         state.status = "idle";
-        state.message = action.payload.message;
+        state.message = action.error;
       })
       .addCase(fetchProductByIdAsync.pending, (state) => {
         state.status = "loading";
@@ -85,7 +85,7 @@ export const productSlice = createSlice({
       })
       .addCase(fetchProductByIdAsync.rejected, (state, action) => {
         state.status = "idle";
-        state.message = action.payload.message;
+        state.message = action.error;
       })
       .addCase(createProductAsync.pending, (state) => {
         state.status = "loading";
@@ -96,7 +96,7 @@ export const productSlice = createSlice({
       })
       .addCase(createProductAsync.rejected, (state, action) => {
         state.status = "failed";
-        state.message = action.payload;
+        state.message = action.error;
       })
       .addCase(updateProductAsync.pending, (state) => {
         state.status = "loading";
@@ -110,7 +110,7 @@ export const productSlice = createSlice({
       })
       .addCase(updateProductAsync.rejected, (state, action) => {
         state.status = "idle";
-        state.message = action.payload.message;
+        state.message = action.payload.error;
       });
   },
 });
