@@ -65,7 +65,7 @@ export const orderSlice = createSlice({
       })
       .addCase(makeOrderAsync.rejected, (state, action) => {
         state.status = "idle";
-        state.message = action.payload.message;
+        state.message = action.error;
       })
       .addCase(fetchAllOrdersAsync.pending, (state) => {
         state.status = "loading";
@@ -77,7 +77,7 @@ export const orderSlice = createSlice({
       })
       .addCase(fetchAllOrdersAsync.rejected, (state, action) => {
         state.status = "idle";
-        state.message = action.payload.message;
+        state.message = action.error;
       })
       .addCase(updateOrderAsync.pending, (state) => {
         state.status = "loading";
@@ -91,7 +91,7 @@ export const orderSlice = createSlice({
       })
       .addCase(updateOrderAsync.rejected, (state, action) => {
         state.status = "idle";
-        state.message = action.payload.message;
+        state.message = action.error;
       });
   },
 });

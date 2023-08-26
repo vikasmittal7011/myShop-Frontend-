@@ -1,11 +1,15 @@
 const API = process.env.REACT_APP_API;
+const token = localStorage.getItem("token");
 
 export function makeOrder(order) {
   return new Promise(async (resolve, reject) => {
     const response = await fetch(API + "order", {
       method: "POST",
       body: JSON.stringify(order),
-      headers: { "content-type": "application/json" },
+      headers: {
+        "content-type": "application/json",
+        authorization: "Bearea " + token,
+      },
     });
     const data = await response.json();
     if (data.success) {
@@ -21,13 +25,16 @@ export function updateOrder(order) {
     const response = await fetch(API + "order/" + order.id, {
       method: "PATCH",
       body: JSON.stringify(order),
-      headers: { "content-type": "application/json" },
+      headers: {
+        "content-type": "application/json",
+        authorization: "Bearea " + token,
+      },
     });
     const data = await response.json();
     if (data.success) {
       resolve({ data });
     } else {
-      reject({ message: data.message });
+      reject(data.message);
     }
   });
 }
@@ -44,7 +51,9 @@ export function fetchAllOrders(page, sort) {
   }
 
   return new Promise(async (resolve, reject) => {
-    const response = await fetch(API + "order?" + queryString);
+    const response = await fetch(API + "order?" + queryString, {
+      headers: { authorization: "Bearea " + token },
+    });
     const data = await response.json();
     const totalOrders = response.headers.get("X-Total-Count");
     if (data.success) {
