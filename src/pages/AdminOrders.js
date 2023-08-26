@@ -16,7 +16,6 @@ import {
 
 const AdminOrders = () => {
   const { orders, totalOrders, message } = useSelector(selectorder);
-  console.log(message);
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
   const [sort, setSort] = useState({ _sort: "id", _order: "asc" });

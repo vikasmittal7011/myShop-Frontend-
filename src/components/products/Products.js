@@ -1,10 +1,10 @@
 import { useSelector } from "react-redux";
-import { selectauth } from "../../features/auth/authSlice";
 
 import Loader from "../common/Loader";
 import Pagination from "./Pagination";
 import ProductList from "./ProductList";
 import AdminProductList from "./AdminProductList";
+import { selectuser } from "../../features/user/userSlice";
 
 const Products = ({
   handlePage,
@@ -14,7 +14,7 @@ const Products = ({
   status,
   totalItems,
 }) => {
-  const { loggedInUser } = useSelector(selectauth);
+  const { userData } = useSelector(selectuser);
 
   if (status !== "idle") {
     return <Loader />;
@@ -23,7 +23,7 @@ const Products = ({
   return (
     <>
       <div className="mx-auto max-w-2xl px-4 pb-16 sm:px-6 sm:pb-12 lg:max-w-7xl lg:px-8">
-        {loggedInUser.role === "user" ? (
+        {userData.role === "user" ? (
           <ProductList products={products} />
         ) : (
           <AdminProductList products={products} />

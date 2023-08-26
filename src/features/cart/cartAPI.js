@@ -1,11 +1,15 @@
 const API = process.env.REACT_APP_API;
+const token = localStorage.getItem("token");
 
 export function addToCart(item) {
   return new Promise(async (resolve, reject) => {
     const response = await fetch(API + "cart", {
       method: "POST",
       body: JSON.stringify(item),
-      headers: { "content-type": "application/json" },
+      headers: {
+        authorization: "Bearea " + token,
+        "content-type": "application/json",
+      },
     });
     const data = await response.json();
     if (data.success) {
@@ -18,7 +22,11 @@ export function addToCart(item) {
 
 export function fetchItemsByUser(userId) {
   return new Promise(async (resolve, reject) => {
-    const response = await fetch(API + "cart/" + userId);
+    const response = await fetch(API + "cart", {
+      headers: {
+        authorization: "Bearea " + token,
+      },
+    });
     const data = await response.json();
     if (data.success) {
       resolve({ data });

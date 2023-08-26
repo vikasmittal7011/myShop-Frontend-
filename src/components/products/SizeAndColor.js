@@ -7,6 +7,7 @@ import Button from "../common/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { selectauth } from "../../features/auth/authSlice";
 import { addToCartAsync, selectCart } from "../../features/cart/cartSlice";
+import { selectuser } from "../../features/user/userSlice";
 
 const SizeAndColor = ({
   selectedColor,
@@ -19,6 +20,7 @@ const SizeAndColor = ({
   const dispatch = useDispatch();
   const alert = useAlert();
   const { loggedInUser } = useSelector(selectauth);
+  const { userData } = useSelector(selectuser);
   const { items } = useSelector(selectCart);
 
   const handleClick = (w) => {
@@ -160,7 +162,7 @@ const SizeAndColor = ({
           </RadioGroup>
         </div>
 
-        {loggedInUser.role === "user" && productData.stock > 0 && (
+        {userData.role === "user" && productData.stock > 0 && (
           <Button
             onClick={handleClick}
             className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"

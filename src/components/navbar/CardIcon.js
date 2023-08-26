@@ -6,15 +6,15 @@ import { useSelector } from "react-redux";
 import ProfileMenu from "./ProfileMenu";
 import Button from "../common/Button";
 import { selectCart } from "../../features/cart/cartSlice";
-import { selectauth } from "../../features/auth/authSlice";
+import { selectuser } from "../../features/user/userSlice";
 
 const CardIcon = () => {
   const { items } = useSelector(selectCart);
-  const { loggedInUser } = useSelector(selectauth);
+  const { userData } = useSelector(selectuser);
 
   return (
     <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-      {loggedInUser.role === "user" && (
+      {userData.role === "user" && (
         <>
           <Link to="/cart">
             <Button

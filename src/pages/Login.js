@@ -11,11 +11,13 @@ import {
   loginUserAsync,
   selectauth,
 } from "../features/auth/authSlice";
+import { selectuser } from "../features/user/userSlice";
 
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  let { loggedInUser, message, status } = useSelector(selectauth);
+  let { userData, message, status } = useSelector(selectuser);
+  const { token } = useSelector(selectauth);
 
   const [credentials, setCredentials] = useState({
     email: "admin@gmail.com",
@@ -75,7 +77,7 @@ const Login = () => {
           password: credentials.password,
         })
       );
-      if (loggedInUser && status === "idle") {
+      if (userData && status === "idle") {
         navigate("/");
       }
     }
@@ -89,7 +91,7 @@ const Login = () => {
 
   return (
     <>
-      {loggedInUser && <Navigate to="/" replace={true} />}
+      {token && <Navigate to="/" replace={true} />}
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img className="mx-auto h-16 w-auto" src={logo} alt="Your Company" />

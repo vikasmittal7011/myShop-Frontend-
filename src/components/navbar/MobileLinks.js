@@ -1,18 +1,17 @@
 import { Disclosure } from "@headlessui/react";
-import React from "react";
+import { useSelector } from "react-redux";
 
 import Links from "./Links";
 import { adminNavLinks, classNames, userNavLinks } from "../../utils/constant";
-import { useSelector } from "react-redux";
-import { selectauth } from "../../features/auth/authSlice";
+import { selectuser } from "../../features/user/userSlice";
 
 const MobileLinks = ({ changeRef }) => {
-  const { loggedInUser } = useSelector(selectauth);
+  const { userData } = useSelector(selectuser);
 
   return (
     <Disclosure.Panel className="sm:hidden">
       <div className="space-y-1 px-2 pb-3 pt-2">
-        {loggedInUser.role === "user"
+        {userData.role === "user"
           ? userNavLinks.map((item) => (
               <Links
                 key={item.name}

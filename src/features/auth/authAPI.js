@@ -10,6 +10,7 @@ export function createUser(userData) {
     const data = await response.json();
     if (data.success) {
       resolve({ data });
+      localStorage.setItem("token", data.token);
     } else {
       reject({ message: data.message });
     }
@@ -26,14 +27,9 @@ export function loginUser(userData) {
     const data = await response.json();
     if (data.success) {
       resolve({ data });
+      localStorage.setItem("token", data.token);
     } else {
       reject({ message: data.message });
     }
-  });
-}
-
-export function logoutUser(id) {
-  return new Promise(async (resolve) => {
-    resolve({ data: "Success" });
   });
 }

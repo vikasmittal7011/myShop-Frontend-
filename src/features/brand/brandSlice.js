@@ -30,6 +30,9 @@ export const brandSlice = createSlice({
     clearMessage: (state) => {
       state.message = "";
     },
+    brandOut: (state) => {
+      state.brand = [];
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -54,7 +57,7 @@ export const brandSlice = createSlice({
   },
 });
 
-export const { clearMessage } = brandSlice.actions;
+export const { clearMessage, brandOut } = brandSlice.actions;
 
 export const selectBrand = (state) => state.brand;
 

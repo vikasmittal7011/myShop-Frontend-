@@ -10,7 +10,7 @@ import Modal from "../common/Modal";
 import { useAlert } from "react-alert";
 import { useState } from "react";
 
-const AdminProductList = ({ products, loggedInUser }) => {
+const AdminProductList = ({ products }) => {
   const alert = useAlert();
   const [isOpen, setIsOpen] = useState(false);
   const [itemId, setItemId] = useState(-1);

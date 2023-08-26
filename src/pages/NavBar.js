@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import { Disclosure } from "@headlessui/react";
 
 import MobileButton from "../components/navbar/MobileButton";

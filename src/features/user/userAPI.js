@@ -1,8 +1,8 @@
 const API = process.env.REACT_APP_API;
 
-export function fetchUserData(id, token) {
+export function fetchUserData(token) {
   return new Promise(async (resolve, reject) => {
-    const response = await fetch(API + "user/" + id, {
+    const response = await fetch(API + "user", {
       headers: { authorization: "Bearea " + token },
     });
     const data = await response.json();
@@ -14,7 +14,6 @@ export function fetchUserData(id, token) {
   });
 }
 
-//Todo
 export function fetchUserOrders(userId) {
   return new Promise(async (resolve, reject) => {
     const response = await fetch(API + "order/" + userId);

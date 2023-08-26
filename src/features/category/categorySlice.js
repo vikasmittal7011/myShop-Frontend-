@@ -30,6 +30,9 @@ export const categorySlice = createSlice({
     clearMessage: (state) => {
       state.message = "";
     },
+    cateOut: (state) => {
+      state.category = [];
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -54,7 +57,7 @@ export const categorySlice = createSlice({
   },
 });
 
-export const { clearMessage } = categorySlice.actions;
+export const { clearMessage, cateOut } = categorySlice.actions;
 
 export const selectCategory = (state) => state.category;
 

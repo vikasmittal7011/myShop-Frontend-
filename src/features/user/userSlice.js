@@ -10,8 +10,8 @@ const initialState = {
 
 export const fetchUserDataAsync = createAsyncThunk(
   "user/fetchUserData",
-  async ({ id, token }) => {
-    const response = await fetchUserData(id, token);
+  async (token) => {
+    const response = await fetchUserData(token);
     return response.data.user;
   }
 );
@@ -39,6 +39,10 @@ export const userSlice = createSlice({
     clearMessage: (state) => {
       state.message = null;
     },
+    userOut: (state) => {
+      state.userOrders = [];
+      state.userData = {};
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -51,7 +55,7 @@ export const userSlice = createSlice({
       })
       .addCase(fetchUserDataAsync.rejected, (state, action) => {
         state.status = "idle";
-        state.message = action.payload.message;
+        state.message = action.payload;
       })
       .addCase(fetchUserOrdersAsync.pending, (state) => {
         state.status = "loading";
@@ -62,7 +66,7 @@ export const userSlice = createSlice({
       })
       .addCase(fetchUserOrdersAsync.rejected, (state, action) => {
         state.status = "idle";
-        state.message = action.payload.message;
+        state.message = action.payload;
       })
       .addCase(updateUserAsync.pending, (state) => {
         state.status = "loading";
@@ -73,12 +77,12 @@ export const userSlice = createSlice({
       })
       .addCase(updateUserAsync.rejected, (state, action) => {
         state.status = "idle";
-        state.message = action.payload.message;
+        state.message = action.payload;
       });
   },
 });
 
-export const { clearMessage } = userSlice.actions;
+export const { clearMessage, userOut } = userSlice.actions;
 
 export const selectuser = (state) => state.user;
 

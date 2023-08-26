@@ -47,6 +47,11 @@ export const orderSlice = createSlice({
     clearMessage: (state) => {
       state.message = null;
     },
+    orderOut: (state) => {
+      state.orders = [];
+      state.orderPlaced = false;
+      state.totalOrders = 0;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -91,7 +96,7 @@ export const orderSlice = createSlice({
   },
 });
 
-export const { resetOrder, clearMessage } = orderSlice.actions;
+export const { resetOrder, clearMessage, orderOut } = orderSlice.actions;
 
 export const selectorder = (state) => state.order;
 

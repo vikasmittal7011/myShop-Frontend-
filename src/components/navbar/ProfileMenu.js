@@ -9,7 +9,7 @@ import {
 } from "../../utils/constant";
 import TransitionEffet from "../common/TransitionEffet";
 import { useSelector } from "react-redux";
-import { selectauth } from "../../features/auth/authSlice";
+import { selectuser } from "../../features/user/userSlice";
 
 // Wrap the Links component with forwardRef
 const ForwardedLinks = forwardRef((props, ref) => {
@@ -17,7 +17,7 @@ const ForwardedLinks = forwardRef((props, ref) => {
 });
 
 const ProfileMenu = () => {
-  const { loggedInUser } = useSelector(selectauth);
+  const { userData } = useSelector(selectuser);
 
   return (
     <Menu as="div" className="relative ml-3">
@@ -34,7 +34,7 @@ const ProfileMenu = () => {
       </div>
       <TransitionEffet>
         <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-          {loggedInUser.role === "user"
+          {userData.role === "user"
             ? userProfileLinks.map((item) => (
                 <Menu.Item key={item.name}>
                   {({ active }) => (

@@ -14,7 +14,7 @@ import {
 
 const Signup = () => {
   const dispatch = useDispatch();
-  const { loggedInUser, message, status } = useSelector(selectauth);
+  const { token, message, status } = useSelector(selectauth);
   const [credentials, setCredentials] = useState({
     name: "Test",
     email: "test@gmail.co",
@@ -109,7 +109,7 @@ const Signup = () => {
 
   return (
     <>
-      {loggedInUser && <Navigate to="/" replace={true} />}
+      {token && <Navigate to="/" replace={true} />}
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img className="mx-auto h-12 w-auto" src={logo} alt="Your Company" />

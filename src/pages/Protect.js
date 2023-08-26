@@ -1,12 +1,12 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { selectauth } from "../features/auth/authSlice";
 import { Navigate } from "react-router-dom";
+import { selectuser } from "../features/user/userSlice";
 
 const Protect = ({ children }) => {
-  const { loggedInUser } = useSelector(selectauth);
+  const { userData } = useSelector(selectuser);
 
-  if (!loggedInUser) {
+  if (!userData) {
     return <Navigate to="/signin" />;
   }
 

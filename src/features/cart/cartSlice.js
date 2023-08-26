@@ -10,7 +10,7 @@ import {
 const initialState = {
   items: [],
   status: "idle",
-  message: ""
+  message: "",
 };
 
 export const addToCartAsync = createAsyncThunk(
@@ -60,6 +60,9 @@ export const cartSlice = createSlice({
     clearMessage: (state) => {
       state.message = "";
     },
+    cartOut: (state) => {
+      state.items = [];
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -72,7 +75,7 @@ export const cartSlice = createSlice({
       })
       .addCase(addToCartAsync.rejected, (state, action) => {
         state.status = "idle";
-        state.message = action.payload.message;
+        state.message = action.payload;
       })
       .addCase(fetchItemsByUsertAsync.pending, (state) => {
         state.status = "loading";
@@ -83,7 +86,7 @@ export const cartSlice = createSlice({
       })
       .addCase(fetchItemsByUsertAsync.rejected, (state, action) => {
         state.status = "idle";
-        state.message = action.payload.message;
+        state.message = action.payload;
       })
       .addCase(updateItemAsync.pending, (state) => {
         state.status = "loading";
@@ -97,7 +100,7 @@ export const cartSlice = createSlice({
       })
       .addCase(updateItemAsync.rejected, (state, action) => {
         state.status = "idle";
-        state.message = action.payload.message;
+        state.message = action.payload;
       })
       .addCase(deleteItemAsync.pending, (state) => {
         state.status = "loading";
@@ -111,7 +114,7 @@ export const cartSlice = createSlice({
       })
       .addCase(deleteItemAsync.rejected, (state, action) => {
         state.status = "idle";
-        state.message = action.payload.message;
+        state.message = action.payload;
       })
       .addCase(resetCartAsync.pending, (state) => {
         state.status = "loading";
@@ -122,12 +125,12 @@ export const cartSlice = createSlice({
       })
       .addCase(resetCartAsync.rejected, (state, action) => {
         state.status = "idle";
-        state.message = action.payload.message;
+        state.message = action.payload;
       });
   },
 });
 
-export const { clearMessage } = cartSlice.actions;
+export const { clearMessage, cartOut } = cartSlice.actions;
 
 export const selectCart = (state) => state.cart;
 
