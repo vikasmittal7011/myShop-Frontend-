@@ -28,10 +28,13 @@ export function fetchUserOrders(userId) {
 
 export function updateUser(update) {
   return new Promise(async (resolve, reject) => {
-    const response = await fetch(API + "user/" + update.id, {
+    const response = await fetch(API + "user", {
       method: "PATCH",
       body: JSON.stringify(update),
-      headers: { "content-type": "application/json" },
+      headers: {
+        "content-type": "application/json",
+        authorization: "Bearea " + localStorage.getItem("token"),
+      },
     });
     const data = await response.json();
     if (data.success) {

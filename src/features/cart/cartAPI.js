@@ -20,7 +20,7 @@ export function addToCart(item) {
   });
 }
 
-export function fetchItemsByUser(userId) {
+export function fetchItemsByUser() {
   return new Promise(async (resolve, reject) => {
     const response = await fetch(API + "cart", {
       headers: {
@@ -41,7 +41,10 @@ export function updateItem(update) {
     const response = await fetch(API + "cart/" + update.id, {
       method: "PATCH",
       body: JSON.stringify(update),
-      headers: { "content-type": "application/json" },
+      headers: {
+        "content-type": "application/json",
+        authorization: "Bearea " + token,
+      },
     });
     const data = await response.json();
     if (data.success) {
@@ -56,6 +59,7 @@ export function deleteItem(itemId) {
   return new Promise(async (resolve, reject) => {
     const response = await fetch(API + "cart/" + itemId, {
       method: "DELETE",
+      headers: { authorization: "Bearea " + token },
     });
     const data = await response.json();
     if (data.success) {
@@ -66,10 +70,11 @@ export function deleteItem(itemId) {
   });
 }
 
-export function resetCart(userId) {
+export function resetCart() {
   return new Promise(async (resolve, reject) => {
-    const response = await fetch(API + "cart/clear-cart/" + userId, {
+    const response = await fetch(API + "cart/clear-cart", {
       method: "DELETE",
+      headers: { authorization: "Bearea " + token },
     });
     const data = await response.json();
     if (data.success) {

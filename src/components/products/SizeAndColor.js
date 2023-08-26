@@ -5,7 +5,6 @@ import { useAlert } from "react-alert";
 import { classNames } from "../../utils/constant";
 import Button from "../common/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { selectauth } from "../../features/auth/authSlice";
 import { addToCartAsync, selectCart } from "../../features/cart/cartSlice";
 import { selectuser } from "../../features/user/userSlice";
 
@@ -19,7 +18,6 @@ const SizeAndColor = ({
 }) => {
   const dispatch = useDispatch();
   const alert = useAlert();
-  const { loggedInUser } = useSelector(selectauth);
   const { userData } = useSelector(selectuser);
   const { items } = useSelector(selectCart);
 
@@ -29,7 +27,6 @@ const SizeAndColor = ({
       const newItem = {
         item: productData.id,
         quantity: 1,
-        user: loggedInUser.id,
       };
       dispatch(addToCartAsync(newItem));
       alert.success("Item is successfully add to your cart");

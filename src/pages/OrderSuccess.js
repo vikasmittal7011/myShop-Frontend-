@@ -11,7 +11,7 @@ const OrderSuccess = () => {
   const { userData } = useSelector(selectuser);
 
   useEffect(() => {
-    dispatch(resetCartAsync(userData.id));
+    dispatch(resetCartAsync());
     dispatch(resetOrder());
   }, [orders, userData, dispatch]);
 

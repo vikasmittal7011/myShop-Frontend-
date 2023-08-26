@@ -21,7 +21,7 @@ const CheckOut = () => {
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
   const { items } = useSelector(selectCart);
-  const { userData, message: userMessage } = useSelector(selectuser);
+  const { message: userMessage } = useSelector(selectuser);
   const { orderPlaced, message: orderMessage } = useSelector(selectorder);
 
   const [paymentInfo, setPaymentInfo] = useState({
@@ -55,7 +55,6 @@ const CheckOut = () => {
         totalPrice,
         address: paymentInfo.address,
         paymentMethod: paymentInfo.paymentMethod,
-        user: userData.id,
         status: "Pending",
       };
       dispatch(makeOrderAsync(newOrder));
