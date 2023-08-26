@@ -26,7 +26,11 @@ export const createCategoryAsync = createAsyncThunk(
 export const categorySlice = createSlice({
   name: "brand",
   initialState,
-  reducers: {},
+  reducers: {
+    clearMessage: (state) => {
+      state.message = "";
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(createCategoryAsync.pending, (state) => {
@@ -49,6 +53,8 @@ export const categorySlice = createSlice({
       });
   },
 });
+
+export const { clearCart } = categorySlice.actions;
 
 export const selectCategory = (state) => state.category;
 

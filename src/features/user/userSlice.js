@@ -25,17 +25,21 @@ export const fetchUserOrdersAsync = createAsyncThunk(
 );
 
 export const updateUserAsync = createAsyncThunk(
-  "auth/updateUser",
+  "user/updateUser",
   async (update) => {
     const response = await updateUser(update);
     return response.data.user;
   }
 );
 
-export const authSlice = createSlice({
+export const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {},
+  reducers: {
+    clearMessage: (state) => {
+      state.message = "";
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchUserDataAsync.pending, (state) => {
@@ -74,6 +78,8 @@ export const authSlice = createSlice({
   },
 });
 
+export const { clearCart } = userSlice.actions;
+
 export const selectuser = (state) => state.user;
 
-export default authSlice.reducer;
+export default userSlice.reducer;

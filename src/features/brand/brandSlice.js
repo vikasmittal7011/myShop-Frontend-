@@ -26,7 +26,11 @@ export const createBrandAsync = createAsyncThunk(
 export const brandSlice = createSlice({
   name: "brand",
   initialState,
-  reducers: {},
+  reducers: {
+    clearMessage: (state) => {
+      state.message = "";
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(createBrandAsync.pending, (state) => {
@@ -49,6 +53,8 @@ export const brandSlice = createSlice({
       });
   },
 });
+
+export const { clearCart } = brandSlice.actions;
 
 export const selectBrand = (state) => state.brand;
 

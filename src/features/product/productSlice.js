@@ -52,6 +52,9 @@ export const productSlice = createSlice({
     clearSelectedProduct: (state) => {
       state.selectedProduct = null;
     },
+    clearMessage: (state) => {
+      state.message = "";
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -106,7 +109,7 @@ export const productSlice = createSlice({
   },
 });
 
-export const { clearSelectedProduct } = productSlice.actions;
+export const { clearSelectedProduct, clearMessage } = productSlice.actions;
 
 export const selectProducts = (state) => state.product;
 
