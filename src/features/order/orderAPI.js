@@ -1,26 +1,34 @@
 const API = process.env.REACT_APP_API;
 
 export function makeOrder(order) {
-  return new Promise(async (resolve) => {
+  return new Promise(async (resolve, reject) => {
     const response = await fetch(API + "order", {
       method: "POST",
       body: JSON.stringify(order),
       headers: { "content-type": "application/json" },
     });
     const data = await response.json();
-    resolve({ data });
+    if (data.success) {
+      resolve({ data });
+    } else {
+      reject({ message: data.message });
+    }
   });
 }
 
 export function updateOrder(order) {
-  return new Promise(async (resolve) => {
+  return new Promise(async (resolve, reject) => {
     const response = await fetch(API + "order/" + order.id, {
       method: "PATCH",
       body: JSON.stringify(order),
       headers: { "content-type": "application/json" },
     });
     const data = await response.json();
-    resolve({ data });
+    if (data.success) {
+      resolve({ data });
+    } else {
+      reject({ message: data.message });
+    }
   });
 }
 
@@ -35,10 +43,14 @@ export function fetchAllOrders(page, sort) {
     queryString += `${key}=${sort[key]}&`;
   }
 
-  return new Promise(async (resolve) => {
+  return new Promise(async (resolve, reject) => {
     const response = await fetch(API + "order?" + queryString);
     const data = await response.json();
     const totalOrders = response.headers.get("X-Total-Count");
-    resolve({ data: { orders: data, totalOrders: +totalOrders } });
+    if (data.success) {
+      resolve({ data: { orders: data, totalOrders: +totalOrders } });
+    } else {
+      reject({ message: data.message });
+    }
   });
 }

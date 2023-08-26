@@ -1,10 +1,14 @@
 const API = process.env.REACT_APP_API;
 
 export function fetchAllBrand() {
-  return new Promise(async (resolve) => {
+  return new Promise(async (resolve, reject) => {
     const response = await fetch(API + "brand");
     const data = await response.json();
-    resolve({ data });
+    if (data.success) {
+      resolve({ data });
+    } else {
+      reject({ message: data.message });
+    }
   });
 }
 

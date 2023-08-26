@@ -17,10 +17,14 @@ export function addToCart(item) {
 }
 
 export function fetchItemsByUser(userId) {
-  return new Promise(async (resolve) => {
+  return new Promise(async (resolve, reject) => {
     const response = await fetch(API + "cart/" + userId);
     const data = await response.json();
-    resolve({ data });
+    if (data.success) {
+      resolve({ data });
+    } else {
+      reject({ message: data.message });
+    }
   });
 }
 
