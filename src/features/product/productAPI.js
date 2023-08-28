@@ -13,8 +13,8 @@ export function fetchProductById(id) {
   });
 }
 
-export function fetchProductByFilters(filters, sort, page) {
-  let queryString = "";
+export function fetchProductByFilters(filters, sort, page, admin) {
+  let queryString = "admin=" + admin + "&";
 
   for (let key in filters) {
     const categoryValues = filters[key];

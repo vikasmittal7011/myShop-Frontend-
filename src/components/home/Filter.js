@@ -16,6 +16,7 @@ import SortOptions from "./SortOptions";
 import FilterForm from "./FilterForm";
 import Buttons from "./Buttons";
 import Products from "../products/Products";
+import { selectuser } from "../../features/user/userSlice";
 
 export const Filter = () => {
   const {
@@ -23,6 +24,7 @@ export const Filter = () => {
     status,
     totalItems,
   } = useSelector(selectProducts);
+  const { userData } = useSelector(selectuser);
 
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [filters, setFilters] = useState({ category: [], brand: [] });
@@ -54,7 +56,14 @@ export const Filter = () => {
 
   useEffect(() => {
     const pagination = { _page: page, _limit: ITEM_PAGE_PER };
-    dispatch(fetchProductByFiltersAsync({ filters, sort, pagination }));
+    dispatch(
+      fetchProductByFiltersAsync({
+        filters,
+        sort,
+        pagination,
+        admin: userData.role === "admin" && true,
+      })
+    );
     dispatch(fetchAllBrandAsync());
     dispatch(fetchAllCategoryAsync());
     // eslint-disable-next-line react-hooks/exhaustive-deps
