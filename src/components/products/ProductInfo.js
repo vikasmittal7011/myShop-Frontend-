@@ -1,5 +1,3 @@
-import React from "react";
-
 import Review from "./Review";
 import SizeAndColor from "./SizeAndColor";
 import Highlights from "./Highlights";
@@ -33,7 +31,7 @@ const ProductInfo = ({
           </p>
         </div>
 
-        <Review reviews={product?.rating} />
+        {product?.rating !== 0 && <Review reviews={product?.rating} />}
 
         <SizeAndColor
           selectedColor={selectedColor}

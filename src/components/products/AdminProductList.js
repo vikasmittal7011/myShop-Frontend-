@@ -60,10 +60,14 @@ const AdminProductList = ({ products }) => {
                       : product?.title}
                   </Link>
                 </h3>
-                <StarIcon className="w-5 h-5 mr-1 inline" />
-                <p className="text-sm text-gray-500 inline align-bottom">
-                  {product?.rating}
-                </p>
+                {product?.rating !== 0 && (
+                  <>
+                    <StarIcon className="w-5 h-5 mr-1 inline" />
+                    <p className="text-sm text-gray-500 inline align-bottom">
+                      {product?.rating}
+                    </p>
+                  </>
+                )}
               </div>
               <div>
                 <p className="text-sm font-medium text-gray-900">
