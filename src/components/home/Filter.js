@@ -105,11 +105,7 @@ export const Filter = () => {
           </div>
         </div>
 
-        <section aria-labelledby="products-heading" className="pb-24 pt-6">
-          <h2 id="products-heading" className="sr-only">
-            Products
-          </h2>
-
+        <section aria-labelledby="products-heading" className="pb-12 pt-6">
           <div className="grid grid-cols-1 gap-x-2 gap-y-10 lg:grid-cols-4">
             <FilterForm handleFilters={handleFilters} />
 
