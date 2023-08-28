@@ -22,7 +22,7 @@ const Products = ({
 
   return (
     <>
-      <div className="mx-auto max-w-2xl px-4 pb-16 sm:px-6 sm:pb-12 lg:max-w-7xl lg:px-8">
+      <div className="mx-auto max-w-2xl px-4 pb-16 sm:px-6 sm:pb-12 lg:max-w-7xl lg:px-3 mt-3">
         {userData.role === "user" ? (
           <ProductList products={products} />
         ) : (
