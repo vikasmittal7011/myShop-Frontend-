@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import SavedAddress from "./SavedAddress";
 import PaymentMethods from "./PaymentMethods";
@@ -6,11 +7,11 @@ import Input from "../form/Input";
 import Select from "../form/Select";
 import Button from "../common/Button";
 import { country } from "../../utils/constant";
-import { useDispatch, useSelector } from "react-redux";
 import { selectuser, updateUserAsync } from "../../features/user/userSlice";
 
 const Form = ({ handlePaymentInfo }) => {
   const dispatch = useDispatch();
+  const [showAddressForm, setshowAddressForm] = useState(false);
 
   const { userData } = useSelector(selectuser);
 
@@ -102,13 +103,14 @@ const Form = ({ handlePaymentInfo }) => {
     e.preventDefault();
     const valid = validate(userInfo, userData);
     if (valid) {
-      dispatch(
-        updateUserAsync({
-          ...userData,
-          addresses: [...userData?.addresses, userInfo],
-        })
-      );
+      const newUser = {
+        ...userData,
+        addresses: [...userData?.addresses, userInfo],
+      };
+      delete newUser["email"];
+      dispatch(updateUserAsync(newUser));
       setUserInfo(initUserInfo);
+      setshowAddressForm(false);
     }
   };
 
@@ -116,126 +118,138 @@ const Form = ({ handlePaymentInfo }) => {
     <>
       <form onSubmit={handleSubmit}>
         <div className="space-y-12">
-          <div className="border-b border-gray-900/10 pb-12">
-            <h2 className="text-base font-semibold leading-7 text-gray-900">
-              Personal Information
-            </h2>
-            <p className="mt-1 text-sm leading-6 text-gray-600">
-              Use a permanent address where you can receive mail.
-            </p>
-
-            <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-              <div className="col-span-full">
-                <Input
-                  id="name"
-                  title="Full Name"
-                  type="text"
-                  placeHolder="Enter full name..."
-                  value={userInfo.name}
-                  errorMessage={userMistakes.name}
-                  onChange={handleUserInfo}
-                />
-              </div>
-
-              <div className="sm:col-span-3">
-                <Input
-                  id="email"
-                  title="Email Address"
-                  type="email"
-                  placeHolder="Enter email address..."
-                  value={userInfo.email}
-                  onChange={handleUserInfo}
-                  errorMessage={userMistakes.email}
-                />
-              </div>
-
-              <div className="sm:col-span-3">
-                <Input
-                  id="tel"
-                  title="Phone Number"
-                  type="text"
-                  placeHolder="Enter phone number..."
-                  errorMessage={userMistakes.tel}
-                  onChange={handleUserInfo}
-                  value={userInfo.tel}
-                />
-              </div>
-
-              <div className="sm:col-span-3">
-                <Select
-                  id="country"
-                  title="Country"
-                  options={country}
-                  defaultValue={userInfo.country}
-                  errorMessage={userMistakes.country}
-                  onChange={handleUserInfo}
-                />
-              </div>
-
-              <div className="col-span-full">
-                <Input
-                  id="street"
-                  title="Street Address"
-                  type="text"
-                  placeHolder="Enter stree address..."
-                  onChange={handleUserInfo}
-                  value={userInfo.street}
-                  errorMessage={userMistakes.street}
-                />
-              </div>
-
-              <div className="sm:col-span-2 sm:col-start-1">
-                <Input
-                  id="city"
-                  title="City"
-                  type="text"
-                  placeHolder="Enter city..."
-                  onChange={handleUserInfo}
-                  value={userInfo.city}
-                  errorMessage={userMistakes.city}
-                />
-              </div>
-
-              <div className="sm:col-span-2">
-                <Input
-                  id="state"
-                  title="State / Province"
-                  type="text"
-                  placeHolder="Enter state / province..."
-                  onChange={handleUserInfo}
-                  value={userInfo.state}
-                  errorMessage={userMistakes.state}
-                />
-              </div>
-
-              <div className="sm:col-span-2">
-                <Input
-                  id="pinCode"
-                  title="ZIP / Postal code"
-                  type="text"
-                  placeHolder="Enter ZIP / Postal code..."
-                  onChange={handleUserInfo}
-                  value={userInfo.pinCode}
-                  errorMessage={userMistakes.pinCode}
-                />
-              </div>
-            </div>
-
-            <div className="mt-6 flex items-center justify-end gap-x-6">
-              <Button
-                type="reset"
-                className="text-sm font-semibold leading-6 text-gray-900"
-              >
-                Reset
-              </Button>
-              <Button
-                type="submit"
-                className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
-                Save
-              </Button>
-            </div>
+          <div
+            onClick={() => {
+              setshowAddressForm(!showAddressForm);
+            }}
+            className="cursor-pointer flex items-center justify-center rounded-md border border-transparent bg-emerald-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-emerald-700 w-1/3"
+          >
+            {showAddressForm === false
+              ? "Add New Address"
+              : "Close Address Form"}
           </div>
+          {showAddressForm && (
+            <div className="border-b border-gray-900/10 pb-12">
+              <h2 className="text-base font-semibold leading-7 text-gray-900">
+                Personal Information
+              </h2>
+              <p className="mt-1 text-sm leading-6 text-gray-600">
+                Use a permanent address where you can receive mail.
+              </p>
+
+              <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                <div className="col-span-full">
+                  <Input
+                    id="name"
+                    title="Full Name"
+                    type="text"
+                    placeHolder="Enter full name..."
+                    value={userInfo.name}
+                    errorMessage={userMistakes.name}
+                    onChange={handleUserInfo}
+                  />
+                </div>
+
+                <div className="sm:col-span-3">
+                  <Input
+                    id="email"
+                    title="Email Address"
+                    type="email"
+                    placeHolder="Enter email address..."
+                    value={userInfo.email}
+                    onChange={handleUserInfo}
+                    errorMessage={userMistakes.email}
+                  />
+                </div>
+
+                <div className="sm:col-span-3">
+                  <Input
+                    id="tel"
+                    title="Phone Number"
+                    type="text"
+                    placeHolder="Enter phone number..."
+                    errorMessage={userMistakes.tel}
+                    onChange={handleUserInfo}
+                    value={userInfo.tel}
+                  />
+                </div>
+
+                <div className="sm:col-span-3">
+                  <Select
+                    id="country"
+                    title="Country"
+                    options={country}
+                    defaultValue={userInfo.country}
+                    errorMessage={userMistakes.country}
+                    onChange={handleUserInfo}
+                  />
+                </div>
+
+                <div className="col-span-full">
+                  <Input
+                    id="street"
+                    title="Street Address"
+                    type="text"
+                    placeHolder="Enter stree address..."
+                    onChange={handleUserInfo}
+                    value={userInfo.street}
+                    errorMessage={userMistakes.street}
+                  />
+                </div>
+
+                <div className="sm:col-span-2 sm:col-start-1">
+                  <Input
+                    id="city"
+                    title="City"
+                    type="text"
+                    placeHolder="Enter city..."
+                    onChange={handleUserInfo}
+                    value={userInfo.city}
+                    errorMessage={userMistakes.city}
+                  />
+                </div>
+
+                <div className="sm:col-span-2">
+                  <Input
+                    id="state"
+                    title="State / Province"
+                    type="text"
+                    placeHolder="Enter state / province..."
+                    onChange={handleUserInfo}
+                    value={userInfo.state}
+                    errorMessage={userMistakes.state}
+                  />
+                </div>
+
+                <div className="sm:col-span-2">
+                  <Input
+                    id="pinCode"
+                    title="ZIP / Postal code"
+                    type="text"
+                    placeHolder="Enter ZIP / Postal code..."
+                    onChange={handleUserInfo}
+                    value={userInfo.pinCode}
+                    errorMessage={userMistakes.pinCode}
+                  />
+                </div>
+              </div>
+
+              <div className="mt-6 flex items-center justify-end gap-x-6">
+                <Button
+                  type="reset"
+                  className="text-sm font-semibold leading-6 text-gray-900"
+                >
+                  Reset
+                </Button>
+                <Button
+                  type="submit"
+                  className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                >
+                  Save
+                </Button>
+              </div>
+            </div>
+          )}
 
           <div className="border-b border-gray-900/10 pb-12">
             <div className="mt-10 space-y-10">
