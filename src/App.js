@@ -21,6 +21,7 @@ import {
   AdminHome,
   CreateBrand,
   CreateCategory,
+  StripePayment,
 } from "./pages/index";
 import Loader from "./components/common/Loader";
 import { fetchItemsByUsertAsync } from "./features/cart/cartSlice";
@@ -82,7 +83,16 @@ const App = () => {
                 }
               />
               <Route
-                path="/order-success"
+                path="/payment"
+                exact
+                element={
+                  <Protect>
+                    <StripePayment />
+                  </Protect>
+                }
+              />
+              <Route
+                path="/order-success/:id"
                 exact
                 element={
                   <Protect>

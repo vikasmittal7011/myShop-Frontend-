@@ -306,7 +306,7 @@ export const country = [
 
 export const paymentMathods = [
   { id: 1, name: "Cash" },
-  { id: 1, name: "Cart" },
+  { id: 1, name: "Card" },
 ];
 
 export const footerLinks = [

@@ -62,8 +62,10 @@ const CheckOut = () => {
   };
 
   useEffect(() => {
-    if (orderPlaced) {
-      navigate("/order-success");
+    if (orderPlaced && orderPlaced.paymentMethod === "Cash") {
+      navigate(`/order-success/${orderPlaced.id}`);
+    } else if (orderPlaced && orderPlaced.paymentMethod === "Card") {
+      navigate("/payment");
     }
   }, [orderPlaced, navigate]);
 

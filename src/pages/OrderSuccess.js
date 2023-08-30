@@ -1,28 +1,27 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { resetOrder, selectorder } from "../features/order/orderSlice";
-import { selectuser } from "../features/user/userSlice";
 import { resetCartAsync } from "../features/cart/cartSlice";
 
 const OrderSuccess = () => {
   const dispatch = useDispatch();
-  const { orders } = useSelector(selectorder);
-  const { userData } = useSelector(selectuser);
+  const { orderPlaced } = useSelector(selectorder);
+  const { id } = useParams();
 
   useEffect(() => {
     dispatch(resetCartAsync());
     dispatch(resetOrder());
-  }, [orders, userData, dispatch]);
+  }, [orderPlaced, id, dispatch]);
 
   return (
     <main className="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
       <div className="text-center">
         <p className="text-base font-semibold text-indigo-600">
-          Order Successfully Places
+          Order Successfully Place
         </p>
         <h1 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl">
-          Order Number #{orders?.id}
+          Order Number #{id}
         </h1>
         <p className="mt-6 text-base leading-7 text-gray-600">
           Your can check your order in My Profile {`>`} My Orders
