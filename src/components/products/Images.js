@@ -28,7 +28,7 @@ const Images = ({ images }) => {
           )}
         </div>
       </div>
-      <div className="aspect-h-5 aspect-w-4 lg:aspect-h-4 lg:aspect-w-3 sm:overflow-hidden sm:rounded-lg">
+      <div className="aspect-h-5 aspect-w-4 lg:aspect-h-4 lg:aspect-w-3 sm:overflow-hidden rounded-lg s:mx-3 l:mx-3 xs:mx-3">
         {images[3] && (
           <Image src={process.env.REACT_APP_API + images[3]} alt={images[3]} />
         )}
