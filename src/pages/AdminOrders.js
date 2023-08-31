@@ -15,7 +15,7 @@ import {
 } from "../features/order/orderSlice";
 
 const AdminOrders = () => {
-  const { orders, totalOrders, message } = useSelector(selectorder);
+  const { orders, totalOrders, message, status } = useSelector(selectorder);
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
   const [sort, setSort] = useState({ _sort: "id", _order: "asc" });
@@ -48,10 +48,6 @@ const AdminOrders = () => {
     }, 4000);
   }, [message?.message, dispatch]);
 
-  if (!orders) {
-    return <Loader />;
-  }
-
   return (
     <>
       <NavBar>
@@ -59,28 +55,34 @@ const AdminOrders = () => {
         <p className="text-red-600 my-3 font-bold text-2xl capitalize">
           {message?.message}
         </p>
-        <div className="overflow-x-auto">
-          <div className="flex items-center justify-center font-sans overflow-x">
-            <div className="w-full">
-              <div className="bg-white shadow-md rounded my-6 mx-5">
-                <table className="min-w-max w-full table-auto">
-                  <Headers handleSort={handleSort} sort={sort} />
-                  <Body
-                    orders={orders}
-                    handleEdit={handleEdit}
-                    handleShow={handleShow}
-                    editableOrderId={editableOrderId}
-                  />
-                </table>
+        {status !== "loading" ? (
+          <>
+            <div className="overflow-x-auto">
+              <div className="flex items-center justify-center font-sans overflow-x">
+                <div className="w-full">
+                  <div className="bg-white shadow-md rounded my-6 mx-5">
+                    <table className="min-w-max w-full table-auto">
+                      <Headers handleSort={handleSort} sort={sort} />
+                      <Body
+                        orders={orders}
+                        handleEdit={handleEdit}
+                        handleShow={handleShow}
+                        editableOrderId={editableOrderId}
+                      />
+                    </table>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-        <Pagination
-          handlePage={handlePage}
-          page={page}
-          totalProduct={totalOrders}
-        />
+            <Pagination
+              handlePage={handlePage}
+              page={page}
+              totalProduct={totalOrders}
+            />
+          </>
+        ) : (
+          <Loader />
+        )}
       </NavBar>
     </>
   );
