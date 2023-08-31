@@ -5,7 +5,11 @@ import { useAlert } from "react-alert";
 import { classNames } from "../../utils/constant";
 import Button from "../common/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCartAsync, selectCart } from "../../features/cart/cartSlice";
+import {
+  addToCartAsync,
+  fetchItemsByUsertAsync,
+  selectCart,
+} from "../../features/cart/cartSlice";
 import { selectuser } from "../../features/user/userSlice";
 
 const SizeAndColor = ({
@@ -29,6 +33,7 @@ const SizeAndColor = ({
         quantity: 1,
       };
       dispatch(addToCartAsync(newItem));
+      dispatch(fetchItemsByUsertAsync());
       alert.success("Item is successfully add to your cart");
     } else {
       alert.error("Item is already added to your cart");
