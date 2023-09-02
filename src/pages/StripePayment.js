@@ -19,6 +19,7 @@ const StripePayment = () => {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ items: orderPlaced.totalPrice }),
+      meta: { order_id: orderPlaced.id },
     })
       .then((res) => res.json())
       .then((data) => setClientSecret(data.clientSecret));
