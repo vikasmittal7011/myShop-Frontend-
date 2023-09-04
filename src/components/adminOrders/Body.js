@@ -18,6 +18,9 @@ const Body = ({ orders, handleShow, handleEdit, editableOrderId }) => {
   const handleUpdate = (e, order) => {
     const updateOrder = { ...order };
     updateOrder.status = e.target.value;
+    if (e.target.value === "Delivered") {
+      updateOrder.paymentStatus = "Receive";
+    }
     dispatch(updateOrderAsync(updateOrder));
     handleEdit(-1);
   };
@@ -32,6 +35,8 @@ const Body = ({ orders, handleShow, handleEdit, editableOrderId }) => {
         return "bg-green-200 text-green-600";
       case "Cancel":
         return "bg-red-200 text-red-600";
+      case "Receive":
+        return "bg-green-200 text--600";
       default:
         return "bg-purple-200 text-purple-600";
     }
@@ -114,6 +119,17 @@ const Body = ({ orders, handleShow, handleEdit, editableOrderId }) => {
                   {order.status}
                 </span>
               )}
+            </td>
+            <td className="py-3 px-6 text-center">
+              <div className="flex items-center">
+                <span
+                  className={`${colorPicker(
+                    order.paymentStatus
+                  )} py-1 px-3 rounded-full text-xs`}
+                >
+                  {order.paymentStatus}
+                </span>
+              </div>
             </td>
             <td className="py-3 px-6 text-center">
               <div className="flex item-center justify-center">

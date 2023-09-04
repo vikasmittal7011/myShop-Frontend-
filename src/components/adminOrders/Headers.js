@@ -40,7 +40,8 @@ const Headers = ({ handleSort, sort }) => {
           Total amount {showArrows("totalPrice")}
         </th>
         <th className="py-3 px-6 text-center">Delivery Address</th>
-        <th className="py-3 px-6 text-center">Status</th>
+        <th className="py-3 px-6 text-center">Delivery Status</th>
+        <th className="py-3 px-6 text-center">Payment Status</th>
         <th className="py-3 px-6 text-center">Actions</th>
       </tr>
     </thead>

@@ -18,8 +18,10 @@ const StripePayment = () => {
     fetch(process.env.REACT_APP_API + "create-payment-intent", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ items: orderPlaced.totalPrice }),
-      meta: { order_id: orderPlaced.id },
+      body: JSON.stringify({
+        items: orderPlaced.totalPrice,
+        orderId: orderPlaced.id,
+      }),
     })
       .then((res) => res.json())
       .then((data) => setClientSecret(data.clientSecret));
