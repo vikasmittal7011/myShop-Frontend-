@@ -1,5 +1,5 @@
 import React, { Suspense, useEffect } from "react";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import {
   Home,
@@ -51,7 +51,6 @@ const App = () => {
   return (
     <>
       <BrowserRouter>
-        {!token && <Navigate to="/signin" replace={true} />}
         <Suspense fallback={<Loader />}>
           <Provider template={AlertTemplate} {...options}>
             <Routes>
