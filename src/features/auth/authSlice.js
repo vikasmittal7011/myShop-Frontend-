@@ -1,10 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { createUser, loginUser } from "./authAPI";
+import { createUser, forgetPasswordRequest, loginUser } from "./authAPI";
 
 const initialState = {
   status: "idle",
   message: null,
   token: localStorage.getItem("token") || "",
+  sendMail: false,
 };
 
 export const createUserAsync = createAsyncThunk(
@@ -19,6 +20,14 @@ export const loginUserAsync = createAsyncThunk(
   "auth/loginUser",
   async (userData) => {
     const response = await loginUser(userData);
+    return response.data;
+  }
+);
+
+export const forgetPasswordRequestAsync = createAsyncThunk(
+  "auth/forgetPasswordRequest",
+  async (mail) => {
+    const response = await forgetPasswordRequest(mail);
     return response.data;
   }
 );
@@ -56,6 +65,17 @@ export const authSlice = createSlice({
         state.token = action.payload.token;
       })
       .addCase(loginUserAsync.rejected, (state, action) => {
+        state.status = "failed";
+        state.message = action.error;
+      })
+      .addCase(forgetPasswordRequestAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(forgetPasswordRequestAsync.fulfilled, (state, action) => {
+        state.status = "idle";
+        state.sendMail = true;
+      })
+      .addCase(forgetPasswordRequestAsync.rejected, (state, action) => {
         state.status = "failed";
         state.message = action.error;
       });
