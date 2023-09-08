@@ -17,25 +17,17 @@ const Signup = () => {
   const dispatch = useDispatch();
   const { token, message, status } = useSelector(selectauth);
   const [credentials, setCredentials] = useState({
-    name: "Test",
-    email: "test@gmail.co",
-    password: "Test@9876",
-    confirmPassword: "Test@9876",
-  });
-
-  const [errors, setErrors] = useState({
+    name: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
 
+  const [errors, setErrors] = useState({});
+
   const manageCredentials = (id, value) => {
     setCredentials({ ...credentials, [id]: value });
-    setErrors({
-      email: "",
-      password: "",
-      confirmPassword: "",
-    });
+    setErrors("");
   };
 
   const validate = (data) => {
@@ -46,19 +38,16 @@ const Signup = () => {
 
     if (data.name === "") {
       setErrors({
-        ...errors,
         email: "Enter a valid name!",
       });
       return false;
     } else if (!emailPattern.test(data.email)) {
       setErrors({
-        ...errors,
         email: "Enter a valid email address!",
       });
       return false;
     } else if (!passwordPattern.test(data.password)) {
       setErrors({
-        ...errors,
         password: `- at least 8 characters\n
         - must contain at least 1 uppercase letter, 1 lowercase letter, and 1 number\n
         - Can contain special characters`,
@@ -66,16 +55,11 @@ const Signup = () => {
       return false;
     } else if (data.password !== data.confirmPassword) {
       setErrors({
-        ...errors,
         confirmPassword: `Password should be match`,
       });
       return false;
     } else {
-      setErrors({
-        email: "",
-        password: "",
-        confirmPassword: "",
-      });
+      setErrors("");
       return true;
     }
   };
@@ -92,12 +76,7 @@ const Signup = () => {
         })
       );
       if (status !== "failed") {
-        setCredentials({
-          name: "",
-          email: "",
-          password: "",
-          confirmPassword: "",
-        });
+        setCredentials("");
       }
     }
   };
@@ -181,7 +160,7 @@ const Signup = () => {
               <Links
                 to="/signin"
                 className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
-                name="Continue Shopping"
+                name="Login"
               />
             </p>
           </div>

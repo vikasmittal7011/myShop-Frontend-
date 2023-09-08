@@ -17,26 +17,21 @@ import { selectuser } from "../features/user/userSlice";
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  let { userData, message, status } = useSelector(selectuser);
+  let { status } = useSelector(selectuser);
+  let { message } = useSelector(selectauth);
+
   const { token } = useSelector(selectauth);
 
   const [credentials, setCredentials] = useState({
-    email: "admin@gmail.com",
-    password: "Admin@1234",
-  });
-
-  const [errors, setErrors] = useState({
     email: "",
     password: "",
-    validform: false,
   });
+
+  const [errors, setErrors] = useState({});
 
   const manageCredentials = (id, value) => {
     setCredentials({ ...credentials, [id]: value });
-    setErrors({
-      email: "",
-      password: "",
-    });
+    setErrors("");
   };
 
   const validate = (email, password) => {
@@ -47,23 +42,18 @@ const Login = () => {
 
     if (!emailPattern.test(email)) {
       setErrors({
-        ...errors,
         email: "Enter a valid email address!",
       });
       return false;
     } else if (!passwordPattern.test(password)) {
       setErrors({
-        ...errors,
         password: `- at least 8 characters\n
       - must contain at least 1 uppercase letter, 1 lowercase letter, and 1 number\n
       - Can contain special characters`,
       });
       return false;
     } else {
-      setErrors({
-        email: "",
-        password: "",
-      });
+      setErrors("");
       return true;
     }
   };
@@ -78,7 +68,7 @@ const Login = () => {
           password: credentials.password,
         })
       );
-      if (userData && status === "idle") {
+      if (token && status === "idle") {
         navigate("/");
       }
     }
