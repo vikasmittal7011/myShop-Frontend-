@@ -22,6 +22,7 @@ import {
   CreateBrand,
   CreateCategory,
   StripePayment,
+  ResetPassword,
 } from "./pages/index";
 import Loader from "./components/common/Loader";
 import { fetchItemsByUsertAsync } from "./features/cart/cartSlice";
@@ -195,6 +196,7 @@ const App = () => {
                 exact
                 element={<ForgotPassword />}
               />
+              <Route path="/reset-password" exact element={<ResetPassword />} />
               <Route path="/signup" exact element={<Signup />} />
               <Route path="*" exact element={<PageNotFound />} />
             </Routes>

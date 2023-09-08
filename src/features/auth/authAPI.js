@@ -49,3 +49,19 @@ export function forgetPasswordRequest(mail) {
     }
   });
 }
+
+export function resetPassword(userData) {
+  return new Promise(async (resolve, reject) => {
+    const response = await fetch(API + "auth/reset-password", {
+      method: "POST",
+      body: JSON.stringify(userData),
+      headers: { "Content-Type": "application/json" },
+    });
+    const data = await response.json();
+    if (data.success) {
+      resolve({ data });
+    } else {
+      reject({ message: data.message });
+    }
+  });
+}

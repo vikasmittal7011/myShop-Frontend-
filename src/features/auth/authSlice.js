@@ -1,11 +1,17 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { createUser, forgetPasswordRequest, loginUser } from "./authAPI";
+import {
+  createUser,
+  forgetPasswordRequest,
+  loginUser,
+  resetPassword,
+} from "./authAPI";
 
 const initialState = {
   status: "idle",
   message: null,
   token: localStorage.getItem("token") || "",
   sendMail: false,
+  resetPassword: false,
 };
 
 export const createUserAsync = createAsyncThunk(
@@ -28,6 +34,14 @@ export const forgetPasswordRequestAsync = createAsyncThunk(
   "auth/forgetPasswordRequest",
   async (mail) => {
     const response = await forgetPasswordRequest(mail);
+    return response.data;
+  }
+);
+
+export const resetPasswordAsync = createAsyncThunk(
+  "auth/resetPassword",
+  async (data) => {
+    const response = await resetPassword(data);
     return response.data;
   }
 );
@@ -71,11 +85,23 @@ export const authSlice = createSlice({
       .addCase(forgetPasswordRequestAsync.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(forgetPasswordRequestAsync.fulfilled, (state, action) => {
+      .addCase(forgetPasswordRequestAsync.fulfilled, (state) => {
         state.status = "idle";
         state.sendMail = true;
       })
       .addCase(forgetPasswordRequestAsync.rejected, (state, action) => {
+        state.status = "failed";
+        state.message = action.error;
+      })
+      .addCase(resetPasswordAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(resetPasswordAsync.fulfilled, (state) => {
+        state.status = "idle";
+        state.resetPassword = true;
+        state.message = { message: "Password was successfully changed" };
+      })
+      .addCase(resetPasswordAsync.rejected, (state, action) => {
         state.status = "failed";
         state.message = action.error;
       });

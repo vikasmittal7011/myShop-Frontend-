@@ -20,6 +20,7 @@ const AdminHome = lazy(() => import("./AdminHome"));
 const CreateBrand = lazy(() => import("./CreateBrand"));
 const CreateCategory = lazy(() => import("./CreateCategory"));
 const StripePayment = lazy(() => import("./StripePayment"));
+const ResetPassword = lazy(() => import("./ResetPassword"));
 
 export {
   Signup,
@@ -42,4 +43,5 @@ export {
   CreateBrand,
   CreateCategory,
   StripePayment,
+  ResetPassword,
 };
