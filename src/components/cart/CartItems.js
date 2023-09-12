@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import Button from "../common/Button";
@@ -55,7 +55,7 @@ const CartItems = ({ items }) => {
               <div>
                 <div className="flex justify-between text-base font-medium text-gray-900">
                   <h3>
-                    <Link to={`/item-details/${item?.item?.id}`}>
+                    <Link to={`/product-details/${item?.item?.id}`}>
                       {item?.item?.title}
                     </Link>
                   </h3>
@@ -72,9 +72,16 @@ const CartItems = ({ items }) => {
                     </p>
                   </div>
                 </div>
-                <p className="mt-1 text-sm text-gray-500">
-                  {item?.item?.color || "Blue"}
-                </p>
+                {item?.color?.name && (
+                  <p className="mt-1 text-sm text-gray-700">
+                    Color: {item?.color?.name}
+                  </p>
+                )}
+                {item?.size?.name && (
+                  <p className="mt-1 text-sm text-gray-700">
+                    Size: {item?.size?.name}
+                  </p>
+                )}
               </div>
               <div className="flex flex-1 items-end justify-between text-sm">
                 <p className="text-gray-500">

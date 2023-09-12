@@ -13,36 +13,24 @@ import Loader from "../components/common/Loader";
 import Header from "../components/common/Header";
 import Footer from "../components/common/Footer";
 import NavBar from "./NavBar";
-
-const colorAndSizes = {
-  colors: [
-    { name: "White", class: "bg-white", selectedClass: "ring-gray-400" },
-    { name: "Gray", class: "bg-gray-200", selectedClass: "ring-gray-400" },
-    { name: "Black", class: "bg-gray-900", selectedClass: "ring-gray-900" },
-  ],
-  sizes: [
-    { name: "XXS", inStock: false },
-    { name: "XS", inStock: true },
-    { name: "S", inStock: true },
-    { name: "M", inStock: true },
-    { name: "L", inStock: true },
-    { name: "XL", inStock: true },
-    { name: "2XL", inStock: true },
-    { name: "3XL", inStock: true },
-  ],
-};
+import { selectCart } from "../features/cart/cartSlice";
 
 const ProductDetails = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { selectedProduct, status, message } = useSelector(selectProducts);
+  const { status: cartState } = useSelector(selectCart);
   const [selectedColor, setSelectedColor] = useState(
-    selectedProduct?.colors[0]
+    selectedProduct?.colors[0] || ""
   );
-  const [selectedSize, setSelectedSize] = useState(selectedProduct?.sizes[0]);
+  const [selectedSize, setSelectedSize] = useState(
+    selectedProduct?.sizes[0] || ""
+  );
 
   useEffect(() => {
     dispatch(fetchProductByIdAsync(id));
+    setSelectedColor(selectedProduct?.colors[0] || "");
+    setSelectedSize(selectedProduct?.sizes[0] || "");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
@@ -52,7 +40,7 @@ const ProductDetails = () => {
     }, 4000);
   }, [message?.message, dispatch]);
 
-  if (status !== "idle" || selectedProduct === null) {
+  if (status !== "idle" || selectedProduct === null || cartState !== "idle") {
     return <Loader />;
   }
 
@@ -72,7 +60,6 @@ const ProductDetails = () => {
             selectedSize={selectedSize}
             setSelectedSize={setSelectedSize}
             product={selectedProduct}
-            colorAndSizes={colorAndSizes}
           />
         </div>
         <Footer />

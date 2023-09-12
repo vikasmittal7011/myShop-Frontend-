@@ -10,6 +10,7 @@ import {
   selectCart,
 } from "../../features/cart/cartSlice";
 import { selectuser } from "../../features/user/userSlice";
+import { useState } from "react";
 
 const SizeAndColor = ({
   selectedColor,
@@ -18,8 +19,8 @@ const SizeAndColor = ({
   setSelectedSize,
   productData,
 }) => {
-  console.log(productData);
   const dispatch = useDispatch();
+  const [error, setError] = useState("");
   const alert = useAlert();
   const { userData } = useSelector(selectuser);
   const { items } = useSelector(selectCart);
@@ -31,6 +32,22 @@ const SizeAndColor = ({
         item: productData.id,
         quantity: 1,
       };
+      if (productData.colors.length > 0) {
+        if (selectedColor) {
+          newItem.color = selectedColor;
+        } else {
+          setError("Select color first");
+          return;
+        }
+      }
+      if (productData.sizes.length > 0) {
+        if (selectedSize) {
+          newItem.size = selectedSize;
+        } else {
+          setError("Select size first");
+          return;
+        }
+      }
       dispatch(addToCartAsync(newItem));
       dispatch(fetchItemsByUsertAsync());
       alert.success("Item is successfully add to your cart");
@@ -42,15 +59,15 @@ const SizeAndColor = ({
   return (
     <>
       <form className="mt-10">
-        <div>
-          <h3 className="text-sm font-medium text-gray-900">Color</h3>
+        {productData?.colors.length > 0 && (
+          <div>
+            <h3 className="text-sm font-medium text-gray-900">Color</h3>
 
-          <RadioGroup
-            value={selectedColor}
-            onChange={setSelectedColor}
-            className="mt-4"
-          >
-            {productData?.colors && (
+            <RadioGroup
+              value={selectedColor}
+              onChange={setSelectedColor}
+              className="mt-4"
+            >
               <div className="flex items-center space-x-3">
                 {productData?.colors?.map((color) => (
                   <RadioGroup.Option
@@ -75,21 +92,21 @@ const SizeAndColor = ({
                   </RadioGroup.Option>
                 ))}
               </div>
-            )}
-          </RadioGroup>
-        </div>
-
-        <div className="mt-10">
-          <div className="flex items-center justify-between">
-            <h3 className="text-sm font-medium text-gray-900">Size</h3>
+            </RadioGroup>
           </div>
+        )}
 
-          <RadioGroup
-            value={selectedSize}
-            onChange={setSelectedSize}
-            className="mt-4"
-          >
-            {productData?.sizes && (
+        {productData?.sizes.length > 0 && (
+          <div className="mt-10">
+            <div className="flex items-center justify-between">
+              <h3 className="text-sm font-medium text-gray-900">Size</h3>
+            </div>
+
+            <RadioGroup
+              value={selectedSize}
+              onChange={setSelectedSize}
+              className="mt-4"
+            >
               <div className="grid grid-cols-4 gap-4 sm:grid-cols-8 lg:grid-cols-4">
                 {productData?.sizes?.map((size) => (
                   <RadioGroup.Option
@@ -148,14 +165,18 @@ const SizeAndColor = ({
                   </RadioGroup.Option>
                 ))}
               </div>
-            )}
-          </RadioGroup>
-        </div>
-
+            </RadioGroup>
+          </div>
+        )}
+        {error && (
+          <p className="text-red-600 mt-3 font-bold text-xl capitalize">
+            {error}
+          </p>
+        )}
         {userData.role === "user" && productData.stock > 0 && (
           <Button
             onClick={handleClick}
-            className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            className="mt-5 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
           >
             Add to Cart
           </Button>

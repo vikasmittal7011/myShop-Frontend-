@@ -28,7 +28,10 @@ const Modal = ({
         </TransitionEffet>
 
         <div className="fixed inset-0 z-10 overflow-y-auto">
-          <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+          <div
+            className="flex justify-center items-center p-4 text-center sm:items-center sm:p-0"
+            style={{ height: "100vh" }}
+          >
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-300"
