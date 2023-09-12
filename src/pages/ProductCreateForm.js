@@ -10,21 +10,25 @@ import Select from "../components/form/Select";
 import ImageInput from "../components/form/ImageInput";
 import Header from "../components/common/Header";
 import Button from "../components/common/Button";
+import CheckBox from "../components/form/CheckBox";
 import {
+  selectProducts,
   clearMessage,
   clearSelectedProduct,
   createProductAsync,
   fetchProductByIdAsync,
-  selectProducts,
   updateProductAsync,
 } from "../features/product/productSlice";
 import { selectBrand } from "../features/brand/brandSlice";
 import { selectCategory } from "../features/category/categorySlice";
+import { colors as color, sizes as size } from "../utils/constant";
 
 const ProductCreateForm = () => {
   const navigate = useNavigate();
   const alert = useAlert();
   const { id } = useParams();
+  const [colors, setColors] = useState(color);
+  const [sizes, setSizes] = useState(size);
   const dispatch = useDispatch();
   const { selectedProduct, status, message } = useSelector(selectProducts);
   const { brand } = useSelector(selectBrand);
@@ -43,6 +47,8 @@ const ProductCreateForm = () => {
     image2: "",
     image3: "",
     image4: "",
+    colors: [],
+    sizes: [],
   };
 
   const productDetailsTwo = {
@@ -68,6 +74,82 @@ const ProductCreateForm = () => {
       brand: "",
       category: "",
     });
+  };
+
+  const handleSize = (id, e) => {
+    const size = sizes.find((s) => s.id === id);
+    const index = sizes.findIndex((s) => s.id === id);
+    const product = { ...productInfo };
+    if (!selectedProduct) {
+      if (e.target.checked) {
+        size.checked = true;
+        sizes.splice(index, 1, size);
+        product.sizes.push(size);
+      } else {
+        size.checked = false;
+        sizes.splice(index, 1, size);
+        product.sizes.splice(size, 1);
+      }
+    } else {
+      if (e.target.checked) {
+        size.checked = true;
+        const newData = sizes.map((s, i) => {
+          return index === i ? size : s;
+        });
+        const selectedData = newData.filter((d) => {
+          return d.checked === true && d;
+        });
+        product.sizes = selectedData;
+      } else {
+        size.checked = false;
+        const newData = sizes.map((s, i) => {
+          return index === i ? size : s;
+        });
+        const selectedData = newData.filter((d) => {
+          return d.checked === true && d;
+        });
+        product.sizes = selectedData;
+      }
+    }
+    setProductInfo(product);
+  };
+
+  const handleColor = (id, e) => {
+    const color = colors.find((s) => s.id === id);
+    const index = colors.findIndex((s) => s.id === id);
+    const product = { ...productInfo };
+    if (!selectedProduct) {
+      if (e.target.checked) {
+        color.checked = true;
+        colors.splice(index, 1, color);
+        product.colors.push(color);
+      } else {
+        color.checked = false;
+        colors.splice(index, 1, color);
+        product.colors.splice(color, 1);
+      }
+    } else {
+      if (e.target.checked) {
+        color.checked = true;
+        const newData = colors.map((s, i) => {
+          return index === i ? color : s;
+        });
+        const selectedData = newData.filter((d) => {
+          return d.checked === true && d;
+        });
+        product.colors = selectedData;
+      } else {
+        color.checked = false;
+        const newData = colors.map((s, i) => {
+          return index === i ? color : s;
+        });
+        const selectedData = newData.filter((d) => {
+          return d.checked === true && d;
+        });
+        product.colors = selectedData;
+      }
+    }
+    setProductInfo(product);
   };
 
   const validation = (product) => {
@@ -154,12 +236,13 @@ const ProductCreateForm = () => {
       formData.append("stock", +productInfo.stock);
       formData.append("brand", productInfo.brand);
       formData.append("category", productInfo.category);
+      formData.append("colors", JSON.stringify(productInfo.colors));
+      formData.append("sizes", JSON.stringify(productInfo.sizes));
       formData.append("thumbnail", productInfo.thumbnail);
       formData.append("image1", productInfo.image1);
       formData.append("image2", productInfo.image2);
       formData.append("image3", productInfo.image3);
       formData.append("image4", productInfo.image4);
-
       if (id) {
         productInfo.id = id;
         productInfo.rating = selectedProduct.rating || 0;
@@ -194,12 +277,81 @@ const ProductCreateForm = () => {
     if (selectedProduct && id) {
       setProductInfo({
         ...selectedProduct,
-        image1: selectedProduct.images?.[1],
-        image2: selectedProduct.images?.[2],
-        image3: selectedProduct.images?.[3],
-        image4: selectedProduct.images?.[4],
       });
+      const colorsMap = new Map(
+        selectedProduct.colors.map((item) => [item.id, item])
+      );
+      const updatedSelectedColors = colors.map((item) => {
+        const newItem = colorsMap.get(item.id);
+        return newItem ? { ...item, ...newItem } : item;
+      });
+      setColors(updatedSelectedColors);
+
+      const sizesMap = new Map(
+        selectedProduct.sizes.map((item) => [item.id, item])
+      );
+      const updatedSelectedSizes = sizes.map((item) => {
+        const newItem = sizesMap.get(item.id);
+        return newItem ? { ...item, ...newItem } : item;
+      });
+      setSizes(updatedSelectedSizes);
+    } else {
+      setColors([
+        {
+          id: "White",
+          name: "White",
+          class: "bg-white",
+          selectedClass: "ring-gray-400",
+          checked: false,
+        },
+        {
+          id: "Gray",
+          name: "Gray",
+          class: "bg-gray-600",
+          selectedClass: "ring-gray-400",
+          checked: false,
+        },
+        {
+          id: "Black",
+          name: "Black",
+          class: "bg-black",
+          selectedClass: "ring-black",
+          checked: false,
+        },
+        {
+          id: "Red",
+          name: "Red",
+          class: "bg-red-600",
+          selectedClass: "ring-red-600",
+          checked: false,
+        },
+        {
+          id: "Green",
+          name: "Green",
+          class: "bg-green-500",
+          selectedClass: "ring-green-500",
+          checked: false,
+        },
+        {
+          id: "Yellow",
+          name: "Yellow",
+          class: "bg-yellow-400",
+          selectedClass: "ring-yellow-400",
+          checked: false,
+        },
+      ]);
+      setSizes([
+        { name: "XXS", id: "XXS", inStock: true, checked: false },
+        { name: "XS", id: "XS", inStock: true, checked: false },
+        { name: "S", id: "S", inStock: true, checked: false },
+        { name: "M", id: "M", inStock: true, checked: false },
+        { name: "L", id: "L", inStock: true, checked: false },
+        { name: "XL", id: "XL", inStock: true, checked: false },
+        { name: "2XL", id: "2XL", inStock: true, checked: false },
+        { name: "3XL", id: "3XL", inStock: true, checked: false },
+      ]);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedProduct, id]);
 
   useEffect(() => {
@@ -211,7 +363,7 @@ const ProductCreateForm = () => {
   return (
     <>
       <NavBar>
-        <Header heading="Add New Product" />
+        <Header heading={id ? "Update Product" : "Add New Product"} />
         <p className="text-red-600 my-3 font-bold text-2xl capitalize">
           {message?.message}
         </p>
@@ -298,6 +450,26 @@ const ProductCreateForm = () => {
                     onChange={handleProductInfo}
                     value={productInfo.stock}
                     errorMessage={productMistakes.stock}
+                  />
+                </div>
+
+                <div className="sm:col-span-full">
+                  <CheckBox
+                    id="sizes"
+                    title="Sizes"
+                    values={sizes}
+                    onChange={handleSize}
+                    // value={productInfo.stock}
+                  />
+                </div>
+
+                <div className="sm:col-span-full">
+                  <CheckBox
+                    id="colors"
+                    title="Colors"
+                    values={colors}
+                    onChange={handleColor}
+                    // value={productInfo.stock}
                   />
                 </div>
 

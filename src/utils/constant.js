@@ -343,3 +343,59 @@ export const footerLinks = [
     ],
   },
 ];
+
+export const colors = [
+  {
+    id: "White",
+    name: "White",
+    class: "bg-white",
+    selectedClass: "ring-gray-400",
+    checked: false,
+  },
+  {
+    id: "Gray",
+    name: "Gray",
+    class: "bg-gray-600",
+    selectedClass: "ring-gray-400",
+    checked: false,
+  },
+  {
+    id: "Black",
+    name: "Black",
+    class: "bg-black",
+    selectedClass: "ring-black",
+    checked: false,
+  },
+  {
+    id: "Red",
+    name: "Red",
+    class: "bg-red-600",
+    selectedClass: "ring-red-600",
+    checked: false,
+  },
+  {
+    id: "Green",
+    name: "Green",
+    class: "bg-green-500",
+    selectedClass: "ring-green-500",
+    checked: false,
+  },
+  {
+    id: "Yellow",
+    name: "Yellow",
+    class: "bg-yellow-400",
+    selectedClass: "ring-yellow-400",
+    checked: false,
+  },
+];
+
+export const sizes = [
+  { name: "XXS", id: "XXS", inStock: true, checked: false },
+  { name: "XS", id: "XS", inStock: true, checked: false },
+  { name: "S", id: "S", inStock: true, checked: false },
+  { name: "M", id: "M", inStock: true, checked: false },
+  { name: "L", id: "L", inStock: true, checked: false },
+  { name: "XL", id: "XL", inStock: true, checked: false },
+  { name: "2XL", id: "2XL", inStock: true, checked: false },
+  { name: "3XL", id: "3XL", inStock: true, checked: false },
+];

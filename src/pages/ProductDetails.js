@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
-
-import Header from "../components/common/Header";
-import Images from "../components/products/Images";
-import ProductInfo from "../components/products/ProductInfo";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+
+import Images from "../components/products/Images";
+import ProductInfo from "../components/products/ProductInfo";
 import {
   clearMessage,
   fetchProductByIdAsync,
   selectProducts,
 } from "../features/product/productSlice";
 import Loader from "../components/common/Loader";
-import NavBar from "./NavBar";
+import Header from "../components/common/Header";
 import Footer from "../components/common/Footer";
+import NavBar from "./NavBar";
 
 const colorAndSizes = {
   colors: [
@@ -35,14 +35,16 @@ const colorAndSizes = {
 const ProductDetails = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const [selectedColor, setSelectedColor] = useState(colorAndSizes.colors[0]);
-  const [selectedSize, setSelectedSize] = useState(colorAndSizes.sizes[2]);
   const { selectedProduct, status, message } = useSelector(selectProducts);
+  const [selectedColor, setSelectedColor] = useState(
+    selectedProduct?.colors[0]
+  );
+  const [selectedSize, setSelectedSize] = useState(selectedProduct?.sizes[0]);
 
   useEffect(() => {
     dispatch(fetchProductByIdAsync(id));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     setTimeout(() => {

@@ -1,5 +1,7 @@
-import React, { Suspense, useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import AlertTemplate from "react-alert-template-basic";
+import { positions, Provider } from "react-alert";
 
 import {
   Home,
@@ -29,8 +31,8 @@ import { fetchItemsByUsertAsync } from "./features/cart/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { selectauth } from "./features/auth/authSlice";
 import { fetchUserDataAsync } from "./features/user/userSlice";
-import { positions, Provider } from "react-alert";
-import AlertTemplate from "react-alert-template-basic";
+import { fetchAllBrandAsync } from "./features/brand/brandSlice";
+import { fetchAllCategoryAsync } from "./features/category/categorySlice";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -45,6 +47,8 @@ const App = () => {
     if (token) {
       dispatch(fetchItemsByUsertAsync(token));
       dispatch(fetchUserDataAsync(token));
+      dispatch(fetchAllBrandAsync());
+      dispatch(fetchAllCategoryAsync());
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
