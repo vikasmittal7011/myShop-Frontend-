@@ -49,6 +49,8 @@ const ProductCreateForm = () => {
     image4: "",
     colors: [],
     sizes: [],
+    highlight: "",
+    highlights: [],
   };
 
   const productDetailsTwo = {
@@ -74,6 +76,17 @@ const ProductCreateForm = () => {
       brand: "",
       category: "",
     });
+    if (id === "highlight") {
+      const highlightsArray = value.split(",");
+      const trimedHighlightsArray = highlightsArray.map((a) => {
+        return a.trim();
+      });
+      setProductInfo({
+        ...productInfo,
+        highlights: trimedHighlightsArray,
+        [id]: value,
+      });
+    }
   };
 
   const handleSize = (id, e) => {
@@ -243,6 +256,7 @@ const ProductCreateForm = () => {
       formData.append("image2", productInfo.image2);
       formData.append("image3", productInfo.image3);
       formData.append("image4", productInfo.image4);
+      formData.append("highlights", productInfo.highlights);
       if (id) {
         productInfo.id = id;
         productInfo.rating = selectedProduct.rating || 0;
@@ -277,6 +291,7 @@ const ProductCreateForm = () => {
     if (selectedProduct && id) {
       setProductInfo({
         ...selectedProduct,
+        highlight: selectedProduct.highlights.toString(),
       });
       const colorsMap = new Map(
         selectedProduct.colors.map((item) => [item.id, item])
@@ -414,6 +429,19 @@ const ProductCreateForm = () => {
                     onChange={handleProductInfo}
                     value={productInfo.description}
                     errorMessage={productMistakes.description}
+                    required={true}
+                  />
+                </div>
+
+                <div className="col-span-full">
+                  <TextArea
+                    id="highlight"
+                    title="Highlights"
+                    type="text"
+                    placeHolder="Separate every highlight with ','"
+                    onChange={handleProductInfo}
+                    value={productInfo.highlight}
+                    required={false}
                   />
                 </div>
 
