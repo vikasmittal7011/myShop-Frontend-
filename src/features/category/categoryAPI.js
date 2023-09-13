@@ -1,5 +1,4 @@
 const API = process.env.REACT_APP_API;
-const token = localStorage.getItem("token");
 
 export function fetchAllCategory() {
   return new Promise(async (resolve, reject) => {
@@ -20,7 +19,7 @@ export function createCategory(category) {
       body: JSON.stringify(category),
       headers: {
         "Content-Type": "application/json",
-        authorization: "Bearea " + token,
+        authorization: "Bearea " + localStorage.getItem("token"),
       },
     });
     const data = await response.json();

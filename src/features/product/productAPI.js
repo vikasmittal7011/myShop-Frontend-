@@ -1,5 +1,4 @@
 const API = process.env.REACT_APP_API;
-const token = localStorage.getItem("token");
 
 export function fetchProductById(id) {
   return new Promise(async (resolve, reject) => {
@@ -60,7 +59,7 @@ export function createProduct(product) {
     const response = await fetch(API + "product", {
       method: "POST",
       body: product,
-      headers: { authorization: "Bearea " + token },
+      headers: { authorization: "Bearea " + localStorage.getItem("token") },
     });
     const data = await response.json();
     if (data.success) {
@@ -78,7 +77,7 @@ export function updateProduct(product) {
       body: JSON.stringify(product),
       headers: {
         "content-type": "application/json",
-        authorization: "Bearea " + token,
+        authorization: "Bearea " + localStorage.getItem("token"),
       },
     });
     const data = await response.json();

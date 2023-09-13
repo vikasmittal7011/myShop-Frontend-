@@ -1,5 +1,4 @@
 const API = process.env.REACT_APP_API;
-const token = localStorage.getItem("token");
 
 export function addToCart(item) {
   return new Promise(async (resolve, reject) => {
@@ -7,7 +6,7 @@ export function addToCart(item) {
       method: "POST",
       body: JSON.stringify(item),
       headers: {
-        authorization: "Bearea " + token,
+        authorization: "Bearea " + localStorage.getItem("token"),
         "content-type": "application/json",
       },
     });
@@ -24,7 +23,7 @@ export function fetchItemsByUser() {
   return new Promise(async (resolve, reject) => {
     const response = await fetch(API + "cart", {
       headers: {
-        authorization: "Bearea " + token,
+        authorization: "Bearea " + localStorage.getItem("token"),
       },
     });
     const data = await response.json();
@@ -43,7 +42,7 @@ export function updateItem(update) {
       body: JSON.stringify(update),
       headers: {
         "content-type": "application/json",
-        authorization: "Bearea " + token,
+        authorization: "Bearea " + localStorage.getItem("token"),
       },
     });
     const data = await response.json();
@@ -59,7 +58,7 @@ export function deleteItem(itemId) {
   return new Promise(async (resolve, reject) => {
     const response = await fetch(API + "cart/" + itemId, {
       method: "DELETE",
-      headers: { authorization: "Bearea " + token },
+      headers: { authorization: "Bearea " + localStorage.getItem("token") },
     });
     const data = await response.json();
     if (data.success) {
@@ -74,7 +73,7 @@ export function resetCart() {
   return new Promise(async (resolve, reject) => {
     const response = await fetch(API + "cart/clear-cart", {
       method: "DELETE",
-      headers: { authorization: "Bearea " + token },
+      headers: { authorization: "Bearea " + localStorage.getItem("token") },
     });
     const data = await response.json();
     if (data.success) {

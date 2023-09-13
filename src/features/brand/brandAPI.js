@@ -1,5 +1,4 @@
 const API = process.env.REACT_APP_API;
-const token = localStorage.getItem("token");
 
 export function fetchAllBrand() {
   return new Promise(async (resolve, reject) => {
@@ -20,7 +19,7 @@ export function createBrand(brand) {
       body: JSON.stringify(brand),
       headers: {
         "Content-Type": "application/json",
-        authorization: "Bearea " + token,
+        authorization: "Bearea " + localStorage.getItem("token"),
       },
     });
     const data = await response.json();

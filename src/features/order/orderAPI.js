@@ -1,5 +1,4 @@
 const API = process.env.REACT_APP_API;
-const token = localStorage.getItem("token");
 
 export function makeOrder(order) {
   return new Promise(async (resolve, reject) => {
@@ -8,7 +7,7 @@ export function makeOrder(order) {
       body: JSON.stringify(order),
       headers: {
         "content-type": "application/json",
-        authorization: "Bearea " + token,
+        authorization: "Bearea " + localStorage.getItem("token"),
       },
     });
     const data = await response.json();
@@ -27,7 +26,7 @@ export function updateOrder(order) {
       body: JSON.stringify(order),
       headers: {
         "content-type": "application/json",
-        authorization: "Bearea " + token,
+        authorization: "Bearea " + localStorage.getItem("token"),
       },
     });
     const data = await response.json();
@@ -52,7 +51,7 @@ export function fetchAllOrders(page, sort) {
 
   return new Promise(async (resolve, reject) => {
     const response = await fetch(API + "order?" + queryString, {
-      headers: { authorization: "Bearea " + token },
+      headers: { authorization: "Bearea " + localStorage.getItem("token") },
     });
     const data = await response.json();
     const totalOrders = response.headers.get("X-Total-Count");
