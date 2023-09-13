@@ -122,7 +122,7 @@ const Form = ({ handlePaymentInfo }) => {
             onClick={() => {
               setshowAddressForm(!showAddressForm);
             }}
-            className="cursor-pointer flex items-center justify-center rounded-md border border-transparent bg-emerald-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-emerald-700 w-1/3"
+            className="cursor-pointer flex items-center justify-center rounded-md border border-transparent bg-emerald-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-emerald-700"
           >
             {showAddressForm === false
               ? "Add New Address"
