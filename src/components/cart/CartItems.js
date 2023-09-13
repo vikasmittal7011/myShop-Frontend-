@@ -1,15 +1,16 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useAlert } from "react-alert";
 
 import Button from "../common/Button";
 import Image from "../common/Image";
-import { useDispatch } from "react-redux";
 import {
   deleteItemAsync,
   updateItemAsync,
 } from "../../features/cart/cartSlice";
 import Modal from "../common/Modal";
-import { useAlert } from "react-alert";
+import { Classes } from "../../utils/constant";
 
 const CartItems = ({ items }) => {
   const alert = useAlert();
@@ -18,15 +19,15 @@ const CartItems = ({ items }) => {
   const dispatch = useDispatch();
 
   const handleChange = (e, item) => {
-    if (+e.target.value > 0) {
-      const update = {
-        item: item.item.id,
-        quantity: +e.target.value,
-        user: item.user,
-        id: item.id,
-      };
-      dispatch(updateItemAsync(update));
-    }
+    // if (+e.target.value > 0) {
+    const update = {
+      item: item.item.id,
+      quantity: +e.target.value,
+      user: item.user,
+      id: item.id,
+    };
+    dispatch(updateItemAsync(update));
+    // }
   };
 
   const handleDelete = (id) => {
@@ -42,13 +43,18 @@ const CartItems = ({ items }) => {
     <>
       <ul className="divide-y divide-gray-200">
         {items?.map((item) => (
-          <li key={item?.id} className="flex py-6">
-            <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-              <Image
-                src={process.env.REACT_APP_API + item?.item?.thumbnail}
-                alt={item?.item?.title}
-                className="h-full w-full object-cover object-center"
-              />
+          <li
+            key={item?.id}
+            className={`flex py-6 ${Classes.flexDirectionClass} gap-2`}
+          >
+            <div className="flex justify-centera items-center m-auto">
+              <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+                <Image
+                  src={process.env.REACT_APP_API + item?.item?.thumbnail}
+                  alt={item?.item?.title}
+                  className="h-full w-full object-cover object-center"
+                />
+              </div>
             </div>
 
             <div className="ml-4 flex flex-1 flex-col">
