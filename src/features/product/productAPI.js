@@ -25,7 +25,7 @@ export function fetchRelatedProductById(id) {
   });
 }
 
-export function fetchProductByFilters(filters, sort, page, admin) {
+export function fetchProductByFilters(filters, sort, page, admin, search) {
   let queryString = "admin=" + admin + "&";
 
   for (let key in filters) {
@@ -42,6 +42,10 @@ export function fetchProductByFilters(filters, sort, page, admin) {
 
   for (let key in page) {
     queryString += `${key}=${page[key]}&`;
+  }
+
+  if (search) {
+    queryString += `search=${search}&`;
   }
 
   return new Promise(async (resolve) => {

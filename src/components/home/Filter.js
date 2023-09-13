@@ -16,7 +16,7 @@ import Products from "../products/Products";
 export const Filter = () => {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [filters, setFilters] = useState({ category: [], brand: [] });
-
+  const [search, setSearch] = useState("");
   const [sort, setSort] = useState({});
   const dispatch = useDispatch();
 
@@ -36,6 +36,10 @@ export const Filter = () => {
     setSort(sort);
   };
 
+  const handleChange = (e) => {
+    setSearch(e.target.value);
+  };
+
   useEffect(() => {
     dispatch(fetchAllBrandAsync());
     dispatch(fetchAllCategoryAsync());
@@ -44,6 +48,15 @@ export const Filter = () => {
 
   return (
     <div>
+      <div className="mx-6 mt-4 mb-[-50px]">
+        <input
+          className={`
+            "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+          }`}
+          placeholder="Search Product..."
+          onKeyUp={handleChange}
+        />
+      </div>
       <MobileFilter
         mobileFiltersOpen={mobileFiltersOpen}
         setMobileFiltersOpen={setMobileFiltersOpen}
@@ -73,7 +86,7 @@ export const Filter = () => {
             <FilterForm handleFilters={handleFilters} />
 
             <div className="lg:col-span-3">
-              <Products filters={filters} sort={sort} />
+              <Products filters={filters} sort={sort} search={search} />
             </div>
           </div>
         </section>

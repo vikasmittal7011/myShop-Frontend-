@@ -34,12 +34,13 @@ export const fetchRelatedProductByIdAsync = createAsyncThunk(
 
 export const fetchProductByFiltersAsync = createAsyncThunk(
   "product/fetchProductByFilters",
-  async ({ filters, sort, pagination, admin }) => {
+  async ({ filters, sort, pagination, admin, search }) => {
     const response = await fetchProductByFilters(
       filters,
       sort,
       pagination,
-      admin
+      admin,
+      search
     );
     return response.data;
   }
