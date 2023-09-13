@@ -61,11 +61,7 @@ const CartItems = ({ items }) => {
                   </h3>
                   <div>
                     <p className="text-sm font-medium text-gray-900">
-                      ${" "}
-                      {Math.round(
-                        item?.item?.price *
-                          (1 - item?.item?.discountPercentage / 100)
-                      )}
+                      $ {item?.item?.discountPrice}
                     </p>
                     <p className="text-sm font-medium text-red-400 line-through">
                       $ {item?.item?.price}

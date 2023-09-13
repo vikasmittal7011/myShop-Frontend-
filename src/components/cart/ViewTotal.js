@@ -9,10 +9,7 @@ const ViewTotal = ({
   message,
 }) => {
   const totalPrice = items.reduce(
-    (amount, item) =>
-      Math.round(item?.item?.price * (1 - item?.item?.discountPercentage / 100)) *
-        item.quantity +
-      amount,
+    (amount, item) => item?.item?.discountPrice * item.quantity + amount,
     0
   );
   const totalItems = items.reduce((total, item) => item.quantity + total, 0);

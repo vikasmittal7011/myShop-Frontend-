@@ -20,10 +20,7 @@ const ProductInfo = ({
       <div className="mt-4 lg:row-span-3 lg:mt-0">
         <div>
           <p className="text-3xl font-medium text-gray-900">
-            ${" "}
-            {Math.round(
-              product?.price * (1 - product?.discountPercentage / 100)
-            )}
+            $ {product?.discountPrice}
           </p>
           <p className="text-xl font-medium text-red-400 line-through">
             $ {product?.price}

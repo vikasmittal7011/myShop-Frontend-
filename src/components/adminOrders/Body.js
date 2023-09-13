@@ -72,10 +72,7 @@ const Body = ({ orders, handleShow, handleEdit, editableOrderId }) => {
                       />
                     </div>
                     <span>
-                      {item.title} - #{detail.quantity} - $
-                      {Math.round(
-                        item?.price * (1 - item?.discountPercentage / 100)
-                      )}
+                      {item.title} - #{detail.quantity} - ${item?.discountPrice}
                     </span>
                   </div>
                 );
