@@ -13,6 +13,18 @@ export function fetchProductById(id) {
   });
 }
 
+export function fetchRelatedProductById(id) {
+  return new Promise(async (resolve, reject) => {
+    const response = await fetch(API + "product/relatedProduct/" + id);
+    const data = await response.json();
+    if (data.success) {
+      resolve({ data: data.product });
+    } else {
+      reject({ data: data.message });
+    }
+  });
+}
+
 export function fetchProductByFilters(filters, sort, page, admin) {
   let queryString = "admin=" + admin + "&";
 

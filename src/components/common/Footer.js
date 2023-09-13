@@ -26,6 +26,7 @@ const Footer = () => {
           background:
             "linear-gradient(179deg, rgba(0, 255, 235, 0.35) 0%, rgba(7, 58, 187, 0.72) 100%)",
         }}
+        className="mt-5"
       >
         <div className="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">

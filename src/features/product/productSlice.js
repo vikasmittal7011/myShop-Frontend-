@@ -3,6 +3,7 @@ import {
   createProduct,
   fetchProductByFilters,
   fetchProductById,
+  fetchRelatedProductById,
   updateProduct,
 } from "./productAPI";
 
@@ -12,12 +13,21 @@ const initialState = {
   totalItems: 0,
   selectedProduct: null,
   message: "",
+  relatedProduct: [],
 };
 
 export const fetchProductByIdAsync = createAsyncThunk(
   "product/fetchProductById",
   async (id) => {
     const response = await fetchProductById(id);
+    return response.data;
+  }
+);
+
+export const fetchRelatedProductByIdAsync = createAsyncThunk(
+  "product/fetchRelatedProductById",
+  async (id) => {
+    const response = await fetchRelatedProductById(id);
     return response.data;
   }
 );
@@ -114,6 +124,17 @@ export const productSlice = createSlice({
         state.products.products[index] = action.payload;
       })
       .addCase(updateProductAsync.rejected, (state, action) => {
+        state.status = "idle";
+        state.message = action.payload.error;
+      })
+      .addCase(fetchRelatedProductByIdAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(fetchRelatedProductByIdAsync.fulfilled, (state, action) => {
+        state.status = "idle";
+        state.relatedProduct = action.payload;
+      })
+      .addCase(fetchRelatedProductByIdAsync.rejected, (state, action) => {
         state.status = "idle";
         state.message = action.payload.error;
       });
