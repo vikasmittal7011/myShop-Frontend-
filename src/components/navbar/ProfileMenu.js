@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import { forwardRef } from "react";
 import { Menu } from "@headlessui/react";
 
 import Links from "./Links";

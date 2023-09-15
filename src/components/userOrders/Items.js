@@ -1,4 +1,3 @@
-import React from "react";
 import { Classes } from "../../utils/constant";
 import Image from "../common/Image";
 

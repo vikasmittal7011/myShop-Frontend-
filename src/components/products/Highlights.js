@@ -1,5 +1,3 @@
-import React from "react";
-
 const Highlights = ({ highlights }) => {
   return (
     <div className="mt-4">

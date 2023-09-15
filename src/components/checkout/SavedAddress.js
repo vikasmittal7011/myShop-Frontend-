@@ -1,5 +1,3 @@
-import React from "react";
-
 const SavedAddress = ({ addresses, handlePaymentInfo }) => {
   return (
     <fieldset>

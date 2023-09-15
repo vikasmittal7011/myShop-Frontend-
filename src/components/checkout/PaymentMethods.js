@@ -1,5 +1,3 @@
-import React from "react";
-
 import Radio from "../form/Radio";
 import { paymentMathods } from "../../utils/constant";
 

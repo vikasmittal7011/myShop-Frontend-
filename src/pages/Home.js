@@ -1,4 +1,3 @@
-import React from "react";
 import Header from "../components/common/Header";
 import { Filter } from "../components/home/Filter";
 import NavBar from "./NavBar";

@@ -1,5 +1,5 @@
 import { Dialog, Transition } from "@headlessui/react";
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import MobileFilterForm from "./MobileFilterForm";
 import TransitionEffet from "../common/TransitionEffet";

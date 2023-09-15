@@ -1,5 +1,4 @@
 import { Disclosure } from "@headlessui/react";
-import React from "react";
 import { MinusIcon, PlusIcon } from "@heroicons/react/20/solid";
 
 const FilterTitle = ({ h3Class, disclosureClass, name, open }) => {

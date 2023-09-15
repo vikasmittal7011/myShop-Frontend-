@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 
 const PageNotFound = () => {
@@ -20,7 +19,10 @@ const PageNotFound = () => {
             Go back home
           </Link>
           <p className="text-md font-semibold text-gray-900">
-            Contact as via email <span className="text-blue-600 text-lg ml-2 font-bold font-serif">vikasaggrawal700@gmail.com</span>
+            Contact as via email{" "}
+            <span className="text-blue-600 text-lg ml-2 font-bold font-serif">
+              vikasaggrawal700@gmail.com
+            </span>
           </p>
         </div>
       </div>

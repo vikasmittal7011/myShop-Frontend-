@@ -1,4 +1,3 @@
-import React from "react";
 import { Classes } from "../../utils/constant";
 
 const Address = ({ address }) => {

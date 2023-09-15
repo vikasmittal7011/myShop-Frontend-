@@ -1,5 +1,4 @@
 import { Disclosure } from "@headlessui/react";
-import React from "react";
 import { useSelector } from "react-redux";
 
 import FilterTitle from "./FilterTitle";

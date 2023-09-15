@@ -1,5 +1,4 @@
 import { FunnelIcon, Squares2X2Icon } from "@heroicons/react/20/solid";
-import React from "react";
 
 const Buttons = ({setMobileFiltersOpen}) => {
   return (
