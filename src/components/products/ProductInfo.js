@@ -1,6 +1,7 @@
 import Review from "./Review";
 import SizeAndColor from "./SizeAndColor";
 import Highlights from "./Highlights";
+import Button from "../common/Button";
 
 const ProductInfo = ({
   selectedColor,
@@ -8,6 +9,7 @@ const ProductInfo = ({
   selectedSize,
   setSelectedSize,
   product,
+  handleModel,
 }) => {
   return (
     <div className="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
@@ -26,8 +28,7 @@ const ProductInfo = ({
             $ {product?.price}
           </p>
         </div>
-
-        {product?.rating !== 0 && <Review reviews={product?.rating} />}
+        {product?.averageRating !== 0 && <Review reviews={product} />}
 
         <SizeAndColor
           selectedColor={selectedColor}
@@ -58,6 +59,12 @@ const ProductInfo = ({
             </div>
           </div>
         )}
+        <Button
+          onClick={handleModel}
+          className="mt-5 flex items-center justify-center rounded-md border border-transparent bg-cyan-400 px-8 py-3 text-base font-medium text-white hover:bg-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
+        >
+          Post Review
+        </Button>
       </div>
     </div>
   );

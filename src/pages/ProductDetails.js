@@ -16,16 +16,22 @@ import ProductList from "../components/products/ProductList";
 import Images from "../components/products/Images";
 import ProductInfo from "../components/products/ProductInfo";
 import AdminProductList from "../components/products/AdminProductList";
+import PostReviewForm from "../components/products/PostReviewForm";
 import { selectCart } from "../features/cart/cartSlice";
 import { selectuser } from "../features/user/userSlice";
+import { postReviewAsync, selectReview } from "../features/review/reviewSlice";
 
 const ProductDetails = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { selectedProduct, status, message, relatedProduct } =
-    useSelector(selectProducts);
+
   const { userData } = useSelector(selectuser);
   const { status: cartState } = useSelector(selectCart);
+  const { selectedProduct, status, message, relatedProduct } =
+    useSelector(selectProducts);
+  const { reviews } = useSelector(selectReview);
+
+  const [isOpen, setIsOpen] = useState(false);
   const [selectedColor, setSelectedColor] = useState(
     selectedProduct?.colors[0] || ""
   );
@@ -33,13 +39,22 @@ const ProductDetails = () => {
     selectedProduct?.sizes[0] || ""
   );
 
+  const handleModel = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const formAction = (review) => {
+    const newReview = { ...review, product: selectedProduct.id };
+    dispatch(postReviewAsync(newReview));
+  };
+
   useEffect(() => {
     dispatch(fetchProductByIdAsync(id));
     dispatch(fetchRelatedProductByIdAsync(id));
     setSelectedColor(selectedProduct?.colors[0] || "");
     setSelectedSize(selectedProduct?.sizes[0] || "");
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
+  }, [id, reviews]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -53,6 +68,13 @@ const ProductDetails = () => {
 
   return (
     <>
+      <PostReviewForm
+        isOpen={isOpen}
+        handleModal={handleModel}
+        action="Post Review"
+        title="Post new review for product here...."
+        formAction={formAction}
+      />
       <NavBar>
         <Header heading="Product Overview" />
         <p className="text-red-600 my-3 font-bold text-2xl capitalize">
@@ -67,6 +89,7 @@ const ProductDetails = () => {
             selectedSize={selectedSize}
             setSelectedSize={setSelectedSize}
             product={selectedProduct}
+            handleModel={handleModel}
           />
         </div>
         {relatedProduct.length > 0 && (
