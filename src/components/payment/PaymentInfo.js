@@ -64,7 +64,10 @@ const PaymentInfo = () => {
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: `http://localhost:3000/order-success/${orderPlaced.id}`,
+        return_url: `${
+          process.env.REACT_APP_STRIP_PAYMENT_REDIRECT ||
+          "http://localhost:3000"
+        }/order-success/${orderPlaced.id}`,
       },
     });
     if (error.type === "card_error" || error.type === "validation_error") {
