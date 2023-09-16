@@ -16,10 +16,15 @@ import ProductList from "../components/products/ProductList";
 import Images from "../components/products/Images";
 import ProductInfo from "../components/products/ProductInfo";
 import AdminProductList from "../components/products/AdminProductList";
+import ProductReview from "../components/products/ProductReview";
 import PostReviewForm from "../components/products/PostReviewForm";
 import { selectCart } from "../features/cart/cartSlice";
 import { selectuser } from "../features/user/userSlice";
-import { postReviewAsync, selectReview } from "../features/review/reviewSlice";
+import {
+  fetchReviewsAsync,
+  postReviewAsync,
+  selectReview,
+} from "../features/review/reviewSlice";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -55,6 +60,11 @@ const ProductDetails = () => {
     setSelectedSize(selectedProduct?.sizes[0] || "");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, reviews]);
+
+  useEffect(() => {
+    dispatch(fetchReviewsAsync(id));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -102,6 +112,17 @@ const ProductDetails = () => {
             ) : (
               <AdminProductList products={relatedProduct} />
             )}
+          </div>
+        )}
+        {reviews.length > 0 && (
+          <div
+            className="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-3 mt-3"
+            id="reviews"
+          >
+            <h1 className="text-2xl font-bold tracking-tight my-3">
+              Product Reviews
+            </h1>
+            <ProductReview reviews={reviews} />
           </div>
         )}
         <Footer />

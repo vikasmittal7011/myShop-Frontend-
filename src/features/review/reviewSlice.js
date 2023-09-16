@@ -8,7 +8,7 @@ const initialState = {
 };
 
 export const postReviewAsync = createAsyncThunk(
-  "cart/postReview",
+  "review/postReview",
   async (review) => {
     const response = await postReview(review);
     return response.data.review;
@@ -16,7 +16,7 @@ export const postReviewAsync = createAsyncThunk(
 );
 
 export const fetchReviewsAsync = createAsyncThunk(
-  "cart/fetchItemsByUser",
+  "review/fetchReviews",
   async (id) => {
     const response = await fetchReviews(id);
     return response.data.reviews;
@@ -24,7 +24,7 @@ export const fetchReviewsAsync = createAsyncThunk(
 );
 
 export const updateAsync = createAsyncThunk(
-  "cart/updateItem",
+  "review/updateItem",
   async (update) => {
     // const response = await updateItem(update);
     // return response.data.cart;

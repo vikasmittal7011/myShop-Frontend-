@@ -21,9 +21,12 @@ const Review = ({ reviews }) => {
               />
             ))}
           </div>
-          <p className="text-blue-500 underline cursor-pointer ml-2">
+          <a
+            href="#reviews"
+            className="text-blue-500 underline cursor-pointer ml-2"
+          >
             {reviews.totalRating.length} Reviews
-          </p>
+          </a>
         </div>
       </div>
     </>
