@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import InfiniteScroll from "react-infinite-scroll-component";
 
+import loader from "../assets/loader.gif";
 import {
   clearMessage,
   fetchProductByIdAsync,
@@ -25,6 +27,7 @@ import {
   postReviewAsync,
   selectReview,
 } from "../features/review/reviewSlice";
+import { ITEM_PAGE_PER } from "../utils/constant";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -34,8 +37,9 @@ const ProductDetails = () => {
   const { status: cartState } = useSelector(selectCart);
   const { selectedProduct, status, message, relatedProduct } =
     useSelector(selectProducts);
-  const { reviews } = useSelector(selectReview);
+  const { reviews, totalReviews } = useSelector(selectReview);
 
+  const [page, setPage] = useState(1);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedColor, setSelectedColor] = useState(
     selectedProduct?.colors[0] || ""
@@ -51,6 +55,8 @@ const ProductDetails = () => {
   const formAction = (review) => {
     const newReview = { ...review, product: selectedProduct.id };
     dispatch(postReviewAsync(newReview));
+    const pagination = { _page: page, _limit: ITEM_PAGE_PER };
+    dispatch(fetchReviewsAsync({ id, pagination }));
   };
 
   useEffect(() => {
@@ -62,9 +68,10 @@ const ProductDetails = () => {
   }, [id, reviews]);
 
   useEffect(() => {
-    dispatch(fetchReviewsAsync(id));
+    const pagination = { _page: page, _limit: ITEM_PAGE_PER };
+    dispatch(fetchReviewsAsync({ id, pagination }));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
+  }, [id, page]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -122,7 +129,20 @@ const ProductDetails = () => {
             <h1 className="text-2xl font-bold tracking-tight my-3">
               Product Reviews
             </h1>
-            <ProductReview reviews={reviews} />
+            <InfiniteScroll
+              dataLength={totalReviews}
+              next={() => {
+                setPage(page + 1);
+              }}
+              hasMore={totalReviews > reviews.length}
+              loader={
+                <div className={`flex justify-center my-2`}>
+                  <img src={loader} alt="Loading" width={100} height={100} />
+                </div>
+              }
+            >
+              <ProductReview reviews={reviews} />
+            </InfiniteScroll>
           </div>
         )}
         <Footer />

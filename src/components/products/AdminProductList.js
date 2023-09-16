@@ -8,6 +8,7 @@ import { updateProductAsync } from "../../features/product/productSlice";
 import Modal from "../common/Modal";
 import { useAlert } from "react-alert";
 import { useState } from "react";
+import { classNames } from "../../utils/constant";
 
 const AdminProductList = ({ products }) => {
   const alert = useAlert();
@@ -59,13 +60,21 @@ const AdminProductList = ({ products }) => {
                       : product?.title}
                   </Link>
                 </h3>
-                {product?.rating !== 0 && (
-                  <>
-                    <StarIcon className="w-5 h-5 mr-1 inline" />
-                    <p className="text-sm text-gray-500 inline align-bottom">
-                      {product?.rating}
-                    </p>
-                  </>
+                {product?.averageRating !== 0 && (
+                  <div className="flex items-center">
+                    {[0, 1, 2, 3, 4].map((rating) => (
+                      <StarIcon
+                        key={rating}
+                        className={classNames(
+                          product.averageRating > rating
+                            ? "text-gray-900"
+                            : "text-gray-200",
+                          "h-5 w-5 flex-shrink-0"
+                        )}
+                        aria-hidden="true"
+                      />
+                    ))}
+                  </div>
                 )}
               </div>
               <div>

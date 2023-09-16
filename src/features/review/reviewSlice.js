@@ -5,6 +5,7 @@ const initialState = {
   reviews: [],
   status: "idle",
   message: "",
+  totalReviews: null,
 };
 
 export const postReviewAsync = createAsyncThunk(
@@ -17,17 +18,9 @@ export const postReviewAsync = createAsyncThunk(
 
 export const fetchReviewsAsync = createAsyncThunk(
   "review/fetchReviews",
-  async (id) => {
-    const response = await fetchReviews(id);
-    return response.data.reviews;
-  }
-);
-
-export const updateAsync = createAsyncThunk(
-  "review/updateItem",
-  async (update) => {
-    // const response = await updateItem(update);
-    // return response.data.cart;
+  async ({ id, pagination }) => {
+    const response = await fetchReviews(id, pagination);
+    return response.data;
   }
 );
 
@@ -49,7 +42,7 @@ export const reviewSlice = createSlice({
       })
       .addCase(postReviewAsync.fulfilled, (state, action) => {
         state.status = "idle";
-        state.reviews.push(action.payload);
+        state.reviews.unshift(action.payload);
       })
       .addCase(postReviewAsync.rejected, (state, action) => {
         state.status = "idle";
@@ -60,23 +53,11 @@ export const reviewSlice = createSlice({
       })
       .addCase(fetchReviewsAsync.fulfilled, (state, action) => {
         state.status = "idle";
-        state.reviews = action.payload;
+        const updatedReviews = [...state.reviews, ...action.payload.reviews];
+        state.reviews = updatedReviews;
+        state.totalReviews = action.payload.totalReviews;
       })
       .addCase(fetchReviewsAsync.rejected, (state, action) => {
-        state.status = "idle";
-        state.message = action.payload;
-      })
-      .addCase(updateAsync.pending, (state) => {
-        state.status = "loading";
-      })
-      .addCase(updateAsync.fulfilled, (state, action) => {
-        state.status = "idle";
-        const index = state.items.findIndex(
-          (item) => item.id === action.payload.id
-        );
-        state.items[index] = action.payload;
-      })
-      .addCase(updateAsync.rejected, (state, action) => {
         state.status = "idle";
         state.message = action.payload;
       });
