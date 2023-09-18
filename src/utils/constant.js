@@ -1,3 +1,5 @@
+import { StarIcon } from "@heroicons/react/20/solid";
+
 export const ITEM_PAGE_PER = 10;
 
 export const userNavLinks = [{ name: "Home", href: "/" }];
@@ -67,6 +69,21 @@ export const Classes = {
 export const classNames = (...classes) => {
   return classes.filter(Boolean).join(" ");
 };
+
+export const rating = (product) => (
+  <div className="flex items-center">
+    {[0, 1, 2, 3, 4].map((rating) => (
+      <StarIcon
+        key={rating}
+        className={classNames(
+          product.averageRating > rating ? "text-gray-900" : "text-gray-200",
+          "h-5 w-5 flex-shrink-0"
+        )}
+        aria-hidden="true"
+      />
+    ))}
+  </div>
+);
 
 export const country = [
   { name: "Afghanistan", code: "AF" },

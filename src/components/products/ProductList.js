@@ -1,7 +1,6 @@
-import { StarIcon } from "@heroicons/react/20/solid";
 import { Link } from "react-router-dom";
 
-import { classNames } from "../../utils/constant";
+import { rating } from "../../utils/constant";
 
 const ProductList = ({ products }) => {
   return (
@@ -20,7 +19,7 @@ const ProductList = ({ products }) => {
               <div className="mt-4 flex justify-between">
                 <div>
                   <h3 className="text-sm text-gray-700">
-                    <Link to={`/product-details/${product.id}`}>
+                    <Link to={`product-details/${product.id}`}>
                       <span
                         aria-hidden="true"
                         className="absolute inset-0 w-50"
@@ -30,22 +29,7 @@ const ProductList = ({ products }) => {
                         : product?.title}
                     </Link>
                   </h3>
-                  {product?.averageRating !== 0 && (
-                    <div className="flex items-center">
-                      {[0, 1, 2, 3, 4].map((rating) => (
-                        <StarIcon
-                          key={rating}
-                          className={classNames(
-                            product.averageRating > rating
-                              ? "text-gray-900"
-                              : "text-gray-200",
-                            "h-5 w-5 flex-shrink-0"
-                          )}
-                          aria-hidden="true"
-                        />
-                      ))}
-                    </div>
-                  )}
+                  {product?.averageRating !== 0 && rating(product)}
                 </div>
                 <div>
                   <p className="text-sm font-medium text-gray-900">

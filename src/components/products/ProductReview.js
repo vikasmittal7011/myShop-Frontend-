@@ -2,6 +2,7 @@ import dayjs from "dayjs";
 
 import usericon from "../../assets/usericon.png";
 import Image from "../common/Image";
+import { rating } from "../../utils/constant";
 
 const ProductReview = ({ reviews }) => {
   return (
@@ -14,6 +15,9 @@ const ProductReview = ({ reviews }) => {
           </div>
           <p className="text-gray-600 text-sm my-2">
             Posted On: {dayjs(r.createdAt).format("YYYY-MM-DD HH:mm:ss")}
+          </p>
+          <p className="text-gray-600 text-sm my-2 flex gap-3">
+            {rating({ averageRating: r.rating })} {r.rating.toFixed(1)}
           </p>
           <p>{r.comment}</p>
         </div>

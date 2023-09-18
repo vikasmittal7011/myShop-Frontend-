@@ -1,14 +1,13 @@
-import { StarIcon } from "@heroicons/react/20/solid";
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useAlert } from "react-alert";
+import { useDispatch } from "react-redux";
 
 import Button from "../common/Button";
 import Image from "../common/Image";
-import { useDispatch } from "react-redux";
-import { updateProductAsync } from "../../features/product/productSlice";
 import Modal from "../common/Modal";
-import { useAlert } from "react-alert";
-import { useState } from "react";
-import { classNames } from "../../utils/constant";
+import { rating } from "../../utils/constant";
+import { updateProductAsync } from "../../features/product/productSlice";
 
 const AdminProductList = ({ products }) => {
   const alert = useAlert();
@@ -60,22 +59,7 @@ const AdminProductList = ({ products }) => {
                       : product?.title}
                   </Link>
                 </h3>
-                {product?.averageRating !== 0 && (
-                  <div className="flex items-center">
-                    {[0, 1, 2, 3, 4].map((rating) => (
-                      <StarIcon
-                        key={rating}
-                        className={classNames(
-                          product.averageRating > rating
-                            ? "text-gray-900"
-                            : "text-gray-200",
-                          "h-5 w-5 flex-shrink-0"
-                        )}
-                        aria-hidden="true"
-                      />
-                    ))}
-                  </div>
-                )}
+                {product?.averageRating !== 0 && rating(product)}
               </div>
               <div>
                 <p className="text-sm font-medium text-gray-900">
