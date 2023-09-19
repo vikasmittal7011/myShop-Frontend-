@@ -74,6 +74,7 @@ export const productSlice = createSlice({
     },
     productOut: (state) => {
       state.products = [];
+      state.relatedProduct = [];
       state.totalItems = 0;
       state.selectedProduct = null;
     },

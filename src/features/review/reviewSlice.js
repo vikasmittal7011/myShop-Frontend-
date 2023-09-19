@@ -6,6 +6,7 @@ const initialState = {
   status: "idle",
   message: "",
   totalReviews: null,
+  isReviewAdded: 0,
 };
 
 export const postReviewAsync = createAsyncThunk(
@@ -42,19 +43,19 @@ export const reviewSlice = createSlice({
       })
       .addCase(postReviewAsync.fulfilled, (state, action) => {
         state.status = "idle";
-        state.reviews.unshift(action.payload);
+        state.isReviewAdded = ++state.isReviewAdded;
       })
       .addCase(postReviewAsync.rejected, (state, action) => {
         state.status = "idle";
         state.message = action.payload;
+        state.isReviewAdded = 0;
       })
       .addCase(fetchReviewsAsync.pending, (state) => {
         state.status = "loading";
       })
       .addCase(fetchReviewsAsync.fulfilled, (state, action) => {
         state.status = "idle";
-        const updatedReviews = [...state.reviews, ...action.payload.reviews];
-        state.reviews = updatedReviews;
+        state.reviews = action.payload.reviews;
         state.totalReviews = action.payload.totalReviews;
       })
       .addCase(fetchReviewsAsync.rejected, (state, action) => {

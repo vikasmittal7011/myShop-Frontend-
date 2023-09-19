@@ -8,6 +8,7 @@ import { cateOut } from "../features/category/categorySlice";
 import { orderOut } from "../features/order/orderSlice";
 import { productOut } from "../features/product/productSlice";
 import { userOut } from "../features/user/userSlice";
+import { reviewOut } from "../features/review/reviewSlice";
 
 const Logout = () => {
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ const Logout = () => {
     dispatch(orderOut());
     dispatch(productOut());
     dispatch(userOut());
+    dispatch(reviewOut());
     navigate("/");
   }, [token, dispatch, navigate]);
 };

@@ -18,7 +18,7 @@ const AdminOrders = () => {
   const { orders, totalOrders, message, status } = useSelector(selectorder);
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
-  const [sort, setSort] = useState({ _sort: "id", _order: "asc" });
+  const [sort, setSort] = useState({ _sort: "id", _order: "desc" });
 
   const [editableOrderId, setEditableOrderId] = useState(-1);
 

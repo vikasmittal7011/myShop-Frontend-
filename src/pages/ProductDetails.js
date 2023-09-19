@@ -37,7 +37,7 @@ const ProductDetails = () => {
   const { status: cartState } = useSelector(selectCart);
   const { selectedProduct, status, message, relatedProduct } =
     useSelector(selectProducts);
-  const { reviews, totalReviews } = useSelector(selectReview);
+  const { reviews, totalReviews, isReviewAdded } = useSelector(selectReview);
 
   const [page, setPage] = useState(1);
   const [isOpen, setIsOpen] = useState(false);
@@ -65,7 +65,7 @@ const ProductDetails = () => {
     setSelectedColor(selectedProduct?.colors[0] || "");
     setSelectedSize(selectedProduct?.sizes[0] || "");
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id, reviews]);
+  }, [id, isReviewAdded]);
 
   useEffect(() => {
     const pagination = { _page: page, _limit: ITEM_PAGE_PER };
