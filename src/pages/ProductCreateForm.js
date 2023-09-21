@@ -354,6 +354,13 @@ const ProductCreateForm = () => {
           selectedClass: "ring-yellow-400",
           checked: false,
         },
+        {
+          id: "Blue",
+          name: "Blue",
+          class: "bg-blue-500",
+          selectedClass: "ring-blue-500",
+          checked: false,
+        },
       ]);
       setSizes([
         { name: "XXS", id: "XXS", inStock: true, checked: false },

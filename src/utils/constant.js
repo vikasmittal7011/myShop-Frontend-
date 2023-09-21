@@ -414,6 +414,13 @@ export const colors = [
     selectedClass: "ring-yellow-400",
     checked: false,
   },
+  {
+    id: "Blue",
+    name: "Blue",
+    class: "bg-blue-500",
+    selectedClass: "ring-blue-500",
+    checked: false,
+  },
 ];
 
 export const sizes = [
