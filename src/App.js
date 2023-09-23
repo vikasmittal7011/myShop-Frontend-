@@ -30,7 +30,7 @@ import Loader from "./components/common/Loader";
 import { fetchItemsByUsertAsync } from "./features/cart/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { selectauth } from "./features/auth/authSlice";
-import { fetchUserDataAsync } from "./features/user/userSlice";
+import { fetchUserDataAsync, selectuser } from "./features/user/userSlice";
 import { fetchAllBrandAsync } from "./features/brand/brandSlice";
 import { fetchAllCategoryAsync } from "./features/category/categorySlice";
 
@@ -38,6 +38,7 @@ const App = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const { token } = useSelector(selectauth);
+  const { userData } = useSelector(selectuser);
 
   const options = {
     timeout: 5000,
@@ -46,13 +47,17 @@ const App = () => {
 
   useEffect(() => {
     if (token) {
-      dispatch(fetchItemsByUsertAsync(token));
       dispatch(fetchUserDataAsync(token));
       dispatch(fetchAllBrandAsync());
       dispatch(fetchAllCategoryAsync());
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [token]);
+  }, [token, dispatch]);
+
+  useEffect(() => {
+    if (userData.role === "user") {
+      dispatch(fetchItemsByUsertAsync(token));
+    }
+  }, [userData, dispatch, token]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
